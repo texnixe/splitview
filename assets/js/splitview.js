@@ -1,6 +1,7 @@
 var splitView = (function () {
 	var fn = {};
 
+	// Check if top level
 	var _topLevel = function () {
 		if( window.self === window.top ) return true;
 	};
@@ -53,9 +54,8 @@ var splitView = (function () {
 
 	// Feel keydown
 	var _splitviewKeydown = function() {
-		console.log('ready');
 		document.addEventListener('keydown', function(e) {
-			if (e.altKey && e.keyCode == _stringToKey()) {
+			if (e.altKey && e.keyCode == _stringToShortcut()) {
 				if( document.querySelector('.splitbar__wrap').classList.contains('splitbar--hide') ) {
 					_showAll();
 				} else {
@@ -65,8 +65,9 @@ var splitView = (function () {
 		}); 
 	}
 
-	var _stringToKey = function() {
-		string = '{{key}}';
+	// Convert string to shortcut number
+	var _stringToShortcut = function() {
+		string = '{{shortcut}}';
 		return string.toUpperCase().charCodeAt(0);
 	}
 
@@ -184,12 +185,14 @@ var splitView = (function () {
 		}
 	}
 
+	// Splitview - Show if localstorage active is true
 	var _splitviewPlace = function() {
 		if( localStorage.getItem('splitbar.active') === "true" ) {
 			_showAll();
 		}
 	}
 
+	// Init Splitview
 	fn.init = function () {
 		document.addEventListener("DOMContentLoaded", function() {
 			if( _topLevel() === true ) {

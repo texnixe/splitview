@@ -1,7 +1,5 @@
 # Splitview
 
-## About
-
 Splitview makes it possible to edit your pages in a splitscreen view. See what you change directly after pressing save.
 
 ![Splitview](assets/images/screenshot-1.png)
@@ -19,12 +17,13 @@ Splitview makes it possible to edit your pages in a splitscreen view. See what y
 - Kirby 2.2 or later.
 - A modern browser. Some testing remains.
 
-## Install
+## Setup
 
-1. Put the plugin splitview folder in /plugins/
+1. Download the [Splitview plugin](https://github.com/jenstornell/splitview/archive/master.zip)
+1. Put the `splitview` folder in /plugins/
 2. Add `<?php echo splitview(); ?>` right before `</body>` in your footer of all your pages.
-3. Login to the panel and when logged in go to the frontend of your site.
-4. Press `alt + s` to activate Splitbar.
+3. Login to the panel. When logged in, go to the frontend of your site.
+4. Press `alt + s` to activate the Splitbar.
 
 ## Views
 
@@ -88,40 +87,35 @@ c::set('splitview.js', true);
 
 Splitview does not work well on mobile devices because the screen is too narrow. Don't even try it.
 
-### When Splitbar don't start
+### Desktop
 
-Check this if Splitbar don't start keyboard shortcut `alt + s` on the frontend.
+- Make sure you followed all steps correctly in Setup.
+- If you have added splitview options, try to remove them and see if that works.
+- Check for javascript errors. If other scripts don't work, Splitview javascript can be prevented from runnig.
+- Look for `<!-- Splitview # Start -->` in your source. If it's not there, the plugin does not run.
 
-- Check the `splitview.key` option, that it is `s` or not set in config. Else some other key might be used.
-- Check the console for javascript errors.
-- Make sure you have the options `splitview.css` and `splitview.js` is set to `true` in config or not set at all.
-- Check the html and look for `<!-- Splitview # Start -->`. If it does not exist something is wrong.
-- Check the footer.php in your template that you have `<?php echo splitview(); ?>`. Else it would not run.
-- Make sure that you have logged in to the panel. Only logged in users have access to Splitview.
+If problem remains, add an issue and describe as good as you can what does not work.
 
 ## Help needed
 
-### Test on Mac and Linux
+### Different environments
 
-Does it work on Mac and Linux? What version and what browser is used?
+- Does it work on Linux?
+- Does it work on Mac?
+- Help me to test different browsers
 
-### Browser testing
+### Issues
 
-What browsers does it work or not work in?
-
-### Report issues
-
-Function testing. What breaks? Flood me with issues.
+What breaks? Flood me with issues.
 
 ### Ideas
 
 Ideas are always welcome. Add them as issues.
 
-### Code improvements
+### Pull requests and code improvements
 
-Help to improve the code with pull requests or suggestions.
+Help to improve the code with pull requests or suggestions as issues.
 
 ## Future
 
 Possuble future ideas is added to the issues tagged `ideas` or `features`. Also look at milestones.
-

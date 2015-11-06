@@ -30,7 +30,7 @@ class splitView {
 		$html = '';
 		$html .= $this->replaceFonts( $this->css() );
 		$html .= $this->minifyHtml( $this->html() );
-		$html .= $this->replaceKey( $this->js() );
+		$html .= $this->replaceShortcut( $this->js() );
 
 		$html = "\n\n<!-- Splitview # Start -->\n" . $html . "\n<!-- Splitview # End -->\n\n";
 		return $html;
@@ -60,8 +60,8 @@ class splitView {
 		return $html;
 	}
 
-	private function replaceKey($html) {
-		return str_ireplace('{{key}}', c::get('splitview.key', 's'), $html);
+	private function replaceShortcut($html) {
+		return str_ireplace('{{shortcut}}', c::get('splitview.shortcut', 's'), $html);
 	}
 
 	private function minifyHtml($html) {

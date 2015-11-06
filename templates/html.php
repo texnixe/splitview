@@ -26,7 +26,7 @@
 		</div>
 	</div>
 	<div class="splitbar__columns">
-		<div class="splitbar__panel" data-splitbar-url="<?php echo u(); ?>/panel/pages/<?php echo $page->slug(); ?>/edit"></div>
+		<div class="splitbar__panel" data-splitbar-url="<?php echo u(); ?>/panel/pages/<?php echo $page->uri(); ?>/edit"></div>
 		<div class="splitbar__site" data-splitbar-url="<?php echo $page->url(); ?>"></div>
 	</div>
 </div>

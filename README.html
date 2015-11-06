@@ -1,0 +1,82 @@
+<h1 id="splitview">Splitview</h1>
+<p>Splitview makes it possible to edit your pages in a splitscreen view. See what you change directly after pressing save.</p>
+<p><img src="assets/images/screenshot-1.png" alt="Splitview"></p>
+<h2 id="benefits">Benefits</h2>
+<ul>
+<li>A real WYSIWYG. See exactly what you get on save.</li>
+<li>Totally invisible until you need it.</li>
+<li>Lightning fast.</li>
+<li>Dependecy free JS - No libraries required, not even jQuery.</li>
+<li>Remember if Splitview active state until next browser refresh.</li>
+</ul>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>Kirby 2.2 or later.</li>
+<li>A modern browser. Some testing remains.</li>
+</ul>
+<h2 id="setup">Setup</h2>
+<ol>
+<li>Download the <a href="https://github.com/jenstornell/splitview/archive/master.zip">Splitview plugin</a></li>
+<li>Put the <code>splitview</code> folder in /plugins/</li>
+<li>Add <code>&lt;?php echo splitview(); ?&gt;</code> right before <code>&lt;/body&gt;</code> in your footer of all your pages.</li>
+<li>Login to the panel. When logged in, go to the frontend of your site.</li>
+<li>Press <code>alt + s</code> to activate the Splitbar.</li>
+</ol>
+<h2 id="views">Views</h2>
+<p>There are two columns, panel and site. Panel is the Kirby panel and site is your frontend. You can make each column expand to full width.</p>
+<h3 id="panel-fullscreen">Panel - Fullscreen</h3>
+<p><img src="assets/images/screenshot-2.png" alt="Splitview"></p>
+<h3 id="site-fullscreen">Site - Fullscreen</h3>
+<p><img src="assets/images/screenshot-3.png" alt="Splitview"></p>
+<h2 id="buttons">Buttons</h2>
+<ul>
+<li><strong>Fullscreen:</strong> Expand the current view to 100%.</li>
+<li><strong>Columns:</strong> Go back to the column view.</li>
+<li><strong>Close:</strong> Close the Splitview.</li>
+<li><strong>Refresh:</strong> Reload the site view. Good if somehow it is not reloaded on save.</li>
+</ul>
+<h2 id="options">Options</h2>
+<p>If options are not set a default value will be used.</p>
+<h3 id="shortcut">Shortcut</h3>
+<p>To trigger Splitview <code>alt + s</code> is used as a default keyboard shortcut. You can change the <code>s</code> letter if you want.</p>
+<p><strong>Default:</strong> <code>s</code></p>
+<pre><code class="lang-php">c::set(&#39;splitview.key&#39;, &#39;s&#39;);
+</code></pre>
+<h3 id="active">Active</h3>
+<p>You can disable Splitview without removing the plugin. Set this option to <code>false</code> to disable it.</p>
+<p><strong>Default:</strong> <code>true</code></p>
+<pre><code class="lang-php">c::set(&#39;splitview.active&#39;, true);
+</code></pre>
+<h3 id="css-and-js">CSS and JS</h3>
+<p>There is currently no way to add your custom CSS or JS through the plugin, but you can disable it if you want. Set this option to <code>false</code> disable it.</p>
+<p><strong>Warning:</strong> If you disable these option the Splitview will probably not work like expected.</p>
+<p><strong>Default:</strong> <code>true</code></p>
+<pre><code class="lang-php">c::set(&#39;splitview.css&#39;, true);
+c::set(&#39;splitview.js&#39;, true);
+</code></pre>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="mobile-device">Mobile device</h3>
+<p>Splitview does not work well on mobile devices because the screen is too narrow. Don&#39;t even try it.</p>
+<h3 id="desktop">Desktop</h3>
+<ul>
+<li>Make sure you followed all steps correctly in Setup.</li>
+<li>If you have added splitview options, try to remove them and see if that works.</li>
+<li>Check for javascript errors. If other scripts don&#39;t work, Splitview javascript can be prevented from runnig.</li>
+<li>Look for <code>&lt;!-- Splitview # Start --&gt;</code> in your source. If it&#39;s not there, the plugin does not run.</li>
+</ul>
+<p>If problem remains, add an issue and describe as good as you can what does not work.</p>
+<h2 id="help-needed">Help needed</h2>
+<h3 id="different-environments">Different environments</h3>
+<ul>
+<li>Does it work on Linux?</li>
+<li>Does it work on Mac?</li>
+<li>Help me to test different browsers</li>
+</ul>
+<h3 id="issues">Issues</h3>
+<p>What breaks? Flood me with issues.</p>
+<h3 id="ideas">Ideas</h3>
+<p>Ideas are always welcome. Add them as issues.</p>
+<h3 id="pull-requests-and-code-improvements">Pull requests and code improvements</h3>
+<p>Help to improve the code with pull requests or suggestions as issues.</p>
+<h2 id="future">Future</h2>
+<p>Possuble future ideas is added to the issues tagged <code>ideas</code> or <code>features</code>. Also look at milestones.</p>
