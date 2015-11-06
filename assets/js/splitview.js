@@ -1,31 +1,33 @@
 var splitView = (function () {
 	var fn = {};
+	var iframe_count = 0;
 
 	// Check if top level
 	var _topLevel = function () {
 		if( window.self === window.top ) return true;
 	};
 
-	// Panel iframe - Load and trigger _splitviewIframeSite when ready
-	var _splitviewIframePanel = function() {
-		var iframe_panel = document.createElement('iframe');
-		iframe_panel.onload = function() {
-			_splitviewIframeSite();
-		};
-		iframe_panel.src = document.querySelector('.splitbar__panel').getAttribute('data-splitbar-url');
-		document.querySelector('.splitbar__panel').appendChild(iframe_panel);
+	var addIframe = function(selector) {
+		var iframe = document.createElement('iframe');
+		iframe.src = document.querySelector(selector).getAttribute('data-splitbar-url');
+		document.querySelector(selector).appendChild(iframe);
+		return iframe;
 	}
 
-	// Site iframe - Load when panel iframe is ready
-	var _splitviewIframeSite = function() {
-		var iframe_site = document.createElement('iframe');
-		iframe_site.onload = function() {
-			document.querySelector('.splitbar__panel iframe').blur();
-			document.querySelector('.splitbar__site iframe').blur();
-			document.querySelector('.splitbar__wrap').focus();
+	// Event - iframe ready
+	var iframeReady = function(selector) {
+		iframe = document.querySelector(selector);
+		iframe.onload = function() {
+			iframe_count++;
+			if(iframe_count == 2) focusParent();
 		};
-		iframe_site.src = document.querySelector('.splitbar__site').getAttribute('data-splitbar-url');
-		document.querySelector('.splitbar__site').appendChild(iframe_site);
+	}
+
+	// Force focus on parent
+	var focusParent = function() {
+		document.querySelector('.splitbar__panel iframe').blur();
+		document.querySelector('.splitbar__site iframe').blur();
+		document.querySelector('.splitbar__wrap').focus();
 	}
 
 	// Feel when save message is active
@@ -34,7 +36,7 @@ var splitView = (function () {
 
 		if( element ) {
 			_refresh();
-			_messageClosed();
+			_panelMessageClosed();
 		} else {
 			setTimeout(_panelMessageReady, 100);
 		}
@@ -197,7 +199,11 @@ var splitView = (function () {
 		document.addEventListener("DOMContentLoaded", function() {
 			if( _topLevel() === true ) {
 				// Splitview load
-				_splitviewIframePanel();
+				addIframe('.splitbar__panel');
+				addIframe('.splitbar__site');
+				iframeReady('.splitbar__panel iframe');
+				iframeReady('.splitbar__site iframe');
+
 				_splitviewPlace();
 
 				// Splitview events
@@ -214,7 +220,6 @@ var splitView = (function () {
 				_panelFullscreen();
 				_panelColumns();
 			}
-			return 'KLAR';
 		});
 	};
 	return fn;
