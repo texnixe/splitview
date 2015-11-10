@@ -27,7 +27,7 @@ Splitview makes it possible to edit your pages in a splitscreen view. See what y
 ## Setup
 
 1. Download the [Splitview plugin](https://github.com/jenstornell/splitview/archive/master.zip)
-1. Put the `splitview` folder in /plugins/
+1. Put the `splitview` folder in /plugins/. If folder is another name like `splitview-master`, rename it to `splitview`.
 2. Add `<?php echo splitview(); ?>` right before `</body>` in your footer of all your pages.
 3. Login to the panel. When logged in, go to the frontend of your site.
 4. Press `alt + s` to activate the Splitview.
