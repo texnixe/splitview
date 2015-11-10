@@ -17,13 +17,20 @@ Splitview makes it possible to edit your pages in a splitscreen view. See what y
 - Kirby 2.2 or later.
 - A modern browser. Some testing remains.
 
+### Tested browsers
+
+- Firefox (PC - Windows)
+- Google Chrome (PC - Windows)
+- Internet Exploder 11
+- Microsoft Edge (PC - Windows)
+
 ## Setup
 
 1. Download the [Splitview plugin](https://github.com/jenstornell/splitview/archive/master.zip)
 1. Put the `splitview` folder in /plugins/
 2. Add `<?php echo splitview(); ?>` right before `</body>` in your footer of all your pages.
 3. Login to the panel. When logged in, go to the frontend of your site.
-4. Press `alt + s` to activate the Splitbar.
+4. Press `alt + s` to activate the Splitview.
 
 ## Views
 

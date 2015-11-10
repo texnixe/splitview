@@ -1,220 +1,229 @@
 var splitView = (function () {
 	var fn = {};
+	var iframe_count = 0;
 
 	// Check if top level
-	var _topLevel = function () {
+	var topLevel = function () {
 		if( window.self === window.top ) return true;
 	};
 
-	// Panel iframe - Load and trigger _splitviewIframeSite when ready
-	var _splitviewIframePanel = function() {
-		var iframe_panel = document.createElement('iframe');
-		iframe_panel.onload = function() {
-			_splitviewIframeSite();
-		};
-		iframe_panel.src = document.querySelector('.splitbar__panel').getAttribute('data-splitbar-url');
-		document.querySelector('.splitbar__panel').appendChild(iframe_panel);
+	var addIframe = function(selector) {
+		var iframe = document.createElement('iframe');
+		iframe.src = document.querySelector(selector).getAttribute('data-splitview-url');
+		document.querySelector(selector).appendChild(iframe);
+		return iframe;
 	}
 
-	// Site iframe - Load when panel iframe is ready
-	var _splitviewIframeSite = function() {
-		var iframe_site = document.createElement('iframe');
-		iframe_site.onload = function() {
-			document.querySelector('.splitbar__panel iframe').blur();
-			document.querySelector('.splitbar__site iframe').blur();
-			document.querySelector('.splitbar__wrap').focus();
+	// Event - iframe ready
+	var iframeReady = function(selector) {
+		iframe = document.querySelector(selector);
+		iframe.onload = function() {
+			iframe_count++;
+			if(iframe_count == 2) focusParent();
 		};
-		iframe_site.src = document.querySelector('.splitbar__site').getAttribute('data-splitbar-url');
-		document.querySelector('.splitbar__site').appendChild(iframe_site);
+	}
+
+	// Force focus on parent
+	var focusParent = function() {
+		document.querySelector('.splitview__panel iframe').blur();
+		document.querySelector('.splitview__site iframe').blur();
+		document.querySelector('.splitview__wrap').focus();
 	}
 
 	// Feel when save message is active
-	var _panelMessageReady = function () {
-		var element = document.querySelector('.splitbar__panel iframe').contentWindow.document.querySelector('.message-content');
+	var panelMessageReady = function () {
+		var element = document.querySelector('.splitview__panel iframe').contentWindow.document.querySelector('.message-content');
 
 		if( element ) {
-			_refresh();
-			_messageClosed();
+			refresh();
+			panelMessageClosed();
 		} else {
-			setTimeout(_panelMessageReady, 100);
+			setTimeout(panelMessageReady, 100);
 		}
 	}
 
 	// Feel when save message is closed
-	var _panelMessageClosed = function() {
-		var element = document.querySelector('.splitbar__panel iframe').contentWindow.document.querySelector('.message-content');
+	var panelMessageClosed = function() {
+		var element = document.querySelector('.splitview__panel iframe').contentWindow.document.querySelector('.message-content');
 
 		// Message open
 		if( element ) {
-			setTimeout(_panelMessageClosed, 100);
+			setTimeout(panelMessageClosed, 100);
 		} else {
-			setTimeout(_panelMessageReady, 100);
+			setTimeout(panelMessageReady, 100);
 		}
 	}
 
 	// Feel keydown
-	var _splitviewKeydown = function() {
+	var splitviewKeydown = function() {
 		document.addEventListener('keydown', function(e) {
-			if (e.altKey && e.keyCode == _stringToShortcut()) {
-				if( document.querySelector('.splitbar__wrap').classList.contains('splitbar--hide') ) {
-					_showAll();
+			if (e.altKey && e.keyCode == stringToShortcut()) {
+				if( document.querySelector('.splitview__wrap').classList.contains('splitview--hide') ) {
+					showAll();
 				} else {
-					_hideAll();
+					hideAll();
 				}
 			}
 		}); 
 	}
 
 	// Convert string to shortcut number
-	var _stringToShortcut = function() {
+	var stringToShortcut = function() {
 		string = '{{shortcut}}';
 		return string.toUpperCase().charCodeAt(0);
 	}
 
 	// Hide element
-	var _hide = function(selector) {
-		document.querySelector(selector).classList.add("splitbar--hide");
+	var hide = function(selector) {
+		document.querySelector(selector).classList.add("splitview--hide");
 	}
 
 	// Show element
-	var _show = function(selector) {
-		document.querySelector(selector).classList.remove("splitbar--hide");
+	var show = function(selector) {
+		document.querySelector(selector).classList.remove("splitview--hide");
 	}
 
 	// Full
-	var _fullWidth = function(selector) {
-		document.querySelector(selector).classList.add("splitbar--full");
+	var fullWidth = function(selector) {
+		document.querySelector(selector).classList.add("splitview--full");
 	}
 
 	// Split
-	var _autoWidth = function(selector) {
-		document.querySelector(selector).classList.remove("splitbar--full");
+	var autoWidth = function(selector) {
+		document.querySelector(selector).classList.remove("splitview--full");
 	}
 
 	// Show all
-	var _showAll = function () {
-		_show('.splitbar__wrap');
-		_show('.splitbar__message');
-		_crop(true);
-		_saveActive(true);
+	var showAll = function () {
+		show('.splitview__wrap');
+		show('.splitview__message');
+		crop(true);
+		saveActive(true);
 	}
 
 	// Hide all
-	var _hideAll = function () {
-		_hide('.splitbar__wrap');
-		_hide('.splitbar__message');
-		_crop(false);
-		localStorage.setItem('splitbar.active', false);
-
-		_saveActive(false);
+	var hideAll = function () {
+		hide('.splitview__wrap');
+		hide('.splitview__message');
+		crop(false);
+		saveActive(false);
 	}
 
 	// Body overflow hidden
-	var _crop = function( state ) {
-		if( state === true ) document.querySelector('body').classList.add('splitbar--crop');
-		else document.querySelector('body').classList.remove('splitbar--crop');
+	var crop = function( state ) {
+		if( state === true ) document.querySelector('body').classList.add('splitview--crop');
+		else document.querySelector('body').classList.remove('splitview--crop');
 	}
 
 	// Refresh
-	var _refresh = function() {
-		document.querySelector('.splitbar__site iframe').contentWindow.location.reload();
+	var refresh = function() {
+		document.querySelector('.splitview__site iframe').contentWindow.location.reload();
 	}
 
 	// Save active state to localstorage
-	var _saveActive = function( state ) {
-		localStorage.setItem('splitbar.active', state);
+	var saveActive = function( state ) {
+		localStorage.setItem('splitview.active', state);
 	}
 
 	// EVENTS
 
 	// Site - Refresh
-	var _siteRefresh = function() {
-		document.querySelector('.splitbar__menu__item--refresh').onclick = function() { 
-			_refresh();
+	var siteRefresh = function() {
+		document.querySelector('.splitview__menu__item--refresh').onclick = function() { 
+			refresh();
 		}
 	}
 
 	// Site - Fullscreen
-	var _siteFullscreen = function() {
-		document.querySelector('.splitbar__menu--site .splitbar__menu__item--full').onclick = function() {
-			_hide('.splitbar__menu--panel');
-			_hide('.splitbar__panel');
-			_hide('.splitbar__menu--site .splitbar__menu__item--full');
-			_show('.splitbar__menu--site .splitbar__menu__item--columns');
-			_fullWidth('.splitbar__site');
+	var siteFullscreen = function() {
+		document.querySelector('.splitview__menu--site .splitview__menu__item--full').onclick = function() {
+			hide('.splitview__menu--panel');
+			hide('.splitview__panel');
+			hide('.splitview__menu--site .splitview__menu__item--full');
+			show('.splitview__menu--site .splitview__menu__item--columns');
+			fullWidth('.splitview__site');
 		}
 	}
 
 	// Site - Columns
-	var _siteColumns = function() {
-		document.querySelector('.splitbar__menu--site .splitbar__menu__item--columns').onclick = function() {
-			_show('.splitbar__menu--panel');
-			_show('.splitbar__panel');
-			_show('.splitbar__menu--site .splitbar__menu__item--full');
-			_hide('.splitbar__menu--site .splitbar__menu__item--columns');
-			_autoWidth('.splitbar__site');
+	var siteColumns = function() {
+		document.querySelector('.splitview__menu--site .splitview__menu__item--columns').onclick = function() {
+			show('.splitview__menu--panel');
+			show('.splitview__panel');
+			show('.splitview__menu--site .splitview__menu__item--full');
+			hide('.splitview__menu--site .splitview__menu__item--columns');
+			autoWidth('.splitview__site');
 		}
 	}
 
 	// Panel - Fullscreen
-	var _panelFullscreen = function() {
-		document.querySelector('.splitbar__menu--panel .splitbar__menu__item--full').onclick = function() {
-			_hide('.splitbar__menu--site');
-			_hide('.splitbar__site');
-			_hide('.splitbar__menu--panel .splitbar__menu__item--full');
-			_show('.splitbar__menu--panel .splitbar__menu__item--columns');
-			_fullWidth('.splitbar__panel');
+	var panelFullscreen = function() {
+		document.querySelector('.splitview__menu--panel .splitview__menu__item--full').onclick = function() {
+			hide('.splitview__menu--site');
+			hide('.splitview__site');
+			hide('.splitview__menu--panel .splitview__menu__item--full');
+			show('.splitview__menu--panel .splitview__menu__item--columns');
+			fullWidth('.splitview__panel');
 		}
 	}
 
-	// Panel - Columns
-	var _panelColumns = function() {
-		document.querySelector('.splitbar__menu--panel .splitbar__menu__item--columns').onclick = function() {
-			_show('.splitbar__menu--site');
-			_show('.splitbar__site');
-			_show('.splitbar__menu--panel .splitbar__menu__item--full');
-			_hide('.splitbar__menu--panel .splitbar__menu__item--columns');
-			_autoWidth('.splitbar__panel');
+	// Event - PanelColumns
+	var event_panelColumns = function() {
+		document.querySelector('.splitview__menu--panel .splitview__menu__item--columns').onclick = function() {
+			fn.panelColumns();
 		}
 	}
 
 	// Splitview - Close
-	var _splitviewClose = function() {
-		document.querySelector('.splitbar__menu--close .splitbar__menu__item--close').onclick = function() { 
-			_hideAll();
+	var splitviewClose = function() {
+		document.querySelector('.splitview__menu--close .splitview__menu__item--close').onclick = function() { 
+			hideAll();
 		}
 	}
 
 	// Splitview - Show if localstorage active is true
-	var _splitviewPlace = function() {
-		if( localStorage.getItem('splitbar.active') === "true" ) {
-			_showAll();
+	var splitviewPlace = function() {
+		if( localStorage.getItem('splitview.active') === "true" ) {
+			showAll();
 		}
+	}
+
+	// panelColumns - Toggle stuff
+	fn.panelColumns = function() {
+		show('.splitview__menu--site');
+		show('.splitview__site');
+		show('.splitview__menu--panel .splitview__menu__item--full');
+		hide('.splitview__menu--panel .splitview__menu__item--columns');
+		autoWidth('.splitview__panel');
 	}
 
 	// Init Splitview
 	fn.init = function () {
 		document.addEventListener("DOMContentLoaded", function() {
-			if( _topLevel() === true ) {
+
+			if( topLevel() === true ) {
 				// Splitview load
-				_splitviewIframePanel();
-				_splitviewPlace();
+				addIframe('.splitview__panel');
+				addIframe('.splitview__site');
+				iframeReady('.splitview__panel iframe');
+				iframeReady('.splitview__site iframe');
+
+				splitviewPlace();
 
 				// Splitview events
-				_splitviewKeydown();
-				_splitviewClose();
+				splitviewKeydown();
+				splitviewClose();
 
 				// Panel
-				_panelMessageReady();
+				panelMessageReady();
 
 				// Site
-				_siteFullscreen();
-				_siteColumns();
-				_siteRefresh();
-				_panelFullscreen();
-				_panelColumns();
+				siteFullscreen();
+				siteColumns();
+				siteRefresh();
+				panelFullscreen();
+				event_panelColumns();
 			}
-			return 'KLAR';
 		});
 	};
 	return fn;
