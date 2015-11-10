@@ -228,4 +228,3 @@ var splitView = (function () {
 	};
 	return fn;
 })();
-splitView.init();
