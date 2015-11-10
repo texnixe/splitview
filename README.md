@@ -62,7 +62,7 @@ To trigger Splitview `alt + s` is used as a default keyboard shortcut. You can c
 **Default:** `s`
 
 ```php
-c::set('splitview.key', 's');
+c::set('splitview.shortcut', 's');
 ```
 
 ### Active
