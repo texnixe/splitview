@@ -156,11 +156,7 @@ var splitview = (function () {
 
 		// Site columns
 		document.querySelector('.splitview__menu--site .splitview__menu__item--columns').onclick = function() {
-			show('.splitview__menu--panel');
-			show('.splitview__panel');
-			show('.splitview__menu--site .splitview__menu__item--full');
-			hide('.splitview__menu--site .splitview__menu__item--columns');
-			autoWidth('.splitview__site');
+			fn.siteColumns();
 		}
 
 		// Panel fullscreen
@@ -249,13 +245,25 @@ var splitview = (function () {
 		show('.splitview__menu--panel .splitview__menu__item--full');
 		hide('.splitview__menu--panel .splitview__menu__item--columns');
 		autoWidth('.splitview__panel');
+		setLocal('view', '');
+	}
+
+	fn.siteColumns = function() {
+		show('.splitview__menu--panel');
+		show('.splitview__panel');
+		show('.splitview__menu--site .splitview__menu__item--full');
+		hide('.splitview__menu--site .splitview__menu__item--columns');
+		autoWidth('.splitview__site');
+		setLocal('view', '');
 	}
 
 	// Init Splitview
 	fn.init = function (options) {
 		document.addEventListener("DOMContentLoaded", function() {
 			if( topLevel() === true ) {
-				data = options;
+				if( options ) {
+					data = options;
+				}
 
 				// Add iframes
 				addIframe('.splitview__panel');
