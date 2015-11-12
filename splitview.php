@@ -48,7 +48,7 @@ class splitView {
 
 	private function jsScript() {
 		if( c::get('splitview.js', true) === true )
-			return '<script>splitView.init();</script>';
+			return tpl::load( $this->paths->templates . 'script.php', array(), true );
 	}
 
 	private function html() {

@@ -1,12 +1,14 @@
-var splitView = (function () {
+var splitview = (function () {
 	var fn = {};
 	var iframe_count = 0;
+	var data = {};
 
 	// Check if top level
 	var topLevel = function () {
 		if( window.self === window.top ) return true;
 	};
 
+	// Add iframe to selector
 	var addIframe = function(selector) {
 		var iframe = document.createElement('iframe');
 		iframe.src = document.querySelector(selector).getAttribute('data-splitview-url');
@@ -14,20 +16,22 @@ var splitView = (function () {
 		return iframe;
 	}
 
-	// Event - iframe ready
-	var iframeReady = function(selector) {
+	// After iframes loaded - Move focus to root
+	var focusRootOnLoad = function(selector) {
 		iframe = document.querySelector(selector);
 		iframe.onload = function() {
 			iframe_count++;
-			if(iframe_count == 2) focusParent();
+			if(iframe_count == 2) {
+				focusRoot();
+			}
 		};
 	}
 
 	// Force focus on parent
-	var focusParent = function() {
-		document.querySelector('.splitview__panel iframe').blur();
-		document.querySelector('.splitview__site iframe').blur();
-		document.querySelector('.splitview__wrap').focus();
+	var focusRoot = function() {
+		blur('.splitview__panel iframe');
+		blur('.splitview__site iframe');
+		focus('.splitview__wrap');
 	}
 
 	// Feel when save message is active
@@ -69,8 +73,22 @@ var splitView = (function () {
 
 	// Convert string to shortcut number
 	var stringToShortcut = function() {
-		string = '{{shortcut}}';
-		return string.toUpperCase().charCodeAt(0);
+		if( data.hasOwnProperty('shortcut') ) {
+			var value = data.shortcut;
+		} else {
+			var value = 's';
+		}
+		return value.toUpperCase().charCodeAt(0);
+	}
+
+	// Force focus
+	var focus = function(selector) {
+		document.querySelector(selector).focus();
+	}
+
+	// Force blur
+	var blur = function(selector) {
+		document.querySelector(selector).blur();
 	}
 
 	// Hide element
@@ -97,7 +115,7 @@ var splitView = (function () {
 	var showAll = function () {
 		show('.splitview__wrap');
 		show('.splitview__message');
-		crop(true);
+		crop('body', true);
 		saveActive(true);
 	}
 
@@ -105,14 +123,14 @@ var splitView = (function () {
 	var hideAll = function () {
 		hide('.splitview__wrap');
 		hide('.splitview__message');
-		crop(false);
+		crop('body', false);
 		saveActive(false);
 	}
 
 	// Body overflow hidden
-	var crop = function( state ) {
-		if( state === true ) document.querySelector('body').classList.add('splitview--crop');
-		else document.querySelector('body').classList.remove('splitview--crop');
+	var crop = function( selector, state ) {
+		if( state === true ) document.querySelector(selector).classList.add('splitview--crop');
+		else document.querySelector(selector).classList.remove('splitview--crop');
 	}
 
 	// Refresh
@@ -125,28 +143,18 @@ var splitView = (function () {
 		localStorage.setItem('splitview.active', state);
 	}
 
-	// EVENTS
-
-	// Site - Refresh
-	var siteRefresh = function() {
+	var events = function() {
+		// Site refresh
 		document.querySelector('.splitview__menu__item--refresh').onclick = function() { 
 			refresh();
 		}
-	}
 
-	// Site - Fullscreen
-	var siteFullscreen = function() {
+		// Site fullscreen
 		document.querySelector('.splitview__menu--site .splitview__menu__item--full').onclick = function() {
-			hide('.splitview__menu--panel');
-			hide('.splitview__panel');
-			hide('.splitview__menu--site .splitview__menu__item--full');
-			show('.splitview__menu--site .splitview__menu__item--columns');
-			fullWidth('.splitview__site');
+			fn.siteFullscreen();
 		}
-	}
 
-	// Site - Columns
-	var siteColumns = function() {
+		// Site columns
 		document.querySelector('.splitview__menu--site .splitview__menu__item--columns').onclick = function() {
 			show('.splitview__menu--panel');
 			show('.splitview__panel');
@@ -154,41 +162,87 @@ var splitView = (function () {
 			hide('.splitview__menu--site .splitview__menu__item--columns');
 			autoWidth('.splitview__site');
 		}
-	}
 
-	// Panel - Fullscreen
-	var panelFullscreen = function() {
+		// Panel fullscreen
 		document.querySelector('.splitview__menu--panel .splitview__menu__item--full').onclick = function() {
-			hide('.splitview__menu--site');
-			hide('.splitview__site');
-			hide('.splitview__menu--panel .splitview__menu__item--full');
-			show('.splitview__menu--panel .splitview__menu__item--columns');
-			fullWidth('.splitview__panel');
+			fn.panelFullscreen();
 		}
-	}
 
-	// Event - PanelColumns
-	var event_panelColumns = function() {
+		// Panel columns
 		document.querySelector('.splitview__menu--panel .splitview__menu__item--columns').onclick = function() {
 			fn.panelColumns();
 		}
-	}
 
-	// Splitview - Close
-	var splitviewClose = function() {
+		// Close
 		document.querySelector('.splitview__menu--close .splitview__menu__item--close').onclick = function() { 
 			hideAll();
 		}
 	}
 
-	// Splitview - Show if localstorage active is true
-	var splitviewPlace = function() {
-		if( localStorage.getItem('splitview.active') === "true" ) {
+	// Get localstorage variable
+	var getLocal = function(slug) {
+		return localStorage.getItem('splitview.' + slug);
+	}
+
+	// Set localstorage variable
+	var setLocal = function(slug, value) {
+		return localStorage.setItem('splitview.' + slug, value);
+	}
+
+	// Add layout states
+	var addLayout = function() {
+		splitviewStateActive();
+		splitviewStateView();
+	}
+
+	// Toggle splitview depending on options and local storage
+	var splitviewStateActive = function() {
+		if( data.hasOwnProperty('active') ) {
+			var value = data.active;
+		} else {
+			var value = ( getLocal('active') === 'true' ) ? true : false;
+		}
+		if( value === true ) {
 			showAll();
 		}
 	}
 
-	// panelColumns - Toggle stuff
+	// Set view depending on options and local storage
+	var splitviewStateView = function() {
+		if( data.hasOwnProperty('view') ) {
+			var value = data.view;
+		} else {
+			if( getLocal('view') !== null ) {
+				var value = getLocal('view');
+			}
+		}
+		if( value === 'panel' ) {
+			fn.panelFullscreen();
+		} else if( value === 'site' ) {
+			fn.siteFullscreen();
+		}
+	}
+
+	// Panel fullscreen
+	fn.panelFullscreen = function() {
+		hide('.splitview__menu--site');
+		hide('.splitview__site');
+		hide('.splitview__menu--panel .splitview__menu__item--full');
+		show('.splitview__menu--panel .splitview__menu__item--columns');
+		fullWidth('.splitview__panel');
+		setLocal('view', 'panel');
+	}
+
+	fn.siteFullscreen = function() {
+		hide('.splitview__menu--panel');
+		hide('.splitview__panel');
+		hide('.splitview__menu--site .splitview__menu__item--full');
+		show('.splitview__menu--site .splitview__menu__item--columns');
+		fullWidth('.splitview__site');
+		setLocal('view', 'site');
+	}
+
+	// Panel columns
 	fn.panelColumns = function() {
 		show('.splitview__menu--site');
 		show('.splitview__site');
@@ -198,31 +252,30 @@ var splitView = (function () {
 	}
 
 	// Init Splitview
-	fn.init = function () {
+	fn.init = function (options) {
 		document.addEventListener("DOMContentLoaded", function() {
-
 			if( topLevel() === true ) {
-				// Splitview load
+				data = options;
+
+				// Add iframes
 				addIframe('.splitview__panel');
 				addIframe('.splitview__site');
-				iframeReady('.splitview__panel iframe');
-				iframeReady('.splitview__site iframe');
 
-				splitviewPlace();
+				// Focus on root
+				focusRootOnLoad('.splitview__panel iframe');
+				focusRootOnLoad('.splitview__site iframe');
 
-				// Splitview events
+				// Add layout by options
+				addLayout();
+
+				// Activate shortcut
 				splitviewKeydown();
-				splitviewClose();
 
-				// Panel
+				// Run events
+				events();
+
+				// Update on save
 				panelMessageReady();
-
-				// Site
-				siteFullscreen();
-				siteColumns();
-				siteRefresh();
-				panelFullscreen();
-				event_panelColumns();
 			}
 		});
 	};
