@@ -1,6 +1,3 @@
 <script>
-splitview.init({
-	active: true,
-	//view: 'site'
-});
+splitview.init();
 </script>
