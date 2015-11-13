@@ -39,7 +39,7 @@
 			</div>
 		</div>
 		<div class="splitview__menu--close">
-			<div class="splitview__menu__item--flip" title="Flip">
+			<div class="splitview__menu__item--orientation" title="Flip">
 				<i class="fa fa-columns fa-rotate-90"></i>
 			</div>
 			<div class="splitview__menu__item--close" title="Close">

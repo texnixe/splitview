@@ -10,6 +10,7 @@ var splitview = (function () {
 	var admin_url;
 	var memory;
 	var time;
+	var orientation;
 
 	//TIME
 	// SAVEDREADYSTART SELECTOR + SAVEDREADYEND SELECTOR
@@ -25,20 +26,18 @@ var splitview = (function () {
 		setAdminUrl();
 		setMemory();
 		setTime();
+		setOrientation();
 	}
 
 	// Memory variables
-	/*
-	var setMode = function() {
-		mode = getValue('mode', 'edit');
-	}*/
-
 	var setActive = function() {
 		active = getValue('active', false);
 	}
-
 	var setView = function() {
 		view = getValue('view', '');
+	}
+	var setOrientation = function() {
+		orientation = getValue('orientation', 'columns');
 	}
 
 	// Urls
@@ -79,13 +78,6 @@ var splitview = (function () {
 		document.querySelector(selector).appendChild(iframe);
 		return iframe;
 	}
-
-	// Add hard link
-	/*
-	var addLink = function(selector, url) {
-		link = document.querySelector(selector);
-		link.setAttribute('href', url);
-	}*/
 
 	// After iframes loaded - Move focus to root
 	var focusRootOnLoad = function(selector) {
@@ -128,24 +120,6 @@ var splitview = (function () {
 			setTimeout(panelMessageReady, time);
 		}
 	}
-
-	// Feel panel url in a time loop
-	/*var panelUrl = function () {
-		var url = document.querySelector('.splitview__panel iframe').contentWindow.location.href;
-		var slash_array = url.split("/");
-		var last_element = slash_array[slash_array.length - 1];
-		var third_last_element = slash_array[slash_array.length - 3];
-
-		if( url.includes( site_url + admin_uri ) === true ) {
-			if( ( last_element === 'edit' && third_last_element == 'file' ) || last_element == 'files' ) {
-				mode = 'files';
-			} else if( last_element === 'edit' ) {
-				mode = 'edit';
-			}
-			setLocal('mode', mode);
-		}
-		setTimeout(panelUrl, 100);
-	}*/
 
 	// Feel keydown
 	var splitviewKeydown = function() {
@@ -258,6 +232,20 @@ var splitview = (function () {
 			clickUrl(this);
 		});
 
+		// Orientation
+		document.querySelector('.splitview__menu__item--orientation').onclick = function() {
+			if( orientation == 'rows') {
+				document.querySelector('.splitview__columns').classList.remove('splitview--rows');
+				document.querySelector('.splitview__menu__item--orientation i').classList.remove('fa-rotate-90');
+				orientation = 'columns';
+			} else {
+				document.querySelector('.splitview__columns').classList.add('splitview--rows');
+				document.querySelector('.splitview__menu__item--orientation i').classList.add('fa-rotate-90');
+				orientation = 'rows';
+			}
+			setLocal('orientation', orientation);
+		}
+
 		// Close
 		document.querySelector('.splitview__menu--close .splitview__menu__item--close').onclick = function() {
 			hideAll();
@@ -288,6 +276,7 @@ var splitview = (function () {
 	var addLayout = function() {
 		splitviewStateActive();
 		splitviewStateView();
+		splitviewStateOrientation();
 	}
 
 	// Get option from JS function
@@ -329,6 +318,17 @@ var splitview = (function () {
 			fn.panelFullscreen();
 		} else if( view === 'site' ) {
 			fn.siteFullscreen();
+		}
+	}
+
+	// Set orientation depending on options and local storage
+	var splitviewStateOrientation = function() {
+		if( orientation === 'rows' ) {
+			document.querySelector('.splitview__columns').classList.add("splitview--rows");
+			document.querySelector('.splitview__menu__item--orientation i').classList.add('fa-rotate-90');
+		} else {
+			document.querySelector('.splitview__columns').classList.remove("splitview--rows");
+			document.querySelector('.splitview__menu__item--orientation i').classList.remove('fa-rotate-90');
 		}
 	}
 

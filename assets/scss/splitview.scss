@@ -23,6 +23,17 @@
 	&--crop {
 		overflow: hidden;
 	}
+	&--rows {
+		.splitview__panel {
+			box-sizing: border-box;
+			border-bottom: 2px solid #000;
+		}
+		.splitview__panel,
+		.splitview__site {
+			width: 100%;
+			height: 50%;
+		}
+	}
 	&__wrap {
 		position: fixed;
 		top: 0;

@@ -50,6 +50,7 @@ class splitView {
 		if( c::get('splitview.script', true) === true ) {
 			$memory = ( c::get('splitview.memory', true) === true ) ? 'true' : 'false';
 			$time = c::get('splitview.time', 'fast');
+			$orientation = c::get('splitview.orientation', 'rows');
 			// View
 			// Site url
 			// admin uri
@@ -57,7 +58,8 @@ class splitView {
 
 			return tpl::load( $this->paths->templates . 'script.php', array(
 				'memory' => $memory,
-				'time' => $time
+				'time' => $time,
+				'orientation' => $orientation
 			),true );
 		}
 	}
