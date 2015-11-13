@@ -50,12 +50,6 @@ splitview.init({
 });
 ```
 
-### Mode
-
-Set the mode of the page in the panel. A mode can be `edit` or `files`. If images are edited it might be better to use `files` mode which leads directly to the file gallery in the panel.
-
-**Default:** `edit`
-
 ## Active
 
 ## View

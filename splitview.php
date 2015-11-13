@@ -49,9 +49,15 @@ class splitView {
 	private function jsScript() {
 		if( c::get('splitview.script', true) === true ) {
 			$memory = ( c::get('splitview.memory', true) === true ) ? 'true' : 'false';
+			$time = c::get('splitview.time', 'fast');
+			// View
+			// Site url
+			// admin uri
+			// Page uri
 
 			return tpl::load( $this->paths->templates . 'script.php', array(
-				'memory' => $memory
+				'memory' => $memory,
+				'time' => $time
 			),true );
 		}
 	}

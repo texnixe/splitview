@@ -2,7 +2,6 @@ var splitview = (function () {
 	var fn = {};
 	var iframe_count = 0;
 	var data = {};
-	//var mode;
 	var active;
 	var view;
 	var page_uri;
@@ -10,6 +9,7 @@ var splitview = (function () {
 	var site_url;
 	var admin_url;
 	var memory;
+	var time;
 
 	//TIME
 	// SAVEDREADYSTART SELECTOR + SAVEDREADYEND SELECTOR
@@ -24,6 +24,7 @@ var splitview = (function () {
 		setSiteUrl();
 		setAdminUrl();
 		setMemory();
+		setTime();
 	}
 
 	// Memory variables
@@ -60,6 +61,12 @@ var splitview = (function () {
 	// Other
 	var setMemory = function() {
 		memory = getOption('memory', true);
+	}
+	var setTime = function() {
+		time = getOption('time', 'fast');
+		time = ( time === 'slow') ? 1000 : 100;
+
+		console.log(time);
 	}
 
 	// Check if top level
@@ -108,7 +115,7 @@ var splitview = (function () {
 			refresh();
 			panelMessageClosed();
 		} else {
-			setTimeout(panelMessageReady, 100);
+			setTimeout(panelMessageReady, time);
 		}
 	}
 
@@ -118,9 +125,9 @@ var splitview = (function () {
 
 		// Message open
 		if( element ) {
-			setTimeout(panelMessageClosed, 100);
+			setTimeout(panelMessageClosed, time);
 		} else {
-			setTimeout(panelMessageReady, 100);
+			setTimeout(panelMessageReady, time);
 		}
 	}
 
@@ -385,7 +392,7 @@ var splitview = (function () {
 
 				// Add iframes
 				addIframe('.splitview__panel', admin_url);
-				addIframe('.splitview__site', getValue('site_url', ''));
+				addIframe('.splitview__site', getValue('site_url', '') + '/' + getValue('page_uri', '') );
 
 				// Focus on root
 				focusRootOnLoad('.splitview__panel iframe');
