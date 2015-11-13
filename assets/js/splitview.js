@@ -2,7 +2,7 @@ var splitview = (function () {
 	var fn = {};
 	var iframe_count = 0;
 	var data = {};
-	var mode;
+	//var mode;
 	var active;
 	var view;
 	var page_uri;
@@ -16,7 +16,7 @@ var splitview = (function () {
 
 	// Set local values
 	var setValues = function() {
-		setMode();
+		//setMode();
 		setActive();
 		setView();
 		setPageUri();
@@ -27,9 +27,10 @@ var splitview = (function () {
 	}
 
 	// Memory variables
+	/*
 	var setMode = function() {
 		mode = getValue('mode', 'edit');
-	}
+	}*/
 
 	var setActive = function() {
 		active = getValue('active', false);
@@ -53,7 +54,7 @@ var splitview = (function () {
 	}
 
 	var setAdminUrl = function() {
-		admin_url = site_url + admin_uri + page_uri + '/' + mode;
+		admin_url = site_url + admin_uri + page_uri + '/edit';
 	}
 
 	// Other
@@ -124,7 +125,7 @@ var splitview = (function () {
 	}
 
 	// Feel panel url in a time loop
-	var panelUrl = function () {
+	/*var panelUrl = function () {
 		var url = document.querySelector('.splitview__panel iframe').contentWindow.location.href;
 		var slash_array = url.split("/");
 		var last_element = slash_array[slash_array.length - 1];
@@ -139,7 +140,7 @@ var splitview = (function () {
 			setLocal('mode', mode);
 		}
 		setTimeout(panelUrl, 100);
-	}
+	}*/
 
 	// Feel keydown
 	var splitviewKeydown = function() {
@@ -192,22 +193,6 @@ var splitview = (function () {
 	// Split
 	var autoWidth = function(selector) {
 		document.querySelector(selector).classList.remove("splitview--full");
-	}
-
-	// Show all
-	var showAll = function () {
-		show('.splitview__wrap');
-		show('.splitview__message');
-		crop('body', true);
-		saveActive(true);
-	}
-
-	// Hide all
-	var hideAll = function () {
-		hide('.splitview__wrap');
-		hide('.splitview__message');
-		crop('body', false);
-		saveActive(false);
 	}
 
 	// Body overflow hidden
@@ -331,6 +316,22 @@ var splitview = (function () {
 		}
 	}
 
+	// Show all
+	var showAll = function () {
+		show('.splitview__wrap');
+		show('.splitview__message');
+		crop('body', true);
+		saveActive(true);
+	}
+
+	// Hide all
+	var hideAll = function () {
+		hide('.splitview__wrap');
+		hide('.splitview__message');
+		crop('body', false);
+		saveActive(false);
+	}
+
 	// Panel fullscreen
 	fn.panelFullscreen = function() {
 		hide('.splitview__menu--site');
@@ -404,7 +405,7 @@ var splitview = (function () {
 				// Update on save
 				panelMessageReady();
 
-				panelUrl();
+				//panelUrl();
 			}
 		});
 	};

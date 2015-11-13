@@ -53,7 +53,7 @@ There are two columns, panel and site. Panel is the Kirby panel and site is your
 
 ## Options
 
-[Read all about the options](https://github.com/jenstornell/splitview/OPTIONS.md
+[Read all about the options](https://github.com/jenstornell/splitview/OPTIONS.md)
 
 ## Troubleshooting
 
@@ -90,6 +90,10 @@ Ideas are always welcome. Add them as issues.
 
 Help to improve the code with pull requests or suggestions as issues.
 
-## Future
+### Future
 
 Possuble future ideas is added to the issues tagged `ideas` or `features`. Also look at milestones.
+
+### License
+
+[CC - Attribution 4.0 International](http://creativecommons.org/licenses/by/4.0/)
