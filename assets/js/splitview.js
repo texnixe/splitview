@@ -2,6 +2,64 @@ var splitview = (function () {
 	var fn = {};
 	var iframe_count = 0;
 	var data = {};
+	var mode;
+	var active;
+	var view;
+	var page_uri;
+	var admin_uri;
+	var site_url;
+	var admin_url;
+	var memory;
+
+	//TIME
+	// SAVEDREADYSTART SELECTOR + SAVEDREADYEND SELECTOR
+
+	// Set local values
+	var setValues = function() {
+		setMode();
+		setActive();
+		setView();
+		setPageUri();
+		setAdminUri();
+		setSiteUrl();
+		setAdminUrl();
+		setMemory();
+	}
+
+	// Memory variables
+	var setMode = function() {
+		mode = getValue('mode', 'edit');
+	}
+
+	var setActive = function() {
+		active = getValue('active', false);
+	}
+
+	var setView = function() {
+		view = getValue('view', '');
+	}
+
+	// Urls
+	var setPageUri = function() {
+		page_uri = getOption('page_uri', '');
+	}
+
+	var setAdminUri = function() {
+		admin_uri = getOption('admin_uri', '/panel/pages/');
+	}
+
+	var setSiteUrl = function() {
+		site_url = getOption('site_url', '');
+	}
+
+	var setAdminUrl = function() {
+		admin_url = site_url + admin_uri + page_uri + '/' + mode;
+	}
+
+	// Other
+	var setMemory = function() {
+		memory = getOption('memory', true);
+	}
 
 	// Check if top level
 	var topLevel = function () {
@@ -9,12 +67,19 @@ var splitview = (function () {
 	};
 
 	// Add iframe to selector
-	var addIframe = function(selector) {
+	var addIframe = function(selector, value) {
 		var iframe = document.createElement('iframe');
-		iframe.src = document.querySelector(selector).getAttribute('data-splitview-url');
+		iframe.src = value;
 		document.querySelector(selector).appendChild(iframe);
 		return iframe;
 	}
+
+	// Add hard link
+	/*
+	var addLink = function(selector, url) {
+		link = document.querySelector(selector);
+		link.setAttribute('href', url);
+	}*/
 
 	// After iframes loaded - Move focus to root
 	var focusRootOnLoad = function(selector) {
@@ -56,6 +121,24 @@ var splitview = (function () {
 		} else {
 			setTimeout(panelMessageReady, 100);
 		}
+	}
+
+	// Feel panel url in a time loop
+	var panelUrl = function () {
+		var url = document.querySelector('.splitview__panel iframe').contentWindow.location.href;
+		var slash_array = url.split("/");
+		var last_element = slash_array[slash_array.length - 1];
+		var third_last_element = slash_array[slash_array.length - 3];
+
+		if( url.includes( site_url + admin_uri ) === true ) {
+			if( ( last_element === 'edit' && third_last_element == 'file' ) || last_element == 'files' ) {
+				mode = 'files';
+			} else if( last_element === 'edit' ) {
+				mode = 'edit';
+			}
+			setLocal('mode', mode);
+		}
+		setTimeout(panelUrl, 100);
 	}
 
 	// Feel keydown
@@ -138,7 +221,7 @@ var splitview = (function () {
 		document.querySelector('.splitview__site iframe').contentWindow.location.reload();
 	}
 
-	// Save active state to localstorage
+	// Save active state to localstorage ENHANCE
 	var saveActive = function( state ) {
 		localStorage.setItem('splitview.active', state);
 	}
@@ -159,6 +242,11 @@ var splitview = (function () {
 			fn.siteColumns();
 		}
 
+		// Site hover link
+		document.querySelector('.splitview__menu--site .splitview__menu__item--link').addEventListener("mouseover", function(event) {
+			hoverUrl('.splitview__menu--site .splitview__menu__item--link a', '.splitview__site iframe');
+		});
+
 		// Panel fullscreen
 		document.querySelector('.splitview__menu--panel .splitview__menu__item--full').onclick = function() {
 			fn.panelFullscreen();
@@ -169,10 +257,20 @@ var splitview = (function () {
 			fn.panelColumns();
 		}
 
+		// Panel hover link
+		document.querySelector('.splitview__menu--panel .splitview__menu__item--link').addEventListener("mouseover", function(event) {
+			hoverUrl('.splitview__menu--panel .splitview__menu__item--link a', '.splitview__panel iframe');
+		});
+
 		// Close
-		document.querySelector('.splitview__menu--close .splitview__menu__item--close').onclick = function() { 
+		document.querySelector('.splitview__menu--close .splitview__menu__item--close').onclick = function() {
 			hideAll();
 		}
+	}
+
+	var hoverUrl = function(selector_link, selector_iframe) {
+		var src = document.querySelector(selector_iframe).contentWindow.location.href;
+		document.querySelector(selector_link).setAttribute('href', src);
 	}
 
 	// Get localstorage variable
@@ -191,30 +289,44 @@ var splitview = (function () {
 		splitviewStateView();
 	}
 
+	// Get option from JS function
+	var getOption = function( key, defaultValue ) {
+		var value = '';
+		if( data.hasOwnProperty(key) ) {
+			value = data[key];
+		} else {
+			value = defaultValue;
+		}
+		return value;
+	}
+
+	// Get value from input, or from localstorage or from default value
+	var getValue = function(key, defaultValue) {
+		var value = '';
+		if( data.hasOwnProperty(key) ) {
+			value = data[key];
+		} else {
+			if( getLocal(key) !== null ) {
+				value = getLocal(key);
+			} else {
+				value = defaultValue;
+			}
+		}
+		return value;
+	}
+
 	// Toggle splitview depending on options and local storage
 	var splitviewStateActive = function() {
-		if( data.hasOwnProperty('active') ) {
-			var value = data.active;
-		} else {
-			var value = ( getLocal('active') === 'true' ) ? true : false;
-		}
-		if( value === true ) {
+		if( active === 'true' ) {
 			showAll();
 		}
 	}
 
 	// Set view depending on options and local storage
 	var splitviewStateView = function() {
-		if( data.hasOwnProperty('view') ) {
-			var value = data.view;
-		} else {
-			if( getLocal('view') !== null ) {
-				var value = getLocal('view');
-			}
-		}
-		if( value === 'panel' ) {
+		if( view === 'panel' ) {
 			fn.panelFullscreen();
-		} else if( value === 'site' ) {
+		} else if( view === 'site' ) {
 			fn.siteFullscreen();
 		}
 	}
@@ -265,16 +377,23 @@ var splitview = (function () {
 					data = options;
 				}
 
+				// Set values to local scope
+				setValues();
+
+				console.log(data);
+
 				// Add iframes
-				addIframe('.splitview__panel');
-				addIframe('.splitview__site');
+				addIframe('.splitview__panel', admin_url);
+				addIframe('.splitview__site', getValue('site_url', ''));
 
 				// Focus on root
 				focusRootOnLoad('.splitview__panel iframe');
 				focusRootOnLoad('.splitview__site iframe');
 
 				// Add layout by options
-				addLayout();
+				if( memory === true ) {
+					addLayout();
+				}
 
 				// Activate shortcut
 				splitviewKeydown();
@@ -284,6 +403,8 @@ var splitview = (function () {
 
 				// Update on save
 				panelMessageReady();
+
+				panelUrl();
 			}
 		});
 	};

@@ -53,40 +53,7 @@ There are two columns, panel and site. Panel is the Kirby panel and site is your
 
 ## Options
 
-If options are not set a default value will be used.
-
-### Shortcut
-
-To trigger Splitview `alt + s` is used as a default keyboard shortcut. You can change the `s` letter if you want.
-
-**Default:** `s`
-
-```php
-c::set('splitview.shortcut', 's');
-```
-
-### Active
-
-You can disable Splitview without removing the plugin. Set this option to `false` to disable it.
-
-**Default:** `true`
-
-```php
-c::set('splitview.active', true);
-```
-
-### CSS and JS
-
-There is currently no way to add your custom CSS or JS through the plugin, but you can disable it if you want. Set this option to `false` disable it.
-
-**Warning:** If you disable these option the Splitview will probably not work like expected.
-
-**Default:** `true`
-
-```php
-c::set('splitview.css', true);
-c::set('splitview.js', true);
-```
+[Read all about the options](https://github.com/jenstornell/splitview/OPTIONS.md
 
 ## Troubleshooting
 

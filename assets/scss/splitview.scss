@@ -31,7 +31,7 @@
 		height: calc( 100% - 48px );
 		z-index: 2100000000;
 
-		@media screen and (max-width: 640px) {
+		@media screen and (max-width: 680px) {
 			display: none;
 		}
 	}
@@ -50,7 +50,7 @@
 		padding: 40px;
 		box-sizing: border-box;
 
-		@media screen and (max-width: 640px) {
+		@media screen and (max-width: 680px) {
 			display: block;
 		}
 	}
@@ -69,7 +69,7 @@
 		border-bottom: 1px solid #555;
 
 		span {
-			@media screen and (max-width: 800px) {
+			@media screen and (max-width: 1140px) {
 				display: none;
 			}
 		}
@@ -96,13 +96,35 @@
 
 			> div {
 				float: left;
+
+				a {
+					color: #fff;
+
+					&:hover {
+						color: #999;
+					}
+				}
 			}
 
 			i {
 				margin-right: 10px;
 
-				@media screen and (max-width: 800px) {
+				@media screen and (max-width: 1140px) {
 					margin-right: 0;
+				}
+			}
+
+			a i {
+				margin-right: 0;
+			}
+		}
+
+		&__item {
+			&--link {
+				padding: 0 !important;
+				a {
+					display: block;
+					padding: 0 20px;
 				}
 			}
 		}

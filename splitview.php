@@ -31,7 +31,7 @@ class splitView {
 		$html .= $this->replaceFonts( $this->css() );
 		$html .= $this->minifyHtml( $this->html() );
 		$html .= $this->replaceShortcut( $this->js() );
-		$html .= $this->jsScript();
+		$html .= $this->minifyHtml( $this->jsScript() );
 
 		$html = "\n\n<!-- Splitview # Start -->\n" . $html . "\n<!-- Splitview # End -->\n\n";
 		return $html;
@@ -47,12 +47,18 @@ class splitView {
 	}
 
 	private function jsScript() {
-		if( c::get('splitview.js', true) === true )
-			return tpl::load( $this->paths->templates . 'script.php', array(), true );
+		if( c::get('splitview.script', true) === true ) {
+			$memory = ( c::get('splitview.memory', true) === true ) ? 'true' : 'false';
+
+			return tpl::load( $this->paths->templates . 'script.php', array(
+				'memory' => $memory
+			),true );
+		}
 	}
 
 	private function html() {
-		return tpl::load( $this->paths->templates . 'html.php', array(), true );
+		if( c::get('splitview.html', true) === true )
+			return tpl::load( $this->paths->templates . 'html.php', array(), true );
 	}
 
 	private function replaceFonts( $html ) {

@@ -14,12 +14,58 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.fa-rotate-90 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+.fa-rotate-180 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.fa-rotate-270 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  -webkit-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+.fa-flip-horizontal {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1);
+  -webkit-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+}
+.fa-flip-vertical {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1);
+  -webkit-transform: scale(1, -1);
+  -ms-transform: scale(1, -1);
+  transform: scale(1, -1);
+}
+
 .fa-arrows-alt:before {
   content: "\f0b2";
 }
 
+.fa-compress:before {
+  content: "\f066";
+}
+
 .fa-refresh:before {
   content: "\f021";
+}
+
+.fa-clone:before {
+  content: "\f24d";
+}
+
+.fa-arrow-left:before {
+  content: "\f060";
+}
+.fa-arrow-right:before {
+  content: "\f061";
 }
 
 .fa-remove:before,
@@ -30,4 +76,32 @@
 
 .fa-columns:before {
   content: "\f0db";
+}
+
+.fa-chain:before,
+.fa-link:before {
+  content: "\f0c1";
+}
+.fa-desktop:before {
+  content: "\f108";
+}
+
+.fa-expand:before {
+  content: "\f065";
+}
+
+.fa-long-arrow-left:before {
+  content: "\f177";
+}
+.fa-long-arrow-right:before {
+  content: "\f178";
+}
+
+.fa-gear:before,
+.fa-cog:before {
+  content: "\f013";
+}
+
+.fa-th-list:before {
+  content: "\f00b";
 }
