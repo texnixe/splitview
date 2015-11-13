@@ -65,8 +65,6 @@ var splitview = (function () {
 	var setTime = function() {
 		time = getOption('time', 'fast');
 		time = ( time === 'slow') ? 1000 : 100;
-
-		console.log(time);
 	}
 
 	// Check if top level
@@ -254,6 +252,12 @@ var splitview = (function () {
 			hoverUrl('.splitview__menu--panel .splitview__menu__item--link a', '.splitview__panel iframe');
 		});
 
+		// Site click link
+		document.querySelector('.splitview__menu--site .splitview__menu__item--link a').addEventListener('click', function(e){
+			e.preventDefault();
+			clickUrl(this);
+		});
+
 		// Close
 		document.querySelector('.splitview__menu--close .splitview__menu__item--close').onclick = function() {
 			hideAll();
@@ -263,6 +267,11 @@ var splitview = (function () {
 	var hoverUrl = function(selector_link, selector_iframe) {
 		var src = document.querySelector(selector_iframe).contentWindow.location.href;
 		document.querySelector(selector_link).setAttribute('href', src);
+	}
+
+	var clickUrl = function(element) {
+		hideAll();
+		window.location.href = element.getAttribute('href');
 	}
 
 	// Get localstorage variable
