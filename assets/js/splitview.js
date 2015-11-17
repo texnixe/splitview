@@ -1,69 +1,200 @@
 var splitview = (function () {
 	var fn = {};
-	var iframe_count = 0;
 	var data = {};
-	var active;
-	var view;
-	var page_uri;
-	var admin_uri;
-	var site_url;
-	var admin_url;
-	var memory;
-	var time;
-	var orientation;
-
-	//TIME
-	// SAVEDREADYSTART SELECTOR + SAVEDREADYEND SELECTOR
-
-	// Set local values
-	var setValues = function() {
-		//setMode();
-		setActive();
-		setView();
-		setPageUri();
-		setAdminUri();
-		setSiteUrl();
-		setAdminUrl();
-		setMemory();
-		setTime();
-		setOrientation();
-	}
-
-	// Memory variables
-	var setActive = function() {
-		active = getValue('active', false);
-	}
-	var setView = function() {
-		view = getValue('view', '');
-	}
-	var setOrientation = function() {
-		orientation = getValue('orientation', 'columns');
-	}
+	var iframe_count = 0;
 
 	// Urls
-	var setPageUri = function() {
+	var root_url;
+	var admin_uri;
+	var page_uri;
+	var admin_url;
+
+	// Options
+	var memory;
+	var orientation;
+	var time;
+	var view;
+	var visible;
+
+	var setValues = function() {
+		//setMode();
+		root_url = getOption('root_url', baseUrl()[0]);
 		page_uri = getOption('page_uri', '');
-	}
+		admin_uri = getOption('admin_uri', 'panel/pages/');
+		admin_url = root_url + admin_uri + page_uri + '/edit';
 
-	var setAdminUri = function() {
-		admin_uri = getOption('admin_uri', '/panel/pages/');
-	}
-
-	var setSiteUrl = function() {
-		site_url = getOption('site_url', '');
-	}
-
-	var setAdminUrl = function() {
-		admin_url = site_url + admin_uri + page_uri + '/edit';
-	}
-
-	// Other
-	var setMemory = function() {
+		// From options only
+		time = getOption('time', 100);
 		memory = getOption('memory', true);
+
+		// From options or local storage
+		orientation = getValue('orientation', 'columns');
+		view = getValue('view', '');
+		visible = getValue('visible', false);
 	}
-	var setTime = function() {
-		time = getOption('time', 'fast');
-		time = ( time === 'slow') ? 1000 : 100;
+
+	// Init
+	fn.init = function (options) {
+		document.addEventListener("DOMContentLoaded", function() {
+			if( topLevel() === true ) {
+				if( options ) {
+					data = options;
+				}
+				setValues();
+
+				addIframe('.splitview--panel', admin_url);
+				addIframe('.splitview--site', root_url + '' + page_uri );
+
+				focusRootOnLoad('.splitview--panel iframe');
+				focusRootOnLoad('.splitview--site iframe');
+
+				if( memory === true ) {
+					getMemory();
+				}
+
+				events();
+				onSaved();
+				onSrcChange();
+			}
+		});
+	}
+
+	var getMemory = function() {
+		// Visible
+		if( visible === 'true' || visible === true ) {
+			show();
+		}
+
+		// Orientation
+		if( orientation === 'columns' ) {
+			orientationColumns();
+		} else {
+			orientationRows();
+		}
+
+		// Orientation
+		if( view === 'panel' ) {
+			viewPanel();
+		} else if(view === 'site') {
+			viewSite();
+		}
+	}
+
+	// Events
+	var events = function() {
+		// Keydown
+		document.addEventListener('keydown', function(e) {
+			if (e.altKey && e.keyCode == stringToShortcut()) {
+				if(document.querySelector('.splitview').classList.contains('splitview--hide')) {
+					show();
+				} else {
+					hide();
+				}
+			}
+		});
+
+		// View root from columns
+		document.querySelector('.splitview--panel .splitview__item--columns').addEventListener('click', function(e){
+			viewRoot();
+		});
+
+		// View root from site
+		document.querySelector('.splitview--site .splitview__item--columns').addEventListener('click', function(e){
+			viewRoot();
+		});
+
+		// View panel
+		document.querySelector('.splitview--panel .splitview__item--full').addEventListener('click', function(e){
+			viewPanel();
+		});
+
+		// View site
+		document.querySelector('.splitview--site .splitview__item--full').addEventListener('click', function(e){
+			viewSite();
+		});
+
+		// Orientation columns
+		document.querySelector('.splitview--meta .splitview__item--columns').addEventListener('click', function(e){
+			orientationColumns();
+		});
+
+		// Orientation rows
+		document.querySelector('.splitview--meta .splitview__item--rows').addEventListener('click', function(e){
+			orientationRows();
+		});
+
+		// Refresh
+		document.querySelector('.splitview__item--refresh').addEventListener('click', function(e){
+			refresh();
+		});
+
+		// Close
+		document.querySelector('.splitview__item--close').addEventListener('click', function(e){
+			hide();
+		});
+	}
+
+	var orientationColumns = function() {
+		document.querySelector('.splitview').classList.add('splitview--columns');
+		document.querySelector('.splitview').classList.remove('splitview--rows');
+		setLocal('orientation', 'columns');
+	}
+
+	var orientationRows = function() {
+		document.querySelector('.splitview').classList.add('splitview--rows');
+		document.querySelector('.splitview').classList.remove('splitview--columns');
+		setLocal('orientation', 'rows');
+	}
+
+	// Show splitview
+	var show = function() {
+		document.querySelector('.splitview').classList.remove('splitview--hide');
+		crop('body');
+		setLocal('visible', 'true');
+	}
+
+	var hide = function() {
+		document.querySelector('.splitview').classList.add('splitview--hide');
+		uncrop('body');
+		setLocal('visible', 'false');
+	}
+
+	// View root
+	var viewRoot = function() {
+		document.querySelector('.splitview').classList.remove('splitview__full--panel', 'splitview__full--site');
+		setLocal('view', '');
+	}
+
+	// View panel
+	var viewPanel = function() {
+		document.querySelector('.splitview').classList.add('splitview__full--panel');
+		setLocal('view', 'panel');
+	}
+
+	// View panel
+	var viewSite = function() {
+		document.querySelector('.splitview').classList.add('splitview__full--site');
+		setLocal('view', 'site');
+	}
+
+	// Set localstorage variable
+	var setLocal = function(slug, value) {
+		return localStorage.setItem('splitview.' + slug, value);
+	}
+
+	// Get localstorage variable
+	var getLocal = function(slug) {
+		return localStorage.getItem('splitview.' + slug);
+	}
+
+	// Convert string to shortcut number
+	var stringToShortcut = function() {
+		if( data.hasOwnProperty('shortcut') ) {
+			var value = data.shortcut;
+		} else {
+			var value = 's';
+		}
+		return value.toUpperCase().charCodeAt(0);
 	}
 
 	// Check if top level
@@ -86,197 +217,20 @@ var splitview = (function () {
 			iframe_count++;
 			if(iframe_count == 2) {
 				focusRoot();
+				hideInnerIframe();
 			}
 		};
 	}
 
 	// Force focus on parent
 	var focusRoot = function() {
-		blur('.splitview__panel iframe');
-		blur('.splitview__site iframe');
-		focus('.splitview__wrap');
+		blur('.splitview--panel iframe');
+		blur('.splitview--site iframe');
+		focus('.splitview');
 	}
 
-	// Feel when save message is active
-	var panelMessageReady = function () {
-		var element = document.querySelector('.splitview__panel iframe').contentWindow.document.querySelector('.message-content');
-
-		if( element ) {
-			refresh();
-			panelMessageClosed();
-		} else {
-			setTimeout(panelMessageReady, time);
-		}
-	}
-
-	// Feel when save message is closed
-	var panelMessageClosed = function() {
-		var element = document.querySelector('.splitview__panel iframe').contentWindow.document.querySelector('.message-content');
-
-		// Message open
-		if( element ) {
-			setTimeout(panelMessageClosed, time);
-		} else {
-			setTimeout(panelMessageReady, time);
-		}
-	}
-
-	// Feel keydown
-	var splitviewKeydown = function() {
-		document.addEventListener('keydown', function(e) {
-			if (e.altKey && e.keyCode == stringToShortcut()) {
-				if( document.querySelector('.splitview__wrap').classList.contains('splitview--hide') ) {
-					showAll();
-				} else {
-					hideAll();
-				}
-			}
-		}); 
-	}
-
-	// Convert string to shortcut number
-	var stringToShortcut = function() {
-		if( data.hasOwnProperty('shortcut') ) {
-			var value = data.shortcut;
-		} else {
-			var value = 's';
-		}
-		return value.toUpperCase().charCodeAt(0);
-	}
-
-	// Force focus
-	var focus = function(selector) {
-		document.querySelector(selector).focus();
-	}
-
-	// Force blur
-	var blur = function(selector) {
-		document.querySelector(selector).blur();
-	}
-
-	// Hide element
-	var hide = function(selector) {
-		document.querySelector(selector).classList.add("splitview--hide");
-	}
-
-	// Show element
-	var show = function(selector) {
-		document.querySelector(selector).classList.remove("splitview--hide");
-	}
-
-	// Full
-	var fullWidth = function(selector) {
-		document.querySelector(selector).classList.add("splitview--full");
-	}
-
-	// Split
-	var autoWidth = function(selector) {
-		document.querySelector(selector).classList.remove("splitview--full");
-	}
-
-	// Body overflow hidden
-	var crop = function( selector, state ) {
-		if( state === true ) document.querySelector(selector).classList.add('splitview--crop');
-		else document.querySelector(selector).classList.remove('splitview--crop');
-	}
-
-	// Refresh
-	var refresh = function() {
-		document.querySelector('.splitview__site iframe').contentWindow.location.reload();
-	}
-
-	// Save active state to localstorage ENHANCE
-	var saveActive = function( state ) {
-		localStorage.setItem('splitview.active', state);
-	}
-
-	var events = function() {
-		// Site refresh
-		document.querySelector('.splitview__menu__item--refresh').onclick = function() { 
-			refresh();
-		}
-
-		// Site fullscreen
-		document.querySelector('.splitview__menu--site .splitview__menu__item--full').onclick = function() {
-			fn.siteFullscreen();
-		}
-
-		// Site columns
-		document.querySelector('.splitview__menu--site .splitview__menu__item--columns').onclick = function() {
-			fn.siteColumns();
-		}
-
-		// Site hover link
-		document.querySelector('.splitview__menu--site .splitview__menu__item--link').addEventListener("mouseover", function(event) {
-			hoverUrl('.splitview__menu--site .splitview__menu__item--link a', '.splitview__site iframe');
-		});
-
-		// Panel fullscreen
-		document.querySelector('.splitview__menu--panel .splitview__menu__item--full').onclick = function() {
-			fn.panelFullscreen();
-		}
-
-		// Panel columns
-		document.querySelector('.splitview__menu--panel .splitview__menu__item--columns').onclick = function() {
-			fn.panelColumns();
-		}
-
-		// Panel hover link
-		document.querySelector('.splitview__menu--panel .splitview__menu__item--link').addEventListener("mouseover", function(event) {
-			hoverUrl('.splitview__menu--panel .splitview__menu__item--link a', '.splitview__panel iframe');
-		});
-
-		// Site click link
-		document.querySelector('.splitview__menu--site .splitview__menu__item--link a').addEventListener('click', function(e){
-			e.preventDefault();
-			clickUrl(this);
-		});
-
-		// Orientation
-		document.querySelector('.splitview__menu__item--orientation').onclick = function() {
-			if( orientation == 'rows') {
-				document.querySelector('.splitview__columns').classList.remove('splitview--rows');
-				document.querySelector('.splitview__menu__item--orientation i').classList.remove('fa-rotate-90');
-				orientation = 'columns';
-			} else {
-				document.querySelector('.splitview__columns').classList.add('splitview--rows');
-				document.querySelector('.splitview__menu__item--orientation i').classList.add('fa-rotate-90');
-				orientation = 'rows';
-			}
-			setLocal('orientation', orientation);
-		}
-
-		// Close
-		document.querySelector('.splitview__menu--close .splitview__menu__item--close').onclick = function() {
-			hideAll();
-		}
-	}
-
-	var hoverUrl = function(selector_link, selector_iframe) {
-		var src = document.querySelector(selector_iframe).contentWindow.location.href;
-		document.querySelector(selector_link).setAttribute('href', src);
-	}
-
-	var clickUrl = function(element) {
-		hideAll();
-		window.location.href = element.getAttribute('href');
-	}
-
-	// Get localstorage variable
-	var getLocal = function(slug) {
-		return localStorage.getItem('splitview.' + slug);
-	}
-
-	// Set localstorage variable
-	var setLocal = function(slug, value) {
-		return localStorage.setItem('splitview.' + slug, value);
-	}
-
-	// Add layout states
-	var addLayout = function() {
-		splitviewStateActive();
-		splitviewStateView();
-		splitviewStateOrientation();
+	var hideInnerIframe = function() {
+		document.querySelector('.splitview--site iframe').contentWindow.document.querySelector('.splitview__message').classList.add('splitview--hide');
 	}
 
 	// Get option from JS function
@@ -305,125 +259,66 @@ var splitview = (function () {
 		return value;
 	}
 
-	// Toggle splitview depending on options and local storage
-	var splitviewStateActive = function() {
-		if( active === 'true' ) {
-			showAll();
-		}
+	// Force focus
+	var focus = function(selector) {
+		document.querySelector(selector).focus();
 	}
 
-	// Set view depending on options and local storage
-	var splitviewStateView = function() {
-		if( view === 'panel' ) {
-			fn.panelFullscreen();
-		} else if( view === 'site' ) {
-			fn.siteFullscreen();
-		}
+	// Force blur
+	var blur = function(selector) {
+		document.querySelector(selector).blur();
 	}
 
-	// Set orientation depending on options and local storage
-	var splitviewStateOrientation = function() {
-		if( orientation === 'rows' ) {
-			document.querySelector('.splitview__columns').classList.add("splitview--rows");
-			document.querySelector('.splitview__menu__item--orientation i').classList.add('fa-rotate-90');
+	// Refresh
+	var refresh = function() {
+		document.querySelector('.splitview--site iframe').contentWindow.location.reload();
+	}
+
+	// Body overflow hidden
+	var crop = function( selector ) {
+		document.querySelector(selector).classList.add('splitview--crop');
+	}
+	var uncrop = function( selector ) {
+		document.querySelector(selector).classList.remove('splitview--crop');
+	}
+
+	function baseUrl() {
+		var re = new RegExp(/^.*\//);
+		return re.exec(window.location.href);
+	}
+
+	// Feel when url changes
+	var onSrcChange = function () {
+		var panel_url = document.querySelector('.splitview--panel iframe').contentWindow.location.href;
+		var site_url = document.querySelector('.splitview--site iframe').contentWindow.location.href;
+		document.querySelector('.splitview--panel .splitview__link').setAttribute('href', panel_url);
+		document.querySelector('.splitview--site .splitview__link').setAttribute('href', site_url);
+		setTimeout(onSrcChange, 1000);
+	}
+
+	// Feel when save message is active
+	var onSaved = function () {
+		var element = document.querySelector('.splitview--panel iframe').contentWindow.document.querySelector('.message-content');
+
+		if( element ) {
+			refresh();
+			onSavedRestart();
 		} else {
-			document.querySelector('.splitview__columns').classList.remove("splitview--rows");
-			document.querySelector('.splitview__menu__item--orientation i').classList.remove('fa-rotate-90');
+			setTimeout(onSaved, time);
 		}
 	}
 
-	// Show all
-	var showAll = function () {
-		show('.splitview__wrap');
-		show('.splitview__message');
-		crop('body', true);
-		saveActive(true);
+	// Feel when save message is closed
+	var onSavedRestart = function() {
+		var element = document.querySelector('.splitview--panel iframe').contentWindow.document.querySelector('.message-content');
+
+		// Message open
+		if( element ) {
+			setTimeout(onSavedRestart, time);
+		} else {
+			setTimeout(onSaved, time);
+		}
 	}
 
-	// Hide all
-	var hideAll = function () {
-		hide('.splitview__wrap');
-		hide('.splitview__message');
-		crop('body', false);
-		saveActive(false);
-	}
-
-	// Panel fullscreen
-	fn.panelFullscreen = function() {
-		hide('.splitview__menu--site');
-		hide('.splitview__site');
-		hide('.splitview__menu--panel .splitview__menu__item--full');
-		show('.splitview__menu--panel .splitview__menu__item--columns');
-		fullWidth('.splitview__panel');
-		setLocal('view', 'panel');
-	}
-
-	fn.siteFullscreen = function() {
-		hide('.splitview__menu--panel');
-		hide('.splitview__panel');
-		hide('.splitview__menu--site .splitview__menu__item--full');
-		show('.splitview__menu--site .splitview__menu__item--columns');
-		fullWidth('.splitview__site');
-		setLocal('view', 'site');
-	}
-
-	// Panel columns
-	fn.panelColumns = function() {
-		show('.splitview__menu--site');
-		show('.splitview__site');
-		show('.splitview__menu--panel .splitview__menu__item--full');
-		hide('.splitview__menu--panel .splitview__menu__item--columns');
-		autoWidth('.splitview__panel');
-		setLocal('view', '');
-	}
-
-	fn.siteColumns = function() {
-		show('.splitview__menu--panel');
-		show('.splitview__panel');
-		show('.splitview__menu--site .splitview__menu__item--full');
-		hide('.splitview__menu--site .splitview__menu__item--columns');
-		autoWidth('.splitview__site');
-		setLocal('view', '');
-	}
-
-	// Init Splitview
-	fn.init = function (options) {
-		document.addEventListener("DOMContentLoaded", function() {
-			if( topLevel() === true ) {
-				if( options ) {
-					data = options;
-				}
-
-				// Set values to local scope
-				setValues();
-
-				console.log(data);
-
-				// Add iframes
-				addIframe('.splitview__panel', admin_url);
-				addIframe('.splitview__site', getValue('site_url', '') + '/' + getValue('page_uri', '') );
-
-				// Focus on root
-				focusRootOnLoad('.splitview__panel iframe');
-				focusRootOnLoad('.splitview__site iframe');
-
-				// Add layout by options
-				if( memory === true ) {
-					addLayout();
-				}
-
-				// Activate shortcut
-				splitviewKeydown();
-
-				// Run events
-				events();
-
-				// Update on save
-				panelMessageReady();
-
-				//panelUrl();
-			}
-		});
-	};
 	return fn;
 })();

@@ -1,78 +1,26 @@
 <?php
-function splitview() {
-	if( site()->user() && c::get('splitview.active', true) === true  ) {
-		$splitView = new splitView;
-		return $splitView->get();
-	}
-}
-
-class splitView {
-	public $paths;
-	public $urls;
-
-	public function __construct() {
-		$this->paths();
-		$this->urls();
-	}
-
-	public function paths() {
-		$this->paths = new stdClass();
-		$this->paths->splitview = kirby()->roots()->plugins() . DS . 'splitview' . DS;
-		$this->paths->templates = $this->paths->splitview . 'templates' . DS;
-	}
-
-	public function urls() {
-		$this->urls = new stdClass();
-		$this->urls->fonts = kirby()->urls()->index() . '/panel/assets/fonts/';
-	}
-
-	public function get() {
+class splitview
+{
+	public static function css() {
 		$html = '';
-		$html .= $this->replaceFonts( $this->css() );
-		$html .= $this->minifyHtml( $this->html() );
-		$html .= $this->replaceShortcut( $this->js() );
-		$html .= $this->minifyHtml( $this->jsScript() );
-
-		$html = "\n\n<!-- Splitview # Start -->\n" . $html . "\n<!-- Splitview # End -->\n\n";
+		if( c::get('splitview.css', true) === true ) {
+			$html = '<link rel="stylesheet" href="' . u() . '/splitview.css?time=' . time() . '">';
+		}
 		return $html;
 	}
-	private function css() {
-		if( c::get('splitview.css', true) === true )
-			return '<style>' .  tpl::load( $this->paths->splitview . 'assets' . DS . 'css' . DS . 'splitview.css', '', true ) . '</style>';
-	}
 
-	private function js() {
-		if( c::get('splitview.js', true) === true )
-			return '<script>' .  tpl::load( $this->paths->splitview . 'assets' . DS . 'js' . DS . 'splitview.min.js', '', true ) . '</script>';
-	}
-
-	private function jsScript() {
-		if( c::get('splitview.script', true) === true ) {
-			$memory = ( c::get('splitview.memory', true) === true ) ? 'true' : 'false';
-			$time = c::get('splitview.time', 'fast');
-			$orientation = c::get('splitview.orientation', 'rows');
-			// View
-			// Site url
-			// admin uri
-			// Page uri
-
-			return tpl::load( $this->paths->templates . 'script.php', array(
-				'memory' => $memory,
-				'time' => $time,
-				'orientation' => $orientation
-			),true );
+	public static function js() {
+		$html = '';
+		if( c::get('splitview.js', true) === true ) {
+			$html = '<script type="text/javascript" src="' . u() . '/splitview.js?time=' . time() . '"></script>';
 		}
+		return $html;
 	}
 
-	private function html() {
-		if( c::get('splitview.html', true) === true )
-			return tpl::load( $this->paths->templates . 'html.php', array(), true );
-	}
-
-	private function replaceFonts( $html ) {
+	public static function replaceFonts( $html ) {
 		$fonts = array(
-			array('{{font-awesome}}', $this->urls->fonts . 'fontawesome-webfont.woff?v=4.2'),
-			array('{{source-sans-pro-400}}', $this->urls->fonts . 'sourcesanspro-400.woff'),
+			array('{{font-awesome}}', kirby()->urls()->index() . '/panel/assets/fonts/' . 'fontawesome-webfont.woff?v=4.2'),
+			array('{{source-sans-pro-400}}', kirby()->urls()->index() . '/panel/assets/fonts/' . 'sourcesanspro-400.woff'),
 		);
 		foreach( $fonts as $font ) {
 			$html = str_ireplace($font[0], $font[1], $html);
@@ -80,11 +28,70 @@ class splitView {
 		return $html;
 	}
 
-	private function replaceShortcut($html) {
-		return str_ireplace('{{shortcut}}', c::get('splitview.shortcut', 's'), $html);
+	public static function init() {
+		$html = static::html();
+		return $html;
 	}
 
-	private function minifyHtml($html) {
+	private static function html() {
+		$html = '';
+		if( c::get('splitview.html', true) === true ) {
+			echo 'TEST';
+			$html = tpl::load( kirby()->roots()->plugins() . DS . 'splitview' . DS . 'templates' . DS . 'html.php', array(), true );
+			$html = ( c::get('splitview.minify', true) === true ) ? static::minifyHtml( $html ) : $html;
+			$html = "\n\n<!-- Splitview # Start -->\n" . $html . "\n<!-- Splitview # End -->\n\n";
+		}
+		return $html;
+	}
+
+	public static function arg($key) {
+		$test = c::get('splitview.' . $key, 'undefined');
+		$js = '';
+
+		if( $test !== 'undefined') {
+			$test = ( $test === false ) ? 'false' : $test;
+			$test = ( $test === true ) ? 'true' : $test;
+			$test = ( is_string( $test ) ) ? "'" . $test . "'" : $test;
+			$test = str_replace('alt+', '', strtolower( $test ) );
+			$js = $key . ': ' . $test . ",\n";
+		}
+
+		return $js;
+	}
+
+	private static function minifyHtml($html) {
 		return str_replace(array("\n", "\r", "\t"), array("", "", ""), $html);
+	}
+
+	protected function __construct() {}
+	private function __clone() {}
+	private function __wakeup()	{}
+}
+
+kirby()->routes(array(  
+	array(
+		'pattern' => 'splitview.css', 
+		'action'  => function() {
+			header("Content-type: text/css; charset: UTF-8");
+			$css = tpl::load( kirby()->roots()->plugins() . DS . 'splitview' . DS . 'assets' . DS . 'css' . DS . 'splitview.css', array(), true );
+			$css = splitview::replaceFonts( $css );
+			echo $css;
+		}
+	),
+	array(
+		'pattern' => 'splitview.js', 
+		'action'  => function() {
+			header("Content-type: application/javascript");
+			$js = tpl::load( kirby()->roots()->plugins() . DS . 'splitview' . DS . 'assets' . DS . 'js' . DS . 'splitview.js', array(), true );
+			echo $js;
+		}
+	)
+));
+
+function splitview() {
+	if( c::get('splitview.active', true) === true ) {
+		return splitview::init();
+	} else {
+		return '';
 	}
 }
