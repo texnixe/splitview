@@ -14,6 +14,7 @@ var splitview = (function () {
 	var memory;
 	var orientation;
 	var time_refresh;
+	var time_bar;
 	var view;
 	var visible;
 	var debug;
@@ -29,6 +30,7 @@ var splitview = (function () {
 
 		// From options only
 		time_refresh = getOption('time_refresh', 100);
+		time_bar = getOption('time_bar', 1000);
 		memory = getOption('memory', true);
 		debug = getOption('debug', false);
 
@@ -354,7 +356,7 @@ var splitview = (function () {
 			page_uri = element_site.getAttribute('data-splitview-id');
 		}
 
-		setTimeout(onSrcChange, 1000);
+		setTimeout(onSrcChange, time_bar);
 	}
 
 	// Set admin uri for sync

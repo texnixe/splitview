@@ -5,6 +5,7 @@ class splitview
 		'memory',
 		'orientation',
 		'time.refresh',
+		'time.bar',
 		'shortcut',
 		'visible',
 		'view',
