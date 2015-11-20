@@ -8,10 +8,10 @@ If options are not set a default value will be used.
 
 To trigger Splitview `alt + s` is used as a default keyboard shortcut. You can change the `s` letter if you want.
 
-**Default:** `s`
+**Default:** `alt+s`
 
 ```php
-c::set('splitview.shortcut', 's');
+c::set('splitview.shortcut', 'alt+s');
 ```
 
 ### Active
@@ -36,7 +36,6 @@ You can't add custom HTML, CSS or JS through the plugin, but you can disable it.
 c::set('splitview.css', true);
 c::set('splitview.html', true);
 c::set('splitview.js', true);
-c::set('splitview.script', true);
 ```
 
 ## splitview.init()
@@ -49,12 +48,6 @@ splitview.init({
     key2: 'string2'
 });
 ```
-
-## Active
-
-## View
-
-
 
 ## Page uri
 

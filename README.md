@@ -55,6 +55,10 @@ There are two columns, panel and site. Panel is the Kirby panel and site is your
 
 [Read all about the options](https://github.com/jenstornell/splitview/blob/development/OPTIONS.md)
 
+## Changelog
+
+[Read all about the changes](https://github.com/jenstornell/splitview/blob/development/CHANGELOG.md)
+
 ## Troubleshooting
 
 ### Mobile device

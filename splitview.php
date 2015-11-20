@@ -1,6 +1,21 @@
 <?php
 class splitview
 {
+	public static $option_keys = array(
+		'memory',
+		'orientation',
+		'time.refresh',
+		'shortcut',
+		'visible',
+		'view',
+		'debug',
+		'root_url',
+		'admin_uri',
+		'page_uri'
+	);
+	public static $options_php = array();
+	public static $options_js = array();
+
 	public static function css() {
 		$html = '';
 		if( c::get('splitview.css', true) === true ) {
@@ -29,34 +44,50 @@ class splitview
 	}
 
 	public static function init() {
+		static::optionsPhp();
+		static::optionsJs();
 		$html = static::html();
 		return $html;
+	}
+
+	private static function optionsPhp() {
+		foreach( self::$option_keys as $key ) {
+			$value = c::get('splitview.' . $key, 'undefined');
+			if( $value !== 'undefined') {
+				$values[$key] = $value;
+			} else {
+				if( $key == 'root_url' ) {
+					$values[$key] = u();
+				}
+				if( $key == 'admin_uri' ) {
+					$values[$key] = 'panel/pages/';
+				}
+				if( $key == 'page_uri' ) {
+					$values[$key] = page()->uri();
+				}
+			}
+		}
+		static::$options_php = $values;
+	}
+
+	private static function optionsJs() {
+		foreach( static::$options_php as $key => $option ) {
+			$option = ( is_string( $option ) ) ? "'" . $option . "'" : $option;
+			$option = ( $option === false ) ? 'false' : $option;
+			$option = ( $option === true ) ? 'true' : $option;
+			$option = str_replace('alt+', '', strtolower( $option ) );
+			$key = str_replace('.', '_', $key );
+			static::$options_js[$key] = $option;
+		}
 	}
 
 	private static function html() {
 		$html = '';
 		if( c::get('splitview.html', true) === true ) {
-			echo 'TEST';
 			$html = tpl::load( kirby()->roots()->plugins() . DS . 'splitview' . DS . 'templates' . DS . 'html.php', array(), true );
-			$html = ( c::get('splitview.minify', true) === true ) ? static::minifyHtml( $html ) : $html;
 			$html = "\n\n<!-- Splitview # Start -->\n" . $html . "\n<!-- Splitview # End -->\n\n";
 		}
 		return $html;
-	}
-
-	public static function arg($key) {
-		$test = c::get('splitview.' . $key, 'undefined');
-		$js = '';
-
-		if( $test !== 'undefined') {
-			$test = ( $test === false ) ? 'false' : $test;
-			$test = ( $test === true ) ? 'true' : $test;
-			$test = ( is_string( $test ) ) ? "'" . $test . "'" : $test;
-			$test = str_replace('alt+', '', strtolower( $test ) );
-			$js = $key . ': ' . $test . ",\n";
-		}
-
-		return $js;
 	}
 
 	private static function minifyHtml($html) {
@@ -66,6 +97,14 @@ class splitview
 	protected function __construct() {}
 	private function __clone() {}
 	private function __wakeup()	{}
+}
+
+function splitview() {
+	if( c::get('splitview.active', true) === true && site()->user() ) {
+		return splitview::init();
+	} else {
+		return '';
+	}
 }
 
 kirby()->routes(array(  
@@ -87,11 +126,3 @@ kirby()->routes(array(
 		}
 	)
 ));
-
-function splitview() {
-	if( c::get('splitview.active', true) === true ) {
-		return splitview::init();
-	} else {
-		return '';
-	}
-}

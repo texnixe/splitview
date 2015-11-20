@@ -12,20 +12,23 @@ var splitview = (function () {
 	// Options
 	var memory;
 	var orientation;
-	var time;
+	var time_refresh;
 	var view;
 	var visible;
+	var debug;
+	//Shortcut
 
 	var setValues = function() {
 		//setMode();
 		root_url = getOption('root_url', baseUrl()[0]);
 		page_uri = getOption('page_uri', '');
 		admin_uri = getOption('admin_uri', 'panel/pages/');
-		admin_url = root_url + admin_uri + page_uri + '/edit';
+		admin_url = root_url + '/' + admin_uri + page_uri + '/edit';
 
 		// From options only
-		time = getOption('time', 100);
+		time_refresh = getOption('time_refresh', 100);
 		memory = getOption('memory', true);
+		debug = getOption('debug', false);
 
 		// From options or local storage
 		orientation = getValue('orientation', 'columns');
@@ -40,13 +43,19 @@ var splitview = (function () {
 				if( options ) {
 					data = options;
 				}
+
 				setValues();
 
 				addIframe('.splitview--panel', admin_url);
-				addIframe('.splitview--site', root_url + '' + page_uri );
+				addIframe('.splitview--site', root_url + '/' + page_uri );
 
 				focusRootOnLoad('.splitview--panel iframe');
 				focusRootOnLoad('.splitview--site iframe');
+
+				if( debug === true ) {
+					console.log('Options JS:');
+					console.log(data);
+				}
 
 				if( memory === true ) {
 					getMemory();
@@ -94,12 +103,12 @@ var splitview = (function () {
 		});
 
 		// View root from columns
-		document.querySelector('.splitview--panel .splitview__item--columns').addEventListener('click', function(e){
+		document.querySelector('.splitview--panel .splitview__item--back').addEventListener('click', function(e){
 			viewRoot();
 		});
 
 		// View root from site
-		document.querySelector('.splitview--site .splitview__item--columns').addEventListener('click', function(e){
+		document.querySelector('.splitview--site .splitview__item--back').addEventListener('click', function(e){
 			viewRoot();
 		});
 
@@ -112,6 +121,11 @@ var splitview = (function () {
 		document.querySelector('.splitview--site .splitview__item--full').addEventListener('click', function(e){
 			viewSite();
 		});
+
+		// Redirect site
+		document.querySelector('.splitview__item--site a').addEventListener('click', function(e){
+			redirectSite(this, e);
+		});			
 
 		// Orientation columns
 		document.querySelector('.splitview--meta .splitview__item--columns').addEventListener('click', function(e){
@@ -134,12 +148,26 @@ var splitview = (function () {
 		});
 	}
 
+	// Redirect to site
+	var redirectSite = function(obj, e) {
+		e.preventDefault();
+		url = obj.getAttribute('href');
+		setLocal('visible', 'false');
+		if( e.which == 1) {
+			window.open(url, '_self');
+		} else if( e.which == 2) {
+			window.open(url, '_blank');
+		}
+	}
+
+	// Orientation columns
 	var orientationColumns = function() {
 		document.querySelector('.splitview').classList.add('splitview--columns');
 		document.querySelector('.splitview').classList.remove('splitview--rows');
 		setLocal('orientation', 'columns');
 	}
 
+	// Orientation rows
 	var orientationRows = function() {
 		document.querySelector('.splitview').classList.add('splitview--rows');
 		document.querySelector('.splitview').classList.remove('splitview--columns');
@@ -153,6 +181,7 @@ var splitview = (function () {
 		setLocal('visible', 'true');
 	}
 
+	// Hide splitview
 	var hide = function() {
 		document.querySelector('.splitview').classList.add('splitview--hide');
 		uncrop('body');
@@ -179,7 +208,12 @@ var splitview = (function () {
 
 	// Set localstorage variable
 	var setLocal = function(slug, value) {
-		return localStorage.setItem('splitview.' + slug, value);
+		if( getLocal(slug) !== value ) {
+			if( debug === true ) {
+				console.log('splitview.' + slug + ': ' + value);
+			}
+			localStorage.setItem('splitview.' + slug, value);
+		}
 	}
 
 	// Get localstorage variable
@@ -217,7 +251,6 @@ var splitview = (function () {
 			iframe_count++;
 			if(iframe_count == 2) {
 				focusRoot();
-				hideInnerIframe();
 			}
 		};
 	}
@@ -227,10 +260,6 @@ var splitview = (function () {
 		blur('.splitview--panel iframe');
 		blur('.splitview--site iframe');
 		focus('.splitview');
-	}
-
-	var hideInnerIframe = function() {
-		document.querySelector('.splitview--site iframe').contentWindow.document.querySelector('.splitview__message').classList.add('splitview--hide');
 	}
 
 	// Get option from JS function
@@ -282,6 +311,7 @@ var splitview = (function () {
 		document.querySelector(selector).classList.remove('splitview--crop');
 	}
 
+	// Base url
 	function baseUrl() {
 		var re = new RegExp(/^.*\//);
 		return re.exec(window.location.href);
@@ -291,8 +321,8 @@ var splitview = (function () {
 	var onSrcChange = function () {
 		var panel_url = document.querySelector('.splitview--panel iframe').contentWindow.location.href;
 		var site_url = document.querySelector('.splitview--site iframe').contentWindow.location.href;
-		document.querySelector('.splitview--panel .splitview__link').setAttribute('href', panel_url);
-		document.querySelector('.splitview--site .splitview__link').setAttribute('href', site_url);
+		document.querySelector('.splitview__item--panel .splitview__link').setAttribute('href', panel_url);
+		document.querySelector('.splitview__item--site .splitview__link').setAttribute('href', site_url);
 		setTimeout(onSrcChange, 1000);
 	}
 
@@ -304,7 +334,7 @@ var splitview = (function () {
 			refresh();
 			onSavedRestart();
 		} else {
-			setTimeout(onSaved, time);
+			setTimeout(onSaved, time_refresh);
 		}
 	}
 
@@ -314,9 +344,9 @@ var splitview = (function () {
 
 		// Message open
 		if( element ) {
-			setTimeout(onSavedRestart, time);
+			setTimeout(onSavedRestart, time_refresh);
 		} else {
-			setTimeout(onSaved, time);
+			setTimeout(onSaved, time_refresh);
 		}
 	}
 
