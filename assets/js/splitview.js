@@ -5,8 +5,9 @@ var splitview = (function () {
 
 	// Urls
 	var root_url;
-	var admin_uri;
+	var admin_root;
 	var page_uri;
+	var admin_uri;
 	var admin_url;
 
 	// Options
@@ -22,8 +23,9 @@ var splitview = (function () {
 		//setMode();
 		root_url = getOption('root_url', baseUrl()[0]);
 		page_uri = getOption('page_uri', '');
-		admin_uri = getOption('admin_uri', 'panel/pages/');
-		admin_url = root_url + '/' + admin_uri + page_uri + '/edit';
+		admin_uri = page_uri;
+		admin_root = getOption('admin_root', 'panel/pages/');
+		admin_url = root_url + '/' + admin_root + admin_uri + '/edit';
 
 		// From options only
 		time_refresh = getOption('time_refresh', 100);
@@ -142,10 +144,30 @@ var splitview = (function () {
 			refresh();
 		});
 
+		// Sync site
+		document.querySelector('.splitview--site .splitview__item--sync').addEventListener('click', function(e){
+			syncSite();
+		});
+
+		// Sync panel
+		document.querySelector('.splitview--panel .splitview__item--sync').addEventListener('click', function(e){
+			syncAdmin();
+		});
+
 		// Close
 		document.querySelector('.splitview__item--close').addEventListener('click', function(e){
 			hide();
 		});
+	}
+
+	var syncSite = function() {
+		admin_url = root_url + '/' + admin_root + page_uri + '/edit';
+		document.querySelector('.splitview--panel iframe').setAttribute('src', admin_url);
+	}
+
+	var syncAdmin = function() {
+		page_url = root_url + '/' + admin_uri;
+		document.querySelector('.splitview--site iframe').setAttribute('src', page_url);
 	}
 
 	// Redirect to site
@@ -323,6 +345,21 @@ var splitview = (function () {
 		var site_url = document.querySelector('.splitview--site iframe').contentWindow.location.href;
 		document.querySelector('.splitview__item--panel .splitview__link').setAttribute('href', panel_url);
 		document.querySelector('.splitview__item--site .splitview__link').setAttribute('href', site_url);
+
+		// From site iframe html
+		var element_panel = document.querySelector('.splitview--panel iframe').contentWindow.document.querySelector('.splitview__data');
+		var element_site = document.querySelector('.splitview--site iframe').contentWindow.document.querySelector('.splitview__data');
+
+		if( element_panel ) {
+			admin_uri = element_panel.getAttribute('data-splitview-id');
+			console.log(admin_uri);
+		}
+		if( element_site ) {
+			page_uri = element_site.getAttribute('data-splitview-id');
+			console.log(page_uri);
+
+		}
+
 		setTimeout(onSrcChange, 1000);
 	}
 
