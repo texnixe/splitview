@@ -1,4 +1,4 @@
-# Splitview
+# Splitview 0.2
 
 Splitview makes it possible to edit your pages in a splitscreen view. See what you change directly after pressing save.
 
@@ -27,10 +27,10 @@ Splitview makes it possible to edit your pages in a splitscreen view. See what y
 ## Setup
 
 1. Download the [Splitview plugin](https://github.com/jenstornell/splitview/archive/master.zip)
-1. Put the `splitview` folder in /plugins/
+1. Put the `splitview` folder in /plugins/. If folder is another name like `splitview-master`, rename it to `splitview`.
 2. Add `<?php echo splitview(); ?>` right before `</body>` in your footer of all your pages.
 3. Login to the panel. When logged in, go to the frontend of your site.
-4. Press `alt + s` to activate the Splitbar.
+4. Press `alt + s` to activate the Splitview.
 
 ## Views
 
@@ -53,40 +53,11 @@ There are two columns, panel and site. Panel is the Kirby panel and site is your
 
 ## Options
 
-If options are not set a default value will be used.
+[Read all about the options](https://github.com/jenstornell/splitview/blob/development/OPTIONS.md)
 
-### Shortcut
+## Changelog
 
-To trigger Splitview `alt + s` is used as a default keyboard shortcut. You can change the `s` letter if you want.
-
-**Default:** `s`
-
-```php
-c::set('splitview.key', 's');
-```
-
-### Active
-
-You can disable Splitview without removing the plugin. Set this option to `false` to disable it.
-
-**Default:** `true`
-
-```php
-c::set('splitview.active', true);
-```
-
-### CSS and JS
-
-There is currently no way to add your custom CSS or JS through the plugin, but you can disable it if you want. Set this option to `false` disable it.
-
-**Warning:** If you disable these option the Splitview will probably not work like expected.
-
-**Default:** `true`
-
-```php
-c::set('splitview.css', true);
-c::set('splitview.js', true);
-```
+[Read all about the changes](https://github.com/jenstornell/splitview/blob/development/CHANGELOG.md)
 
 ## Troubleshooting
 
@@ -123,6 +94,10 @@ Ideas are always welcome. Add them as issues.
 
 Help to improve the code with pull requests or suggestions as issues.
 
-## Future
+### Future
 
 Possuble future ideas is added to the issues tagged `ideas` or `features`. Also look at milestones.
+
+### License
+
+[CC - Attribution 4.0 International](http://creativecommons.org/licenses/by/4.0/)

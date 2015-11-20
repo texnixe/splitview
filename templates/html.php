@@ -1,34 +1,80 @@
-<div class="splitbar__wrap splitbar--hide">
-	<div class="splitbar__menu">
-		<div class="splitbar__menu--panel">
-			<div class="splitbar__menu__item--full" title="Full panel view">
-				<i class="fa fa-arrows-alt"></i><span>Panel</span>
-			</div>
-			<div class="splitbar__menu__item--columns splitbar--hide" title="Split preview">
-				<i class="fa fa-columns"></i><span>Columns</span>
+<?php echo splitview::css(); ?>
+<div class="splitview splitview--hide splitview--columns">
+	<div class="splitview--meta">
+		<div class="splitview__item splitview__item--panel">
+			<a href="#" class="splitview__link">
+				<i class="fa fa-thumb-tack"></i>
+			</a>
+		</div>
+		<div class="splitview__item splitview__item--site">
+			<a href="#" class="splitview__link">
+				<i class="fa fa-thumb-tack"></i>
+			</a>
+		</div>
+		<div class="splitview__item splitview__item--rows">
+			<div style="font-size: 8px;" class="fa-rotate-90">
+				<i class="fa fa-square"></i>
+				<i class="fa fa-square"></i>
 			</div>
 		</div>
-		<div class="splitbar__menu--site">
-			<div class="splitbar__menu__item--full" title="Full site view">
-				<i class="fa fa-arrows-alt"></i><span>Site</span>
-			</div>
-			<div class="splitbar__menu__item--columns splitbar--hide" title="Split preview">
-				<i class="fa fa-columns"></i><span>Columns</span>
-			</div>
-			<div class="splitbar__menu__item--refresh" title="Reload site view">
-				<i class="fa fa-refresh"></i><span>Refresh</span>
+		<div class="splitview__item splitview__item--columns">
+			<div style="font-size: 8px;">
+				<i class="fa fa-square"></i>
+				<i class="fa fa-square"></i>
 			</div>
 		</div>
-		<div class="splitbar__menu--close">
-			<div class="splitbar__menu__item--close" title="Close split preview">
-				<i class="fa fa-times"></i>
+		<div class="splitview__item splitview__item--close">
+			<i class="fa fa-times"></i>
+		</div>
+	</div>
+
+	<div class="splitview__section splitview--panel">
+		<div class="splitview__nav splitview__nav--panel">
+			<div class="splitview__item splitview__item--full">
+				<i class="fa fa-gear"></i><div class="splitview__text">Panel</div>
+			</div>
+			<div class="splitview__item splitview__item--back">
+				<i class="fa fa-arrow-circle-left"></i><div class="splitview__text">Back</div>
 			</div>
 		</div>
 	</div>
-	<div class="splitbar__columns">
-		<div class="splitbar__panel" data-splitbar-url="<?php echo u(); ?>/panel/pages/<?php echo $page->uri(); ?>/edit"></div>
-		<div class="splitbar__site" data-splitbar-url="<?php echo $page->url(); ?>"></div>
+	<div class="splitview__section splitview--site">
+		<div class="splitview__nav splitview__nav--site">
+			<div class="splitview__item splitview__item--full">
+				<i class="fa fa-globe"></i><div class="splitview__text">Site</div>
+			</div>
+			<div class="splitview__item splitview__item--back">
+				<i class="fa fa-arrow-circle-left"></i><div class="splitview__text">Back</div>
+			</div>
+			<div class="splitview__item splitview__item--refresh">
+				<i class="fa fa-refresh"></i><div class="splitview__text">Refresh</div>
+			</div>
+		</div>
 	</div>
+
+	<div class="splitview__data" data-splitview-mode="" data-splitview-id="<?php echo $page->uri(); ?>"></div>
 </div>
 
-<div class="splitbar__message splitbar--hide">Sorry! Splitbar does not work in this resolution.</div>
+<?php echo splitview::js(); ?>
+<?php if( c::get('splitview.js', true) === true ) : ?>
+<script>
+// Init splitview
+splitview.init({
+	<?php foreach( splitview::$options_js as $key => $option ) : ?>
+	<?php echo $key . ": " . $option . ",\n"; ?>
+	<?php endforeach; ?>
+});
+
+// Debug to console
+<?php if( c::get('splitview.debug', false) === true ) : ?>
+if( window.self === window.top ) {
+	var php_options = {};
+	<?php foreach( splitview::$options_js as $key => $option ) : ?>
+	<?php echo "php_options['" . $key . "'] = " . $option . ";\n"; ?>
+	<?php endforeach; ?>
+	console.log('Options PHP:');
+	console.log(php_options);
+}
+<?php endif; ?>
+</script>
+<?php endif; ?>
