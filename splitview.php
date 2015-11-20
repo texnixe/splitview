@@ -86,6 +86,7 @@ class splitview
 		if( c::get('splitview.html', true) === true ) {
 			$html = tpl::load( kirby()->roots()->plugins() . DS . 'splitview' . DS . 'templates' . DS . 'html.php', array(), true );
 			$html = "\n\n<!-- Splitview # Start -->\n" . $html . "\n<!-- Splitview # End -->\n\n";
+			$html = ( c::get('splitview.minify', true) === true ) ? self::minifyHtml($html) : $html;
 		}
 		return $html;
 	}

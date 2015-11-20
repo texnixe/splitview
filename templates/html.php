@@ -64,14 +64,11 @@
 <?php echo splitview::js(); ?>
 <?php if( c::get('splitview.js', true) === true ) : ?>
 <script>
-// Init splitview
 splitview.init({
 	<?php foreach( splitview::$options_js as $key => $option ) : ?>
 	<?php echo $key . ": " . $option . ",\n"; ?>
 	<?php endforeach; ?>
 });
-
-// Debug to console
 <?php if( c::get('splitview.debug', false) === true ) : ?>
 if( window.self === window.top ) {
 	var php_options = {};

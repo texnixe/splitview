@@ -346,21 +346,42 @@ var splitview = (function () {
 		document.querySelector('.splitview__item--panel .splitview__link').setAttribute('href', panel_url);
 		document.querySelector('.splitview__item--site .splitview__link').setAttribute('href', site_url);
 
-		// From site iframe html
-		var element_panel = document.querySelector('.splitview--panel iframe').contentWindow.document.querySelector('.splitview__data');
+		setAdminUri();
+
 		var element_site = document.querySelector('.splitview--site iframe').contentWindow.document.querySelector('.splitview__data');
 
-		if( element_panel ) {
-			admin_uri = element_panel.getAttribute('data-splitview-id');
-			console.log(admin_uri);
-		}
 		if( element_site ) {
 			page_uri = element_site.getAttribute('data-splitview-id');
-			console.log(page_uri);
-
 		}
 
 		setTimeout(onSrcChange, 1000);
+	}
+
+	// Set admin uri for sync
+	var setAdminUri = function() {
+		var admin_url_full = document.querySelector('.splitview--panel iframe').contentWindow.location.href;
+		var admin_url_pages = root_url + '/' + admin_root;
+		var admin_uri_pages = admin_url_full.replace(admin_url_pages, '');
+		var file_array = admin_uri_pages.split('/file/');
+
+		// Add array loop
+		admin_uri_page = removeLast('/edit', file_array[0] );
+		admin_uri_page = removeLast('/files', admin_uri_page );
+		admin_uri_page = removeLast('/subpages', admin_uri_page );
+
+		// If is admin page
+		if(admin_uri_page.indexOf(root_url) == -1) {
+			admin_uri = admin_uri_page;
+		}
+	}
+
+	// Remove last from url
+	var removeLast = function(needle, haystack) {
+		str = haystack.slice(-needle.length);
+		if( str === needle) {
+			haystack = haystack.slice(0, -needle.length);
+		}
+		return haystack;
 	}
 
 	// Feel when save message is active
