@@ -1,6 +1,6 @@
 # Options
 
-If options are not set a default value will be used.
+If options are not set a default value will be used. More docs needed.
 
 ## config.php
 

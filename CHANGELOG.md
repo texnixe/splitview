@@ -20,5 +20,5 @@
 
 - Complete rewrite to make it smaller and simpler
 - Possible to send args to splitview.init(). Good for anyone who want's to control the splitview in a custom template
-- Added license. Seems like "CC - Attribution 4.0 International". Do whatever you want but don't sell it or take credit for it
+- Added license. Seems like "CC - Attribution 4.0 International". Do what you want but don't sell or take credit for it
 - Bugs and fixes
