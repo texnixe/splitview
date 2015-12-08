@@ -1,5 +1,55 @@
 # Changelog
 
+## 0.3 - Sync edition
+
+This is a really big release so it's good for you to know the changes.
+
+### Changed the way it works
+
+In version 0.2 splitview was a function that you could activate with pressing a shortcut. It has evolved from a function to a complete tool.
+
+#### Downsides
+- It will be redirected to a new page. This means that it will take about 0.5 seconds to load (depending on your hosting).
+
+#### Benefits
+- Back in your browser just works. No fancy javascript needed for it to work as expected.
+- CSS problems depending on your site will never appear, as it's now on an own page with own CSS.
+- BEM is no longer needed because it cannot collide with other CSS. It results in much cleaner HTML, CSS and JS.
+- Easier to link to Splitview from anywhere.
+- Easier to add to the panel because it's now linkable.
+- The pin buttons are no longer needed. Just a close button that will take you to the right place.
+- The script code for triggering the shortcut is much smaller which makes your site faster than before. Most of the code loads on the Splitview page.
+- Does not need to autorefresh on close if page has been saved.
+
+### Urls
+
+- Urls to tell you where you are on the panel and on the site.
+- When clicking links on the panel or on the site the urls update automatically.
+- When changing an url and clicking enter, the view will load that page.
+
+### Sync
+
+- When clicking the arrow buttons the page is synced to the other view.
+- It will figure out the url to the panel when syncing from right to left.
+- It will figure out the url to the site when syncing from left to right.
+
+### Options
+
+- Many options are removed as they should not be needed. Se options for more info.
+- Options can now also be inserted directly to the splitview() function as arguments. It will override the config options. The `active` option must still be set in config.php in order to work, if used. Routes config does not work ether.
+
+### Save
+
+- There was a bug that when saved two times very fast, the site view was not refreshed. That problem is now solved.
+- Panel saved message is disabled. The saved message is instead added above the site view. It fixes the bug works better visually.
+
+### Other changes
+
+- Smaller bar with smaller icons. Not so much waste of screen space.
+- Reload is now also available to the panel view, in case it needs to be refreshed.
+- When closing on a view with both panel and site, there is a dropdown to choose what you want to close to, the panel or the site.
+- When closing on the panel or the site view, Splitview closes to these pages.
+
 ## 0.2 - Memory edition
 
 ### Options

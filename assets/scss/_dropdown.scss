@@ -1,0 +1,40 @@
+.dropdown {
+	position: absolute;
+	right: 0;
+	background: #fff;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 10px;
+	white-space: nowrap;
+	display: none;
+
+	&.active {
+		display: block;
+	}
+
+	&:after {
+		position: absolute;
+		content: "";
+		right: 11px;
+		border-bottom: 10px solid #fff;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+		top: -10px;
+	}
+
+	li {
+		color: #000;
+		padding-bottom: 12px;
+		padding-left: 16px;
+		padding-right: 24px;
+		padding-top: 12px;
+		height: auto;
+		line-height: 1;
+		font-family: 'Source Sans Pro', Arial;
+		border-bottom: 1px solid rgb(239, 239, 239);
+
+		i {
+			padding-right: 8px;
+			width: 32px;
+			box-sizing: border-box;
+		}
+	}
+}
