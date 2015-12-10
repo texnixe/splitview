@@ -1,14 +1,14 @@
-# Splitview 0.2
+# Splitview 0.3
 
 Splitview makes it possible to edit your pages in a splitscreen view. See what you change directly after pressing save.
 
-![Splitview](assets/images/screenshot-1.png)
+![Splitview](assets/images/dist/screenshot-1.png)
 
 ## Benefits
 
 - A real WYSIWYG. See exactly what you get on save.
 - Totally invisible until you need it.
-- Lightning fast.
+- Fast to work with.
 - Dependecy free JS - No libraries required, not even jQuery.
 - Remember if Splitview active state until next browser refresh.
 
@@ -38,11 +38,11 @@ There are two columns, panel and site. Panel is the Kirby panel and site is your
 
 ### Panel - Fullscreen
 
-![Splitview](assets/images/screenshot-2.png)
+![Splitview](assets/images/dist/screenshot-2.png)
 
 ### Site - Fullscreen
 
-![Splitview](assets/images/screenshot-3.png)
+![Splitview](assets/images/dist/screenshot-3.png)
 
 ## Buttons
 
@@ -53,11 +53,11 @@ There are two columns, panel and site. Panel is the Kirby panel and site is your
 
 ## Options
 
-[Read all about the options](https://github.com/jenstornell/splitview/blob/development/OPTIONS.md)
+[Read all about the options](OPTIONS.md)
 
 ## Changelog
 
-[Read all about the changes](https://github.com/jenstornell/splitview/blob/development/CHANGELOG.md)
+[Read all about the changes](CHANGELOG.md)
 
 ## Troubleshooting
 
