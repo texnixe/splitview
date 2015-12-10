@@ -1,4 +1,4 @@
-# Splitview 0.2
+# Splitview 0.3
 
 Splitview makes it possible to edit your pages in a splitscreen view. See what you change directly after pressing save.
 
@@ -8,7 +8,7 @@ Splitview makes it possible to edit your pages in a splitscreen view. See what y
 
 - A real WYSIWYG. See exactly what you get on save.
 - Totally invisible until you need it.
-- Lightning fast.
+- Fast to work with.
 - Dependecy free JS - No libraries required, not even jQuery.
 - Remember if Splitview active state until next browser refresh.
 
