@@ -33,15 +33,21 @@ In version 0.2 splitview was a function that you could activate with pressing a 
 - It will figure out the url to the panel when syncing from right to left.
 - It will figure out the url to the site when syncing from left to right.
 
+### Menu
+
+- New menu system because everything will not fit into the bar in the future.
+- Click on "Sync" to try it out.
+
 ### Options
 
-- Many options are removed as they should not be needed. Se options for more info.
-- Options can now also be inserted directly to the splitview() function as arguments. It will override the config options. The `active` option must still be set in config.php in order to work, if used. Routes config does not work ether.
+- Many options are removed as they are not longer. The options docs till be updated in time.
+- Some new options are added. I will wait with the docs on it in case I change my mind about things.
 
 ### Save
 
 - There was a bug that when saved two times very fast, the site view was not refreshed. That problem is now solved.
-- Panel saved message is disabled. The saved message is instead added above the site view. It fixes the bug works better visually.
+- Panel saved message is disabled.
+- Splitview not uses own save and error messages. It fixes a bug and works better visually.
 
 ### Other changes
 
@@ -49,6 +55,7 @@ In version 0.2 splitview was a function that you could activate with pressing a 
 - Reload is now also available to the panel view, in case it needs to be refreshed.
 - When closing on a view with both panel and site, there is a dropdown to choose what you want to close to, the panel or the site.
 - When closing on the panel or the site view, Splitview closes to these pages.
+- Gulp is now used instead of Prepros for better file structure more.
 
 ## 0.2 - Memory edition
 

@@ -74,6 +74,61 @@ nav {
 	border-right: 1px solid #555;
 }
 
+.overlay {
+	//background: rgba(141, 174, 40, .5);
+	background: rgba(30, 30, 30, 0.8);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	display: none;
+}
+.overlay-message {
+	background: #fff;
+	box-shadow: rgba(0, 0, 0, 0.2) 0 2px 10px;
+	padding: 20px;
+	border-radius: 3px;
+}
+
+.button {
+	font-weight: 600;
+	padding: 10px 20px;
+	border-radius: 100px;
+	cursor: pointer;
+	font-size: 16px;
+	margin-bottom: 10px;
+	background: #eee;
+	border-radius: 3px;
+	border: 2px solid rgba(0,0,0,.1);
+
+	.fa {
+		width: 20px;
+	}
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	&:hover {
+		background: #000;
+		color: #fff;
+	}
+}
+.button-sync {
+	.fa-long-arrow-right {
+		padding-left: 10px;
+	}
+	.fa-long-arrow-left {
+		padding-right: 10px;
+	}
+	.fa-long-arrow-up,
+	.fa-long-arrow-down {
+		padding-right: 10px;
+	}
+}
+
 li {
 	padding: 0 15px;
 	height: 38px;
@@ -82,6 +137,15 @@ li {
 	cursor: pointer;
 	color: #fff;
 	position: relative;
+
+	&.active {
+		background: #8dae28;
+		color: #fff;
+
+		&:hover {
+			color: #fff;
+		}
+	}
 
 	&:hover {
 		color: #999;
@@ -126,6 +190,12 @@ ul.right {
 	}
 }
 
+[data-overlay="sync"] {
+	.overlay {
+		display: flex;
+	}
+}
+
 [data-view="grid"][data-orientation="columns"],
 [data-view="grid"][data-orientation="rows"] {
 	ul.left {
@@ -149,22 +219,31 @@ ul.right {
 			width: 50%;
 		}
 
+		.button-sync .fa-long-arrow-down {
+			display: none;
+		}
+
 		li.close-panel,
 		li.columns,
 		li.rows,
-		li.close-dropdown {
+		li.close-dropdown,
+		li.sync {
 			display: none;
 		}
 	}
 	section.site {
 		flex-grow: 1;
 
+		.button-sync .fa-long-arrow-up {
+			display: none;
+		}
+
 		li.close-site {
 			display: none;
 		}
 	}
 	li.sync-up,
-	li.sync-down, {
+	li.sync-down {
 		display: none;
 	}
 
@@ -188,6 +267,10 @@ ul.right {
 	}
 
 	section.panel {
+		.button-sync .fa-long-arrow-right {
+			display: none;
+		}
+
 		li.close-panel {
 			display: none;
 		}
@@ -199,10 +282,15 @@ ul.right {
 	}
 
 	section.site {
+		.button-sync .fa-long-arrow-left {
+			display: none;
+		}
+
 		li.close-site,
 		li.columns,
 		li.rows,
-		li.close-dropdown {
+		li.close-dropdown,
+		li.sync {
 			display: none;
 		}
 	}

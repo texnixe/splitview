@@ -381,6 +381,8 @@ var splitview = (function () {
 		$$( selector ).forEach( function( element ) {
 			element.addEventListener('click', function(e){
 				syncSiteToAdmin();
+				$('body').removeAttribute('data-overlay');
+				removeNavActiveAll();
 			});
 		});
 	}
@@ -390,7 +392,51 @@ var splitview = (function () {
 		$$( selector ).forEach( function( element ) {
 			element.addEventListener('click', function(e){
 				syncAdminToSite();
+				$('body').removeAttribute('data-overlay');
+				removeNavActiveAll();
 			});
+		});
+	}
+
+	var eventOverlay = function(selector, overlay) {
+		$$( selector ).forEach( function( element ) {
+			element.addEventListener('click', function(e){
+				var active = element.classList.contains('active');
+				
+				removeNavActiveAll();
+				if( ! active ) {
+					addNavActive('li.' + overlay);
+					$('body').setAttribute('data-overlay', overlay);
+				} else {
+					removeNavActive('li.' + overlay);
+					$('body').removeAttribute('data-overlay');
+				}
+			});
+		});
+	}
+
+	var eventOverlayClick = function() {
+		$$( '.overlay' ).forEach( function( element ) {
+			element.addEventListener('click', function(e){
+				removeNavActiveAll();
+				$('body').removeAttribute('data-overlay');
+			});
+		});
+	}
+
+	var removeNavActiveAll = function() {
+		$$( 'nav li' ).forEach( function( element ) {
+			element.classList.remove('active');
+		});
+	}
+	var addNavActive = function(selector) {
+		$$( 'nav ' + selector ).forEach( function( element ) {
+			element.classList.add('active');
+		});
+	}
+	var removeNavActive = function(selector) {
+		$$( 'nav ' + selector ).forEach( function( element ) {
+			element.classList.remove('active');
 		});
 	}
 
@@ -414,8 +460,11 @@ var splitview = (function () {
 		eventsShared('panel');
 		eventsShared('site');
 
-		eventSyncSiteToAdmin('section.site .sync');
-		eventSyncAdminToSite('section.panel .sync');
+		eventSyncSiteToAdmin('section.site .button-sync');
+		eventSyncAdminToSite('section.panel .button-sync');
+
+		eventOverlay('nav .sync', 'sync');
+		eventOverlayClick();
 	}
 
 	return fn;

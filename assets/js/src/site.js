@@ -32,15 +32,12 @@ var splitviewSite = (function () {
 		args['panel'] = getOption('panel', 'panel');
 		args['root_url'] = encodeURIComponent( getOption('root_url', '') );
 		args['view'] = getOption('view', 'grid');
-		//send['panel_url'] = getOption('panel_url', 'panel');
-
 	}
 
 	// Hash - Build
 	var hashBuild = function() {
 		for (key in args) {
 			if (args.hasOwnProperty(key)) {
-				console.log(key + " = " + args[key]);
 				hash += key + '=' + args[key] + '&';
 			}
 		}
@@ -49,7 +46,7 @@ var splitviewSite = (function () {
 
 	// Hash - Redirect
 	var hashRedirect = function() {
-		href = getOption('root_url', '') + '/' + getOption('route') + '/' + hash;
+		href = getOption('root_url', '') + '/' + getOption('route', 'splitview') + '/' + hash;
 		window.location.href = href;
 	}
 

@@ -9,7 +9,9 @@ class SplitviewSite {
 	// Args in javascript
 	public static function args() {
 		$args = '';
-		foreach( splitviewOptions::javascript() as $key => $option ) {
+		$js_args = splitviewOptions::javascript();
+		if( ! empty( $js_args ) )
+		foreach( $js_args as $key => $option ) {
 			$args .= $key . ": " . $option . ', ';
 		}
 		return substr($args, 0, -2);

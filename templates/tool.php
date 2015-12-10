@@ -30,8 +30,12 @@
 				</li>
 			</ul>
 			<ul class="right">
-				<li class="sync sync-right"><i class="fa fa-long-arrow-right"></i></li>
-				<li class="sync sync-down"><i class="fa fa-long-arrow-down"></i></li>
+				<li class="sync">
+					<div class="fa-rotate-90">
+						<i class="fa fa-long-arrow-down"></i>
+						<i class="fa fa-long-arrow-up"></i>
+					</div>
+				</li>
 				<li class="refresh"><i class="fa fa-refresh"></i></li>
 
 				<li class="rows">
@@ -57,6 +61,13 @@
 			</ul>
 		</nav>
 		<div class="iframe">
+			<div class="overlay overlay-sync">
+				<div class="overlay-message">
+					<div class="button button-sync">
+						<i class="fa fa-long-arrow-down"></i>Sync<i class="fa fa-long-arrow-right"></i>
+					</div>
+				</div>
+			</div>
 			<div class="message message-saved"><i class="fa fa-check"></i></div>
 			<div class="message message-error"><i class="fa fa-exclamation"></i></div>
 		</div>
@@ -82,8 +93,12 @@
 				</li>
 			</ul>
 			<ul class="right">
-				<li class="sync sync-left"><i class="fa fa-long-arrow-left"></i></li>
-				<li class="sync sync-up"><i class="fa fa-long-arrow-up"></i></li>
+				<li class="sync">
+					<div class="fa-rotate-90">
+						<i class="fa fa-long-arrow-down"></i>
+						<i class="fa fa-long-arrow-up"></i>
+					</div>
+				</li>
 				<li class="refresh"><i class="fa fa-refresh"></i></li>
 				
 				<li class="rows">
@@ -109,6 +124,13 @@
 			</ul>
 		</nav>
 		<div class="iframe">
+			<div class="overlay overlay-sync">
+				<div class="overlay-message">
+					<div class="button button-sync">
+						<i class="fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-left"></i>Sync
+					</div>
+				</div>
+			</div>
 			<div class="message message-saved"><i class="fa fa-check"></i></div>
 			<div class="message message-error"><i class="fa fa-exclamation"></i></div>
 		</div>

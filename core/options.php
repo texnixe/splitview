@@ -14,6 +14,7 @@ class splitviewOptions {
 
 	// Options in php
 	public static function options() {
+		$options = array();
 		foreach( self::$keys as $key ) {
 			if( c::get('splitview.' . $key) !== null ) {
 				$options[$key] = c::get('splitview.' . $key);
