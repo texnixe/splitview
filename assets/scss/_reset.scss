@@ -1,0 +1,24 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+html,
+body,
+.splitview {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+.splitview {
+	font-family: 'Source Sans Pro';
+}
+
+li {
+	list-style: none;
+}
+
+iframe {
+	border: none;
+}

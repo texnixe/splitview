@@ -1,0 +1,123 @@
+// Views
+.cards {
+	width: 340px;
+}
+
+.card {
+	float: left;
+	margin: 10px;
+}
+
+.box-view {
+	width: 150px;
+	background: #fff;
+	border-radius: 5px;
+	cursor: pointer;
+	-webkit-user-select: none;
+	user-select: none;
+}
+.box-view:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.box-panel,
+.box-site {
+	height: 150px;
+	line-height: 150px;
+	text-align: center;
+}
+
+.box-panel {
+	background: #ddd;
+	border-radius: 5px;
+}
+
+.box-left,
+.box-right {
+	height: 150px;
+	line-height: 150px;
+	text-align: center;
+	float: left;
+	width: 50%;
+	box-sizing: border-box;
+}
+
+.box-left {
+	background: #ddd;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.box-top,
+.box-bottom {
+	height: 75px;
+	line-height: 75px;
+	text-align: center;
+}
+
+.box-top {
+	background: #ddd;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+// Exit
+.exit-message {
+	background: #fff;
+	border-radius: 5px;
+	padding: 20px;
+
+	&:after {
+		content: '';
+		clear: both;
+		display: table;
+	}
+}
+.exit-title {
+	background: #eee;
+	margin: -20px;
+	margin-bottom: 20px;
+	padding: 20px;
+	font-size: 18px;
+	font-weight: 600;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.exit-text {
+	margin-bottom: 20px;
+}
+
+.button-exit,
+.button-cancel {
+	border: 2px solid #000;
+	border-radius: 100px;
+	padding: 10px 20px;
+	background: #fff;
+	font-weight: 600;
+	cursor: pointer;
+
+	&:hover {
+		color: #fff;
+	}
+}
+
+.button-exit {
+	border: 2px solid #b3000a;
+	color: #b3000a;
+	float: left;
+
+	&:hover {
+		background: #b3000a;
+	}
+}
+
+.button-cancel {
+	float: right;
+
+	&:hover {
+		background: #000;
+	}
+}

@@ -1,0 +1,53 @@
+.url {
+	padding: 5px;
+	.input {
+		background: #555;
+		border-radius: 3px;
+		display: flex;
+
+		&:hover {
+			background: #666;
+		}
+
+		.button-refresh {
+			padding: 0 20px;
+			border-left: 1px solid #000;
+			color: #ccc;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+
+			&:hover {
+				color: #fff;
+			}
+		}
+	}
+	input {
+		width: 100%;
+		box-sizing: border-box;
+		height: 33px;
+		padding: 0 10px;
+		font-size: 14px;
+		background: transparent;
+		outline: none;
+		border: none;
+		color: #ccc;
+
+		&:hover {
+			color: #fff;
+		}
+	}
+}
+
+.bar {
+	background: #000;
+}
+
+.button {
+	padding: 0 20px;
+	height: 43px;
+	width: 50px;
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
+}

@@ -1,0 +1,49 @@
+.dropdown {
+	display: none;
+}
+
+[data-bar="panel"] {
+	&[data-dropdown="flash"] {
+		section.panel .flash .dropdown {
+			display: block;
+		}
+	}
+	&[data-dropdown="zoom"] {
+		section.panel .zoom .dropdown {
+			display: block;
+		}
+	}
+	&[data-dropdown="views"] {
+		section.panel .views .dropdown {
+			display: block;
+		}
+	}
+	&[data-dropdown="close"] {
+		section.panel .close .dropdown {
+			display: block;
+		}
+	}
+}
+
+[data-bar="site"] {
+	&[data-dropdown="flash"] {
+		section.site .flash .dropdown {
+			display: block;
+		}
+	}
+	&[data-dropdown="zoom"] {
+		section.site .zoom .dropdown {
+			display: block;
+		}
+	}
+	&[data-dropdown="views"] {
+		section.site .views .dropdown {
+			display: block;
+		}
+	}
+	&[data-dropdown="close"] {
+		section.site .close .dropdown {
+			display: block;
+		}
+	}
+}
