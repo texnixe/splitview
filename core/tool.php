@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 class SplitviewTool {
 	// Globals
 	public static $keys = array();
@@ -76,10 +75,6 @@ class SplitviewTool {
 		return tpl::load($path, $args, true );
 	}
 
-=======
-class SplitviewTool
-{
->>>>>>> origin/master
 	// Html
 	public static function html() {
 		$path = kirby()->roots()->plugins() . DS . 'splitview' . DS . 'templates' . DS . 'tool.php';
@@ -89,11 +84,7 @@ class SplitviewTool
 	// JS url
 	public static function js() {
 		$url = u() . '/' . c::get('splitview.route', 'splitview') . '/assets/js/';
-<<<<<<< HEAD
 		$url .= ( c::get('splitview.debug', false) === true ) ? 'dist/tool.js?time=' . time() : 'dist/tool.min.js';
-=======
-		$url .= ( c::get('splitview.debug', false) === true ) ? 'src/tool.js?time=' . time() : 'dist/tool.min.js';
->>>>>>> origin/master
 		return $url;
 	}
 
@@ -103,7 +94,6 @@ class SplitviewTool
 		$url .= ( c::get('splitview.debug', false) === true ) ? '.css?time=' . time() : '.min.css';
 		return $url;
 	}
-<<<<<<< HEAD
 
 	// CSS debug
 	public static function cssDebug() {
@@ -113,6 +103,4 @@ class SplitviewTool
 		}
 		return $html;
 	}
-=======
->>>>>>> origin/master
 }

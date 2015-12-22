@@ -1,6 +1,5 @@
 <?php
 class SplitviewSite {
-<<<<<<< HEAD
 	// Globals
 	public static $keys = array();
 	public static $options_php = array();
@@ -59,29 +58,13 @@ class SplitviewSite {
 		self::$options_output = splitviewOptions::arrayToJavascriptOptions( self::$options_js );
 	}
 
-=======
->>>>>>> origin/master
 	// Html
 	public static function html() {
 		$path = kirby()->roots()->plugins() . DS . 'splitview' . DS . 'templates' . DS . 'site.php';
 		return tpl::load($path, array(), true );
 	}
 
-<<<<<<< HEAD
 	// Url
-=======
-	// Args in javascript
-	public static function args() {
-		$args = '';
-		$js_args = splitviewOptions::javascript();
-		if( ! empty( $js_args ) )
-		foreach( $js_args as $key => $option ) {
-			$args .= $key . ": " . $option . ', ';
-		}
-		return substr($args, 0, -2);
-	}
-
->>>>>>> origin/master
 	public static function url() {
 		$url = u() . '/' . c::get('splitview.route', 'splitview') . '/assets/js/';
 		$url .= ( c::get('splitview.debug', false) === true ) ? 'src/site.js?time=' . time() : 'dist/site.min.js';
