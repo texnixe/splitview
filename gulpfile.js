@@ -2,7 +2,10 @@ var gulp = require('gulp');
 
 var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync').create();
+<<<<<<< HEAD
 var concat = require('gulp-concat');
+=======
+>>>>>>> origin/master
 var imageminOptipng = require('imagemin-optipng');
 var minifyCss = require('gulp-minify-css');
 var notify = require('gulp-notify');
@@ -24,6 +27,7 @@ gulp.task('css', function() {
 });
 
 // JS
+<<<<<<< HEAD
 gulp.task('tool_js', function() {
 	gulp.src('assets/js/src/tool/**/*.js')
 		.pipe(concat('tool.js'))
@@ -40,6 +44,10 @@ gulp.task('site_js', function() {
 	gulp.src('assets/js/src/site/**/*.js')
 		.pipe(concat('site.js'))
 		.pipe(gulp.dest('./assets/js/dist/'))
+=======
+gulp.task('js', function() {
+	gulp.src('assets/js/src/**/*.js')
+>>>>>>> origin/master
 		.pipe(uglify())
 		.pipe(rename({suffix: '.min'}))
 		.pipe(gulp.dest('./assets/js/dist/'))
@@ -69,6 +77,15 @@ gulp.task('sync', function() {
 gulp.task('default',function() {
 	gulp.watch('assets/scss/**/*.scss',['css']);
 	gulp.watch('assets/images/src/*.png',['png']);
+<<<<<<< HEAD
 	gulp.watch('assets/js/src/tool/**/*.js',['tool_js']);
 	gulp.watch('assets/js/src/site/**/*.js',['site_js']);
 });
+=======
+	gulp.watch('assets/js/src/**/*.js',['js']);
+});
+
+//gulp concat
+//uglifyjs
+//svgmin
+>>>>>>> origin/master

@@ -1,5 +1,6 @@
 # Changelog
 
+<<<<<<< HEAD
 ## 0.4 - Copy
 
 ### Dropdown menus
@@ -30,6 +31,9 @@ Copy the url to the other view. Now you can now use Splitview to compare pages o
 - The big splitview.js file is now split into smaller modules for better maintainability.
 
 ## 0.3 - Sync
+=======
+## 0.3 - Sync edition
+>>>>>>> origin/master
 
 This is a really big release so it's good for you to know the changes.
 
