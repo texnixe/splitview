@@ -7,7 +7,7 @@ var timeloop = (function () {
 		panel.triggerErrorMessage();
 
 		setTimeout(timeloop.events, 200);
-	}
+	};
 
 	return fn;
 })();

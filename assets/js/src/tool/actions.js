@@ -7,13 +7,13 @@ var action = (function () {
 
 		panel_url = data['root_url'] + '/' + action.getOption('panel', 'panel') + '/pages/' + data['admin_slug'] + '/edit';
 		site_url = data['root_url'] + '/' + data['page_slug'];
-	}
+	};
 
 	// Set - View
 	fn.setView = function(view) {
 		$$$('body')[0].setAttribute('data-view', view);
 		mem.setLocal('view', view);
-	}
+	};
 
 	// Is json
 	fn.is_json = function(string) {
@@ -24,7 +24,7 @@ var action = (function () {
 			return false;
 		}
 		return true;
-	}
+	};
 
 	// Get option from JS function
 	fn.getOption = function( key, defaultValue ) {
@@ -35,7 +35,7 @@ var action = (function () {
 			value = defaultValue;
 		}
 		return value;
-	}
+	};
 
 	// Add iframe to selector
 	fn.addIframe = function(selector, value) {
@@ -43,7 +43,7 @@ var action = (function () {
 		iframe.src = value;
 		$$$(selector)[0].appendChild(iframe);
 		return iframe;
-	}
+	};
 
 	// Debug data
 	fn.debugData = function() {
@@ -51,7 +51,7 @@ var action = (function () {
 			console.log('Options JS:');
 			console.log(data);
 		}
-	}
+	};
 
 	// TA BORT OVERLAY GREJER
 	/*fn.removeNavActiveAll = function() {

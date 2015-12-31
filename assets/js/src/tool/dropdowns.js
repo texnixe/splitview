@@ -5,14 +5,14 @@ var dropdown = (function () {
 	// Init
 	fn.init = function() {
 		events();
-	}
+	};
 
 	// Events
 	var events = function() {
 		toggle('panel');
 		toggle('site');
 		eventRemove();
-	}
+	};
 
 	var toggle = function(view) {
 		$$$('section.' + view + ' .dropdown').forEach(function(el){
@@ -34,7 +34,7 @@ var dropdown = (function () {
 				}
 			});
 		});
-	}
+	};
 
 	var eventRemove = function() {
 		$$$('.bar .hide .button').click(function(e){
@@ -52,17 +52,17 @@ var dropdown = (function () {
 		$$$('.dropdown li').click(function(e){
 			remove();
 		});
-	}
+	};
 
 	var remove = function() {
 		$$$('body')[0].removeAttribute('data-dropdown');
 		$$$('body')[0].removeAttribute('data-bar');
-	}
+	};
 
 	var set = function( dropdown, view ) {
 		$$$('body')[0].setAttribute('data-dropdown', dropdown );
 		$$$('body')[0].setAttribute('data-bar', view );
-	}
+	};
 
 	return fn;
 })();

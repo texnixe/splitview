@@ -4,14 +4,14 @@ var mem = (function () {
 	fn.init = function() {
 		mem.setMemory();
 		mem.loadMemory();
-	}
+	};
 
 	// Set localstorage variable
 	fn.setLocal = function(slug, value) {
 		memory[slug] = value;
 		var local_memory = JSON.stringify(memory);
 		localStorage.setItem('splitview.memory', local_memory );
-	}
+	};
 
 	// Set memory
 	fn.setMemory = function() {
@@ -21,7 +21,7 @@ var mem = (function () {
 				memory = JSON.parse(local_memory);
 			}
 		}
-	}
+	};
 
 	// Get memory
 	fn.getMemory = function( key, defaultValue ) {
@@ -32,7 +32,7 @@ var mem = (function () {
 			value = defaultValue;
 		}
 		return value;
-	}
+	};
 
 	// Memory - Load
 	fn.loadMemory = function() {
@@ -41,7 +41,7 @@ var mem = (function () {
 		} else {
 			action.setView( action.getOption('view', 'columns') );
 		}
-	}
+	};
 
 	return fn;
 })();

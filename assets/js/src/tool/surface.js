@@ -4,24 +4,24 @@ var surface = (function () {
 	fn.init = function() {
 		surface.focusRootOnLoad('section.panel iframe');
 		surface.focusRootOnLoad('section.site iframe');
-	}
+	};
 
 	// Force focus
 	fn.focus = function(selector) {
 		$$$(selector).focus();
-	}
+	};
 
 	// Force blur
 	fn.blur = function(selector) {
 		$$$(selector).blur();
-	}
+	};
 
 	// Set focus on root
 	fn.focusRoot = function() {
 		surface.blur('section.panel iframe');
 		surface.blur('section.site iframe');
 		surface.focus('.splitview');
-	}
+	};
 
 	// FocusRootOnLoad
 	fn.focusRootOnLoad = function(selector) {
@@ -34,7 +34,7 @@ var surface = (function () {
 				timeloop.events();
 			}
 		};
-	}
+	};
 
 	return fn;
 })();
