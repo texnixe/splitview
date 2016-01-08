@@ -1,6 +1,7 @@
 var address = (function () {
 	var fn = {};
 
+<<<<<<< HEAD
 	// Render address
 	fn.render = function(selector, value) {
 		$$$(selector + ' .url input')[0].value = value;
@@ -16,6 +17,18 @@ var address = (function () {
 
 	return fn;
 })();
+=======
+	// Init
+	fn.init = function() {
+		address.setAddress( 'section.panel .url input', panel_url );
+		address.setAddress( 'section.site .url input', site_url );
+	};
+
+	// Set input url
+	fn.setAddress = function(selector, value) {
+		$$$(selector)[0].value = value;
+	};
+>>>>>>> origin/master
 
 // Iframes loops
 var addresses = (function () {

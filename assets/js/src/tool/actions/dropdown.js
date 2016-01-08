@@ -2,8 +2,25 @@ var dropdown = (function () {
 	var fn = {};
 	var active = false;
 
+<<<<<<< HEAD:assets/js/src/tool/actions/dropdown.js
 	fn.toggle = function(selector, key) {
 		$$$(selector + ' .dropdown').forEach(function(el){
+=======
+	// Init
+	fn.init = function() {
+		events();
+	};
+
+	// Events
+	var events = function() {
+		toggle('panel');
+		toggle('site');
+		eventRemove();
+	};
+
+	var toggle = function(view) {
+		$$$('section.' + view + ' .dropdown').forEach(function(el){
+>>>>>>> origin/master:assets/js/src/tool/dropdowns.js
 			var button_element = el.previousSibling.previousSibling;
 			button_element.addEventListener('click', function(e){
 				var data_dropdown = $$$('body')[0].getAttribute('data-dropdown');
@@ -37,6 +54,12 @@ var dropdown = (function () {
 		$$$('.bar .left').click(function(e){
 			fn.remove();
 		});
+<<<<<<< HEAD:assets/js/src/tool/actions/dropdown.js
+=======
+		$$$('.dropdown li').click(function(e){
+			remove();
+		});
+>>>>>>> origin/master:assets/js/src/tool/dropdowns.js
 	};
 
 	fn.remove = function() {
@@ -48,6 +71,7 @@ var dropdown = (function () {
 		$$$('body')[0].setAttribute('data-dropdown', dropdown );
 		$$$('body')[0].setAttribute('data-bar', view );
 	};
+<<<<<<< HEAD:assets/js/src/tool/actions/dropdown.js
 
 	return fn;
 })();
@@ -60,6 +84,8 @@ var dropdowns = (function () {
 			dropdown.toggle('[data-section="' + i + '"]', i);
 		}
 	};
+=======
+>>>>>>> origin/master:assets/js/src/tool/dropdowns.js
 
 	return fn;
 })();

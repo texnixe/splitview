@@ -35,8 +35,12 @@ var splitview = (function () {
 		Sync.init();
 		Refresh.init();
 
+<<<<<<< HEAD
 		view.init();
 		exit.init();
+=======
+		event.events();
+>>>>>>> origin/master
 	};
 
 	return fn;
