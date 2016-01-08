@@ -28,7 +28,7 @@ var splitview = (function () {
 		SiteSync.init();
 
 		event.events();
-	}
+	};
 
 	return fn;
 })();

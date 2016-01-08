@@ -7,13 +7,13 @@ var action = (function () {
 
 		panel_url = data['root_url'] + '/' + action.getOption('panel', 'panel') + '/pages/' + data['admin_slug'] + '/edit';
 		site_url = data['root_url'] + '/' + data['page_slug'];
-	}
+	};
 
 	// Set - View
 	fn.setView = function(view) {
 		$$$('body')[0].setAttribute('data-view', view);
 		mem.setLocal('view', view);
-	}
+	};
 
 	// Is json
 	fn.is_json = function(string) {
@@ -24,7 +24,7 @@ var action = (function () {
 			return false;
 		}
 		return true;
-	}
+	};
 
 	// Get option from JS function
 	fn.getOption = function( key, defaultValue ) {
@@ -35,7 +35,7 @@ var action = (function () {
 			value = defaultValue;
 		}
 		return value;
-	}
+	};
 
 	// Add iframe to selector
 	fn.addIframe = function(selector, value) {
@@ -43,7 +43,7 @@ var action = (function () {
 		iframe.src = value;
 		$$$(selector)[0].appendChild(iframe);
 		return iframe;
-	}
+	};
 
 	// Debug data
 	fn.debugData = function() {
@@ -51,7 +51,7 @@ var action = (function () {
 			console.log('Options JS:');
 			console.log(data);
 		}
-	}
+	};
 
 	// TA BORT OVERLAY GREJER
 	/*fn.removeNavActiveAll = function() {
@@ -90,12 +90,12 @@ var address = (function () {
 	fn.init = function() {
 		address.setAddress( 'section.panel .url input', panel_url );
 		address.setAddress( 'section.site .url input', site_url );
-	}
+	};
 
 	// Set input url
 	fn.setAddress = function(selector, value) {
 		$$$(selector)[0].value = value;
-	}
+	};
 
 	// Set urls - Triggered by timeloop
 	fn.setAddresses = function() {
@@ -111,7 +111,7 @@ var address = (function () {
 			address.setAddress( 'section.panel .url input', new_panel_url );
 			panel_url = new_panel_url;
 		}
-	}
+	};
 
 	return fn;
 })();
@@ -122,14 +122,14 @@ var dropdown = (function () {
 	// Init
 	fn.init = function() {
 		events();
-	}
+	};
 
 	// Events
 	var events = function() {
 		toggle('panel');
 		toggle('site');
 		eventRemove();
-	}
+	};
 
 	var toggle = function(view) {
 		$$$('section.' + view + ' .dropdown').forEach(function(el){
@@ -151,7 +151,7 @@ var dropdown = (function () {
 				}
 			});
 		});
-	}
+	};
 
 	var eventRemove = function() {
 		$$$('.bar .hide .button').click(function(e){
@@ -169,17 +169,17 @@ var dropdown = (function () {
 		$$$('.dropdown li').click(function(e){
 			remove();
 		});
-	}
+	};
 
 	var remove = function() {
 		$$$('body')[0].removeAttribute('data-dropdown');
 		$$$('body')[0].removeAttribute('data-bar');
-	}
+	};
 
 	var set = function( dropdown, view ) {
 		$$$('body')[0].setAttribute('data-dropdown', dropdown );
 		$$$('body')[0].setAttribute('data-bar', view );
-	}
+	};
 
 	return fn;
 })();
@@ -192,7 +192,7 @@ var event = (function () {
 		event.view(view);
 		event.enterUrl(view);
 		event.refresh(view);
-	}
+	};
 
 	// Events
 	fn.events = function() {
@@ -204,14 +204,14 @@ var event = (function () {
 
 		event.buttonView('columns');
 		event.buttonView('rows');
-	}
+	};
 
 	// Refresh
 	fn.refresh = function(view) {
 		$$$('section.' + view + ' .button-refresh').click(function(e){
 			refresh('section.' + view + ' iframe');
 		});
-	}
+	};
 
 	// View
 	fn.view = function(view) {
@@ -220,14 +220,14 @@ var event = (function () {
 				action.setView(view);
 			});
 		});
-	}
+	};
 
 	// Button view
 	fn.buttonView = function(view) {
 		$$$('.dropdown li.' + view).click(function(e){
 			action.setView(view);
 		});
-	}
+	};
 
 	// Enter url
 	fn.enterUrl = function(view) {
@@ -237,7 +237,7 @@ var event = (function () {
 				$$$('section.' + view + ' iframe')[0].setAttribute('src', value);
 			}
 		});
-	}
+	};
 
 	// Exit
 	fn.exit = function(view) {
@@ -246,7 +246,7 @@ var event = (function () {
 				window.location.href = $$$('section.' + view + ' iframe')[0].contentWindow.document.location.href;
 			});
 		});
-	}
+	};
 
 	return fn;
 })();
@@ -260,7 +260,7 @@ var $$ = function(selector, context) {
 	context = context || document;
 	var elements = context.querySelectorAll(selector);
 	return Array.prototype.slice.call(elements);
-}
+};
 
 
 var $$$ = function(selector, context) {
@@ -315,42 +315,42 @@ var $$$ = function(selector, context) {
 		});
 	};
 	return elements;
-}
+};
 // Refresh
 function refresh(selector) {
 	$$$(selector)[0].contentWindow.location.reload();
-}
+};
 
 // Hide
 function hide(selector) {
 	$$$(selector).hide();
-}
+};
 
 // Show
 function show(selector) {
 	$$$(selector).show();
-}
+};
 
 // Element exists
 function elementExists(selector) {
 	if( $$$(selector).length ) {
 		return true;
 	}
-}
+};
 var mem = (function () {
 	var fn = {};
 
 	fn.init = function() {
 		mem.setMemory();
 		mem.loadMemory();
-	}
+	};
 
 	// Set localstorage variable
 	fn.setLocal = function(slug, value) {
 		memory[slug] = value;
 		var local_memory = JSON.stringify(memory);
 		localStorage.setItem('splitview.memory', local_memory );
-	}
+	};
 
 	// Set memory
 	fn.setMemory = function() {
@@ -360,7 +360,7 @@ var mem = (function () {
 				memory = JSON.parse(local_memory);
 			}
 		}
-	}
+	};
 
 	// Get memory
 	fn.getMemory = function( key, defaultValue ) {
@@ -371,7 +371,7 @@ var mem = (function () {
 			value = defaultValue;
 		}
 		return value;
-	}
+	};
 
 	// Memory - Load
 	fn.loadMemory = function() {
@@ -380,7 +380,7 @@ var mem = (function () {
 		} else {
 			action.setView( action.getOption('view', 'columns') );
 		}
-	}
+	};
 
 	return fn;
 })();
@@ -390,7 +390,7 @@ var menu = (function () {
 	// Init
 	fn.init = function() {
 		events();
-	}
+	};
 
 	// Events
 	var events = function() {
@@ -398,7 +398,7 @@ var menu = (function () {
 		show('panel');
 		hide('site');
 		show('site');
-	}
+	};
 
 	// Hide
 	var hide = function(view) {
@@ -409,7 +409,7 @@ var menu = (function () {
 				$$$('body')[0].setAttribute('data-menu-' + view, true);
 			}
 		});
-	}
+	};
 
 	// Show
 	var show = function(view) {
@@ -421,7 +421,7 @@ var menu = (function () {
 				$$$('body')[0].removeAttribute('data-menu-' + view);
 			}
 		});
-	}
+	};
 
 	return fn;
 })();
@@ -431,11 +431,11 @@ var panel = (function () {
 	// Init
 	fn.init = function() {
 		events();
-	}
+	};
 
 	var events = function() {
 		eventSync('section.panel li.sync');
-	}
+	};
 
 	// Event sync admin to site
 	var eventSync = function(selector) {
@@ -444,26 +444,26 @@ var panel = (function () {
 				sync();
 			});
 		});
-	}
+	};
 
 	// Panel - Message - Hide
 	fn.panelMessageHide = function() {
 		var style_element = document.createElement('style');
 		var node = $$$('section.panel iframe')[0].contentWindow.document.querySelector('body').appendChild(style_element);
 		node.innerHTML = '.message { display: none; }';
-	}
+	};
 
 	// Remove message from site
 	var messageRemove = function(element) {
 		$$$('section.panel .message-saved')[0].classList.remove('active');
 		$$$('section.site .message-saved')[0].classList.remove('active');
-	}
+	};
 
 	// Remove error message from site
 	var messageRemoveError = function(element) {
 		$$$('section.panel .message-error')[0].classList.remove('active');
 		$$$('section.site .message-error')[0].classList.remove('active');
-	}
+	};
 
 	// Remove last from url
 	var removeLast = function(needle, haystack) {
@@ -472,7 +472,7 @@ var panel = (function () {
 			haystack = haystack.slice(0, -needle.length);
 		}
 		return haystack;
-	}
+	};
 
 	// Trigger Error Message
 	fn.triggerErrorMessage = function() {
@@ -483,7 +483,7 @@ var panel = (function () {
 			$$$('section.site .message-error')[0].classList.add('active');
 			setTimeout(messageRemoveError, 4000);
 		}
-	}
+	};
 
 	// Trigger Saved Message
 	fn.triggerSavedMessage = function() {
@@ -505,7 +505,7 @@ var panel = (function () {
 				setTimeout(messageRemove, 4000);
 			}
 		}
-	}
+	};
 
 	// Remove url parts
 	var removeUrlParts = function(url) {
@@ -514,22 +514,22 @@ var panel = (function () {
 		url = removeLast('/files', url );
 		url = removeLast('/subpages', url );
 		return url;
-	}
+	};
 
 	// Iframe url
 	var iframeUrl = function() {
 		return $$$('section.panel iframe')[0].contentWindow.location.href;
-	}
+	};
 
 	// Pages url
 	var pagesUrl = function() {
 		return data['root_url'] + '/' + action.getOption('panel', 'panel') + '/pages';
-	}
+	};
 
 	// No pages url
 	var noPagesUrl = function() {
 		return iframeUrl().replace(pagesUrl(), '');
-	}
+	};
 
 	// Sync Admin to site
 	var sync = function() {
@@ -537,7 +537,7 @@ var panel = (function () {
 
 		site_url = data['root_url'] + uri;
 		site.setUrl( site_url );
-	}
+	};
 
 	return fn;
 })();
@@ -546,7 +546,7 @@ var site = (function () {
 
 	fn.setUrl = function(url) {
 		$$$('section.site iframe')[0].contentWindow.location.href = url;
-	}
+	};
 
 	return fn;
 })();
@@ -580,7 +580,7 @@ var splitview = (function () {
 		SiteSync.init();
 
 		event.events();
-	}
+	};
 
 	return fn;
 })();
@@ -590,24 +590,24 @@ var surface = (function () {
 	fn.init = function() {
 		surface.focusRootOnLoad('section.panel iframe');
 		surface.focusRootOnLoad('section.site iframe');
-	}
+	};
 
 	// Force focus
 	fn.focus = function(selector) {
 		$$$(selector).focus();
-	}
+	};
 
 	// Force blur
 	fn.blur = function(selector) {
 		$$$(selector).blur();
-	}
+	};
 
 	// Set focus on root
 	fn.focusRoot = function() {
 		surface.blur('section.panel iframe');
 		surface.blur('section.site iframe');
 		surface.focus('.splitview');
-	}
+	};
 
 	// FocusRootOnLoad
 	fn.focusRootOnLoad = function(selector) {
@@ -620,7 +620,7 @@ var surface = (function () {
 				timeloop.events();
 			}
 		};
-	}
+	};
 
 	return fn;
 })();
@@ -633,7 +633,7 @@ var timeloop = (function () {
 		panel.triggerErrorMessage();
 
 		setTimeout(timeloop.events, 200);
-	}
+	};
 
 	return fn;
 })();
@@ -643,7 +643,7 @@ var copy = (function () {
 	// Init
 	fn.init = function() {
 		events();
-	}
+	};
 
 	// Events
 	var events = function() {
@@ -653,19 +653,19 @@ var copy = (function () {
 		$$$('section.site .flash .copy').click(function(e){
 			siteToPanel();
 		});
-	}
+	};
 
 	// Panel to site
 	var panelToSite = function() {
 		var panel = $$$('section.panel iframe')[0].contentWindow.document.location.href;
 		$$$('section.site iframe')[0].contentWindow.document.location.href = panel;
-	}
+	};
 
 	// Site to panel
 	var siteToPanel = function() {
 		var site = $$$('section.site iframe')[0].contentWindow.document.location.href;
 		$$$('section.panel iframe')[0].contentWindow.document.location.href = site;
-	}
+	};
 	return fn;
 })();
 var SiteSync = (function () {
@@ -674,19 +674,19 @@ var SiteSync = (function () {
 	// Init
 	fn.init = function() {
 		events();
-	}
+	};
 
 	// Events
 	var events = function() {
 		eventSync('section.site li.sync');
-	}
+	};
 
 	// Event sync site to admin
 	var eventSync = function(selector) {
 		$$$( selector ).click(function(e){
 			sync();
 		});
-	}
+	};
 
 	// Sync site to admin
 	var sync = function() {
@@ -694,19 +694,19 @@ var SiteSync = (function () {
 			var splitview_id = html_data().getAttribute('data-splitview-id');
 			$$$('section.panel iframe')[0].contentWindow.document.location.href = url(splitview_id);
 		}
-	}
+	};
 
 	// Url
 	var url = function(splitview_id) {
 		return data['root_url'] + '/' + action.getOption('panel', 'panel') + '/pages/' + splitview_id + '/edit';
-	}
+	};
 
 	// Html data
 	var html_data = function() {
 		var iframe = document.querySelector('section.site iframe');
 		var data = iframe.contentWindow.document.querySelector('.splitview-data');
 		return data;
-	}
+	};
 
 	return fn;
 })();

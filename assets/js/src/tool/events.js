@@ -7,7 +7,7 @@ var event = (function () {
 		event.view(view);
 		event.enterUrl(view);
 		event.refresh(view);
-	}
+	};
 
 	// Events
 	fn.events = function() {
@@ -19,14 +19,14 @@ var event = (function () {
 
 		event.buttonView('columns');
 		event.buttonView('rows');
-	}
+	};
 
 	// Refresh
 	fn.refresh = function(view) {
 		$$$('section.' + view + ' .button-refresh').click(function(e){
 			refresh('section.' + view + ' iframe');
 		});
-	}
+	};
 
 	// View
 	fn.view = function(view) {
@@ -35,14 +35,14 @@ var event = (function () {
 				action.setView(view);
 			});
 		});
-	}
+	};
 
 	// Button view
 	fn.buttonView = function(view) {
 		$$$('.dropdown li.' + view).click(function(e){
 			action.setView(view);
 		});
-	}
+	};
 
 	// Enter url
 	fn.enterUrl = function(view) {
@@ -52,7 +52,7 @@ var event = (function () {
 				$$$('section.' + view + ' iframe')[0].setAttribute('src', value);
 			}
 		});
-	}
+	};
 
 	// Exit
 	fn.exit = function(view) {
@@ -61,7 +61,7 @@ var event = (function () {
 				window.location.href = $$$('section.' + view + ' iframe')[0].contentWindow.document.location.href;
 			});
 		});
-	}
+	};
 
 	return fn;
 })();

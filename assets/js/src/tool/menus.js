@@ -4,7 +4,7 @@ var menu = (function () {
 	// Init
 	fn.init = function() {
 		events();
-	}
+	};
 
 	// Events
 	var events = function() {
@@ -12,7 +12,7 @@ var menu = (function () {
 		show('panel');
 		hide('site');
 		show('site');
-	}
+	};
 
 	// Hide
 	var hide = function(view) {
@@ -23,7 +23,7 @@ var menu = (function () {
 				$$$('body')[0].setAttribute('data-menu-' + view, true);
 			}
 		});
-	}
+	};
 
 	// Show
 	var show = function(view) {
@@ -35,7 +35,7 @@ var menu = (function () {
 				$$$('body')[0].removeAttribute('data-menu-' + view);
 			}
 		});
-	}
+	};
 
 	return fn;
 })();
