@@ -1,0 +1,28 @@
+[data-input] {
+	/*ul.right {
+		display: none;
+	}*/
+}
+
+/*[data-section="2"] .bar .show {
+	display: none !important;
+}*/
+
+.bar .show {
+	display: none !important;
+}
+
+[data-input] {
+	.bar {
+		.flash,
+		.zoom,
+		.views,
+		.close {
+			display: none;
+		}
+
+		.show {
+			display: block !important;
+		}
+	}
+}

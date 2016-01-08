@@ -1,5 +1,53 @@
 # Changelog
 
+## 0.5 - Flip
+
+Main features for this release are Flip button, improved sync and improved address bar. A lot has been done under the hood.
+
+### Flip
+
+Flip make the views switch place.
+
+### Middle click support
+
+Exit click now support middle mouse click. When clicking the left mouse button it exit to the same tab as you are in. On middle click it exit to a new tab (in most browsers). I hope it work on a Mac as well.
+
+### Sync improvements
+
+Now it does not matter if you have the panel url in the first or the second view, Splitview detect what is the panel and what is the site. That make the Sync function work much better.
+
+### Menu toggle moved / removed
+
+Space is always of value in the address bar. Therefor I moved / removed the toggle button to be more of an invisible feature.
+
+You can still toggle the menu. Just click the address field and it will expand.
+
+### Improved address field
+
+- On click the address is now selected, just like any other browser.
+- On click the address bar is now expanded so you can see more of the address.
+- When address bar is active you can click the arrow button to shrink it again.
+- When address bar is active you can press escape key to shrink it as well.
+- When pressing enter to go to the url it will shrink after that as well.
+- You can still have the address bar in expanded mode while browsing the views. Just don't press escape or enter when input is active, or click the arrow button.
+
+Too much information? Try it out instead.
+
+### Moved reload page button
+
+In the previous version the reload page button was inside the address field container. Now it has been moved to the flash dropdown menu instead.
+
+**Reasons behind the decision:**
+
+- Waste of space.
+- Not often need to refresh as it already does that on save.
+- It's still accessible through the flash menu.
+- It's still accessible by clicking the address bar and hit enter.
+
+### Misc
+
+As always there was some big improvements and cleanup to the code as well.
+
 ## 0.4 - Copy
 
 ### Dropdown menus

@@ -1,4 +1,9 @@
+// States
 @import 'states/dropdown';
+@import 'states/flip';
+@import 'states/columns';
+@import 'states/rows';
+@import 'states/input';
 
 @import '_fonts';
 @import '_reset';
@@ -7,10 +12,22 @@
 @import '_elements';
 @import '_grid-columns';
 @import '_grid-rows';
-@import '_panel';
-@import '_site';
+//@import '_panel';
+//@import '_site';
 @import '_message';
-@import '_cards';
+//@import '_cards';
 @import '_dropdown';
 @import 'icons';
-@import 'tool2';
+@import 'menus';
+@import 'section';
+@import 'bar';
+
+.splitview {
+	display: flex;
+	height: 100%;
+	width: 100%;
+}
+
+.debug {
+	display: none !important;
+}

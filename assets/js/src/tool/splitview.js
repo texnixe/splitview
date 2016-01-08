@@ -1,7 +1,8 @@
 var data = {};
 var iframe_count = 0;
-var panel_url;
-var site_url;
+//var panel_url;
+//var site_url;
+var url = [];
 var panel_state;
 var panel_refreshed = true;
 var memory = {};
@@ -11,24 +12,32 @@ var splitview = (function () {
 
 	// Init
 	fn.init = function (options) {
-		panel.init();
-
-		action.setup(options);
+		setup.init(options);
 		action.debugData();
 
-		action.addIframe('section.panel .iframe', panel_url );
-		action.addIframe('section.site .iframe', site_url );
+		iframes.render();
+		addresses.render();
 
-		menu.init();
-		dropdown.init();
-		address.init();
-		surface.init();
+		dropdowns.toggle();
+		dropdown.eventRemove();
+		focus.rootsOnLoad();
 		mem.init();
-		copy.init();
-		SiteSync.init();
 
-		event.events();
-	}
+		// Actions
+		copy.init();
+		flip.init();
+
+		InputEnter.init();
+		InputClick.init();
+		Show.init();
+		
+
+		Sync.init();
+		Refresh.init();
+
+		view.init();
+		exit.init();
+	};
 
 	return fn;
 })();

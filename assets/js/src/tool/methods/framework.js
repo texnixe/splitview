@@ -4,11 +4,11 @@
 }*/
 
 // Selector - Multiple
-var $$ = function(selector, context) {
+/*var $$ = function(selector, context) {
 	context = context || document;
 	var elements = context.querySelectorAll(selector);
 	return Array.prototype.slice.call(elements);
-}
+}*/
 
 
 var $$$ = function(selector, context) {
@@ -22,9 +22,33 @@ var $$$ = function(selector, context) {
 			});
 		});
 	};
+	elements.mouseover = function(cb){
+		elements.forEach(function(el){
+			el.addEventListener('mouseenter', function(e){
+				e.stopPropagation();
+				cb.apply(elements,[e]);
+			});
+		});
+	};
+	elements.mouseout = function(cb){
+		elements.forEach(function(el){
+			el.addEventListener('mouseleave', function(e){
+				e.stopPropagation();
+				cb.apply(elements,[e]);
+			});
+		});
+	};
 	elements.keypress = function(cb){
 		elements.forEach(function(el){
 			el.addEventListener('keypress', function(e){
+				e.stopPropagation();
+				cb.apply(elements,[e]);
+			});
+		});
+	};
+	elements.keyup = function(cb){
+		elements.forEach(function(el){
+			el.addEventListener('keyup', function(e){
 				e.stopPropagation();
 				cb.apply(elements,[e]);
 			});

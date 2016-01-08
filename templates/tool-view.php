@@ -3,16 +3,10 @@
 		<li class="url">
 			<div class="input">
 				<input type="text" placeholder="https://">
-				<div class="button-refresh"><i class="fa fa-repeat"></i></div>
 			</div>
 		</li>
 	</ul>
 	<ul class="right">
-		<li class="hide">
-			<div class="button">
-				<i class="fa fa-sort-asc fa-rotate-90"></i>
-			</div>
-		</li>
 		<li class="show">
 			<div class="button">
 				<i class="fa fa-sort-asc fa-rotate-270"></i>
@@ -23,12 +17,18 @@
 				<i class="fa fa-flash"></i>
 			</div>
 			<ul class="dropdown">
+				<li class="refresh">
+					<div class="icon-right">
+						<i class="fa fa-repeat"></i>
+					</div>
+					<div class="label">Refresh</div>
+				</li>
 				<li class="copy">
 					<div class="icon-right">
-						<i class="fa fa-long-arrow-right"></i>
-						<i class="fa fa-long-arrow-left"></i>
-						<i class="fa fa-long-arrow-up"></i>
-						<i class="fa fa-long-arrow-down"></i>
+						<i class="fa fa-long-arrow-left arrow-left"></i>
+						<i class="fa fa-long-arrow-right arrow-right"></i>
+						<i class="fa fa-long-arrow-up arrow-up"></i>
+						<i class="fa fa-long-arrow-down arrow-down"></i>
 					</div>
 					<div class="label">Copy</div>
 				</li>
@@ -48,17 +48,11 @@
 					</div>
 					<div class="label">Autosync</div>
 				</li>
-				<li class="flip debug">
-					<div class="icon-right">
-						<i class="fa fa-retweet"></i>
-					</div>
-					<div class="label">Flip</div>
-				</li>
 			</ul>
 		</li>
 		<li class="zoom debug">
 			<div class="button">
-				<i class="fa fa-search"></i>
+				<i class="fa fa-desktop"></i>
 			</div>
 			<ul class="dropdown">
 				<li>
@@ -86,17 +80,19 @@
 				<i class="fa fa-th-large"></i>
 			</div>
 			<ul class="dropdown">
-				<li class="panel">
+				<li class="section1">
 					<div class="icon-right">
-						<i class="fa fa-gear"></i>
+						<i class="fa fa-square"></i>
 					</div>
-					<div class="label">Panel</div>
+					<div class="label label-single">Switch</div>
+					<div class="label label-multiple">Current</div>
 				</li>
-				<li class="site">
+				<li class="section2">
 					<div class="icon-right">
-						<i class="fa fa-globe"></i>
+						<i class="fa fa-square"></i>
 					</div>
-					<div class="label">Site</div>
+					<div class="label-single">Switch</div>
+					<div class="label-multiple">Current</div>
 				</li>
 				<li class="rows">
 					<div class="icon-right">
@@ -116,6 +112,12 @@
 					</div>
 					<div class="label">Columns</div>
 				</li>
+				<li class="flip">
+					<div class="icon-right">
+						<i class="fa fa-retweet"></i>
+					</div>
+					<div class="label">Flip</div>
+				</li>
 			</ul>
 		</li>
 		<li class="close">
@@ -125,9 +127,9 @@
 			<ul class="dropdown">
 				<li class="invisible debug">
 					<div class="icon-right">
-						<i class="fa fa-eye-slash"></i>
+						<i class="fa fa-pencil"></i>
 					</div>
-					<div class="label">Hide bar(s)</div>
+					<div class="label">Distraction free</div>
 				</li>
 				<li class="exit">
 					<div class="icon-right">

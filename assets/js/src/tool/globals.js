@@ -1,8 +1,3 @@
-// Refresh
-function refresh(selector) {
-	$$$(selector)[0].contentWindow.location.reload();
-}
-
 // Hide
 function hide(selector) {
 	$$$(selector).hide();

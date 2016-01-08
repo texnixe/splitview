@@ -1,0 +1,49 @@
+[data-flip="false"][data-view="rows"] {
+	[data-section="1"] {
+		.copy,
+		.sync {
+			.fa-long-arrow-up {
+				display: none;
+			}
+		}
+	}
+
+	[data-section="2"] {
+		.copy,
+		.sync {
+			.fa-long-arrow-down {
+				display: none;
+			}
+		}
+	}
+}
+
+[data-view="rows"] {
+	.copy,
+	.sync {
+		.fa-long-arrow-right,
+		.fa-long-arrow-left {
+			display: none;
+		}
+	}
+
+	.label-single {
+		display: none;
+	}
+
+	[data-section="1"] {
+		.dropdown {
+			.section2 {
+				display: none;
+			}
+		}
+	}
+
+	[data-section="2"] {
+		.dropdown {
+			.section1 {
+				display: none;
+			}
+		}
+	}
+}

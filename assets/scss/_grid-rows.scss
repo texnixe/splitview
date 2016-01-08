@@ -2,8 +2,7 @@
 	.splitview {
 		flex-direction: column; // Row
 	}
-	section.panel,
-	section.site {
+	section {
 		flex-grow: 1;
 		display: flex;
 		flex-direction: column;
@@ -22,51 +21,19 @@
 		display: none;
 	}
 
-	section.panel {
+	[data-section="1"] {
+		position: relative;
 		.dropdown li.site {
 			display: none;
 		}
 	}
 
-	section.site {
-
+	[data-section="2"] {
 		.dropdown li.panel {
 			display: none;
 		}
-
-		.bar {
-			border-top: 1px solid #555;
-		}
 	}
-	.bar {
-		border-bottom: 1px solid #555;
-		display: flex;
-
-		.left {
-			flex-grow: 1;
-		}
-	}
-
-	.bar .right {
-		display: flex;
-		align-items: center;
-
-		>li {
-			border-left: 1px solid #555;
-			color: #fff;
-			cursor: pointer;
-			height: 43px;
-			display: flex;
-			align-items: center;
-
-			&:hover {
-				color: #999;
-			}
-		}
-	}
-	section.nav {
-		display: none;
-	}
+	
 	.left {
 
 	}

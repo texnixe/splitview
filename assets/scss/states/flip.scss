@@ -1,0 +1,51 @@
+[data-flip="true"][data-view="columns"] {
+	.splitview {
+		flex-direction: row-reverse;
+	}
+
+	[data-section="1"] {
+		.copy,
+		.sync {
+			.fa-long-arrow-right {
+				display: none;
+			}
+		}
+	}
+
+	[data-section="2"] {
+		.copy,
+		.sync {
+			.fa-long-arrow-left {
+				display: none;
+			}
+		}
+	}
+}
+
+[data-flip="true"][data-view="rows"] {
+	.splitview {
+		flex-direction: column-reverse;
+	}
+
+	[data-section="1"] {
+		.dropdown {
+			.copy,
+			.sync {
+				.fa-long-arrow-down {
+					display: none;
+				}
+			}
+		}
+	}
+
+	[data-section="2"] {
+		.dropdown {
+			.copy,
+			.sync {
+				.fa-long-arrow-up {
+					display: none;
+				}
+			}
+		}
+	}
+}

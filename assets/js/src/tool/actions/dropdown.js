@@ -2,20 +2,8 @@ var dropdown = (function () {
 	var fn = {};
 	var active = false;
 
-	// Init
-	fn.init = function() {
-		events();
-	}
-
-	// Events
-	var events = function() {
-		toggle('panel');
-		toggle('site');
-		eventRemove();
-	}
-
-	var toggle = function(view) {
-		$$$('section.' + view + ' .dropdown').forEach(function(el){
+	fn.toggle = function(selector, key) {
+		$$$(selector + ' .dropdown').forEach(function(el){
 			var button_element = el.previousSibling.previousSibling;
 			button_element.addEventListener('click', function(e){
 				var data_dropdown = $$$('body')[0].getAttribute('data-dropdown');
@@ -25,44 +13,53 @@ var dropdown = (function () {
 				var dropdown = classes.split(" ")[0];
 
 				if( data_dropdown ) {
-					remove();
-					if( data_dropdown != dropdown || data_bar != view ) {
-						set(dropdown, view);
+					fn.remove();
+					if( data_dropdown != dropdown || data_bar != key ) {
+						set(dropdown, key);
 					}
 				} else {
-					set(dropdown, view);
+					set(dropdown, key);
 				}
 			});
 		});
-	}
+	};
 
-	var eventRemove = function() {
+	fn.eventRemove = function() {
 		$$$('.bar .hide .button').click(function(e){
-			remove();
+			fn.remove();
 		});
 		$$$('.bar .show .button').click(function(e){
-			remove();
+			fn.remove();
 		});
 		$$$('.bar .url .button-refresh').click(function(e){
-			remove();
+			fn.remove();
 		});
 		$$$('.bar .left').click(function(e){
-			remove();
+			fn.remove();
 		});
-		$$$('.dropdown li').click(function(e){
-			remove();
-		});
-	}
+	};
 
-	var remove = function() {
+	fn.remove = function() {
 		$$$('body')[0].removeAttribute('data-dropdown');
 		$$$('body')[0].removeAttribute('data-bar');
-	}
+	};
 
 	var set = function( dropdown, view ) {
 		$$$('body')[0].setAttribute('data-dropdown', dropdown );
 		$$$('body')[0].setAttribute('data-bar', view );
-	}
+	};
+
+	return fn;
+})();
+
+var dropdowns = (function () {
+	var fn = {};
+
+	fn.toggle = function() {
+		for (var i = 1; i < url.length; i++) {
+			dropdown.toggle('[data-section="' + i + '"]', i);
+		}
+	};
 
 	return fn;
 })();

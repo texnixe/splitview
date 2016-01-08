@@ -7,13 +7,13 @@
 	<?php echo css( splitviewTool::css() ); ?>
 	<?php echo splitviewTool::cssDebug(); ?>
 </head>
-<body>
+<body data-flip="false">
 <div class="splitview">
-	<section class="panel">
-		<?php echo SplitviewTool::snippet('tool-view', array('view' => 1)); ?>
+	<section data-section="1">
+		<?php echo SplitviewTool::snippet('tool-view'); ?>
 	</section>
-	<section class="site">
-		<?php echo SplitviewTool::snippet('tool-view', array('view' => 2)); ?>
+	<section data-section="2">
+		<?php echo SplitviewTool::snippet('tool-view'); ?>
 	</section>
 </div>
 
