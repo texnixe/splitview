@@ -24,7 +24,6 @@ var copy = (function () {
 			dropdown.remove();
 		});
 	};
-<<<<<<< HEAD
 
 	// Render
 	fn.render = function() {
@@ -39,19 +38,5 @@ var copy = (function () {
 		_section_target = ( _section_current === 1 ) ? 2 : 1;
 	};
 
-=======
-
-	// Panel to site
-	var panelToSite = function() {
-		var panel = $$$('section.panel iframe')[0].contentWindow.document.location.href;
-		$$$('section.site iframe')[0].contentWindow.document.location.href = panel;
-	};
-
-	// Site to panel
-	var siteToPanel = function() {
-		var site = $$$('section.site iframe')[0].contentWindow.document.location.href;
-		$$$('section.panel iframe')[0].contentWindow.document.location.href = site;
-	};
->>>>>>> origin/master
 	return fn;
 })();

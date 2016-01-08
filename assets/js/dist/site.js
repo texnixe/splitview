@@ -26,7 +26,7 @@ var splitviewSite = (function () {
 		args = [];
 		args['admin_slug'] = encodeURIComponent( getOption('admin_slug', 'home') );
 		args['page_slug'] = encodeURIComponent( getOption('page_slug', '') );
-	};
+	}
 
 	// Hash - Build
 	var hashBuild = function() {
@@ -36,18 +36,18 @@ var splitviewSite = (function () {
 			}
 		}
 		hash = hash.slice(0, - 1);
-	};
+	}
 
 	// Hash - Redirect
 	var hashRedirect = function() {
 		href = getOption('root_url', '') + '/' + getOption('route', 'splitview') + '/' + hash;
 		window.location.href = href;
-	};
+	}
 
 	// Events
 	var events = function() {
 		eventShortcut();
-	};
+	}
 
 	// Event - Shortcut
 	var eventShortcut = function() {
@@ -56,12 +56,12 @@ var splitviewSite = (function () {
 				hashRedirect();
 			}
 		});
-	};
+	}
 
 	// Convert string to shortcut number
 	var stringToShortcut = function() {
 		return getOption('shortcut', 's').toUpperCase().charCodeAt(0);
-	};
+	}
 
 	// Get option from JS function
 	var getOption = function( key, defaultValue ) {
@@ -72,7 +72,7 @@ var splitviewSite = (function () {
 			value = defaultValue;
 		}
 		return value;
-	};
+	}
 
 	return fn;
 })();

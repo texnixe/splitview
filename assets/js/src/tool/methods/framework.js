@@ -8,11 +8,7 @@
 	context = context || document;
 	var elements = context.querySelectorAll(selector);
 	return Array.prototype.slice.call(elements);
-<<<<<<< HEAD:assets/js/src/tool/methods/framework.js
 }*/
-=======
-};
->>>>>>> origin/master:assets/js/src/tool/framework.js
 
 
 var $$$ = function(selector, context) {
@@ -91,4 +87,4 @@ var $$$ = function(selector, context) {
 		});
 	};
 	return elements;
-};
+}
