@@ -8,8 +8,8 @@
 			display: block;
 		}
 	}
-	&[data-dropdown="zoom"] {
-		[data-section="1"] .zoom .dropdown {
+	&[data-dropdown="screen"] {
+		[data-section="1"] .screen .dropdown {
 			display: block;
 		}
 	}
@@ -31,8 +31,8 @@
 			display: block;
 		}
 	}
-	&[data-dropdown="zoom"] {
-		[data-section="2"] .zoom .dropdown {
+	&[data-dropdown="screen"] {
+		[data-section="2"] .screen .dropdown {
 			display: block;
 		}
 	}
@@ -44,6 +44,33 @@
 	&[data-dropdown="close"] {
 		[data-section="2"] .close .dropdown {
 			display: block;
+		}
+	}
+}
+
+li.autosync {
+	.default {
+		display: block;
+	}
+	.inverted {
+		display: none;
+	}
+}
+
+[data-autosync] {
+	li.autosync {
+		background: #368C3D;
+		color: #fff;
+
+		.default {
+			display: none;
+		}
+		.inverted {
+			display: block;
+		}
+
+		.label:hover {
+			color: #fff !important;
 		}
 	}
 }

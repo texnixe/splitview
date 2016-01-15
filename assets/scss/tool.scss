@@ -7,20 +7,16 @@
 
 @import '_fonts';
 @import '_reset';
-@import '_font-awesome-custom';
 @import '_overlay';
-@import '_elements';
 @import '_grid-columns';
 @import '_grid-rows';
-//@import '_panel';
-//@import '_site';
 @import '_message';
-//@import '_cards';
 @import '_dropdown';
 @import 'icons';
 @import 'menus';
 @import 'section';
 @import 'bar';
+@import 'sizes';
 
 .splitview {
 	display: flex;

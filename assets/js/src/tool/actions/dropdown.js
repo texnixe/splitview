@@ -3,11 +3,11 @@ var dropdown = (function () {
 	var active = false;
 
 	fn.toggle = function(selector, key) {
-		$$$(selector + ' .dropdown').forEach(function(el){
+		$(selector + ' .dropdown').forEach(function(el){
 			var button_element = el.previousSibling.previousSibling;
 			button_element.addEventListener('click', function(e){
-				var data_dropdown = $$$('body')[0].getAttribute('data-dropdown');
-				var data_bar = $$$('body')[0].getAttribute('data-bar');
+				var data_dropdown = $('body')[0].getAttribute('data-dropdown');
+				var data_bar = $('body')[0].getAttribute('data-bar');
 
 				var classes = button_element.parentNode.getAttribute('class');
 				var dropdown = classes.split(" ")[0];
@@ -25,28 +25,28 @@ var dropdown = (function () {
 	};
 
 	fn.eventRemove = function() {
-		$$$('.bar .hide .button').click(function(e){
+		$('.bar .hide .button').click(function(e){
 			fn.remove();
 		});
-		$$$('.bar .show .button').click(function(e){
+		$('.bar .show .button').click(function(e){
 			fn.remove();
 		});
-		$$$('.bar .url .button-refresh').click(function(e){
+		$('.bar .url .button-refresh').click(function(e){
 			fn.remove();
 		});
-		$$$('.bar .left').click(function(e){
+		$('.bar .left').click(function(e){
 			fn.remove();
 		});
 	};
 
 	fn.remove = function() {
-		$$$('body')[0].removeAttribute('data-dropdown');
-		$$$('body')[0].removeAttribute('data-bar');
+		$('body')[0].removeAttribute('data-dropdown');
+		$('body')[0].removeAttribute('data-bar');
 	};
 
 	var set = function( dropdown, view ) {
-		$$$('body')[0].setAttribute('data-dropdown', dropdown );
-		$$$('body')[0].setAttribute('data-bar', view );
+		$('body')[0].setAttribute('data-dropdown', dropdown );
+		$('body')[0].setAttribute('data-bar', view );
 	};
 
 	return fn;

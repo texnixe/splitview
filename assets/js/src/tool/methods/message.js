@@ -3,7 +3,7 @@ var message = (function () {
 
 	fn.hide = function(selector) {
 		var style_element = document.createElement('style');
-		var node = $$$(selector + ' iframe')[0].contentWindow.document.querySelector('body').appendChild(style_element);
+		var node = $(selector + ' iframe')[0].contentWindow.document.querySelector('body').appendChild(style_element);
 		node.innerHTML = '.message { display: none; }';
 	};
 

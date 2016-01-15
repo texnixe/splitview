@@ -10,7 +10,7 @@ var Error = (function () {
 
 	// Trigger Error Message
 	fn.onError = function(count) {
-		var element = $$$('[data-section="' + count + '"]' + ' iframe')[0].contentWindow.document.querySelector('.message-is-alert');
+		var element = $('[data-section="' + count + '"]' + ' iframe')[0].contentWindow.document.querySelector('.message-is-alert');
 		if( element ) {
 			element.remove();
 			fn.renderMessage();
@@ -21,14 +21,14 @@ var Error = (function () {
 	// Render message
 	fn.renderMessage = function() {
 		for (var i = 1; i < url.length; i++) {
-			$$$('[data-section="' + i + '"] .message-error')[0].classList.add('active');
+			$('[data-section="' + i + '"] .message-error')[0].classList.add('active');
 		}
 	};
 
 	// Remove message
 	fn.removeMessage = function() {
 		for (var i = 1; i < url.length; i++) {
-			$$$('[data-section="' + i + '"] .message-error')[0].classList.remove('active');
+			$('[data-section="' + i + '"] .message-error')[0].classList.remove('active');
 		}
 	};
 

@@ -19,7 +19,7 @@ var InputClick = (function () {
 
 	// Event click
 	fn.eventClick = function(count) {
-		$$$('[data-section="' + count + '"] .input input').click(function(e){
+		$('[data-section="' + count + '"] .input input').click(function(e){
 			_section = count;
 			
 			fn.addAttribute();
@@ -35,7 +35,7 @@ var InputClick = (function () {
 	// Event blur
 	fn.eventBlur = function(count) {
 		_section = count;
-		$$$('[data-section="' + count + '"] .input input')[0].onblur = fn.setBlur;
+		$('[data-section="' + count + '"] .input input')[0].onblur = fn.setBlur;
 	};
 
 	// Set blur
@@ -46,7 +46,7 @@ var InputClick = (function () {
 
 	// Event Close
 	fn.eventEscape = function(count) {
-		$$$('[data-section="' + count + '"] .url input').keyup(function(e){
+		$('[data-section="' + count + '"] .url input').keyup(function(e){
 			if (event.keyCode == 27) {
 				_section = count;
 				window.getSelection().removeAllRanges();
@@ -57,12 +57,12 @@ var InputClick = (function () {
 
 	// Add attribute
 	fn.addAttribute = function() {
-		$$$('[data-section="' + _section + '"]')[0].setAttribute('data-input', '');
+		$('[data-section="' + _section + '"]')[0].setAttribute('data-input', '');
 	};
 
 	// Delete attribute
 	fn.deleteAttribute = function(section) {
-		$$$('[data-section="' + section + '"]')[0].removeAttribute('data-input');
+		$('[data-section="' + section + '"]')[0].removeAttribute('data-input');
 	};
 
 	return fn;

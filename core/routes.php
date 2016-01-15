@@ -13,71 +13,58 @@ class SplitbarRoutes {
 	// Routes
 	private static function routes() {
 		kirby()->routes(array( 
-			// Splitview page
+			// Splitview tool
 			array(
 				'pattern' => self::$route, 
 				'action'  => function() {
 					echo SplitviewTool::html();
 				}
 			),
+
+			// Css
 			array(
-				'pattern' => self::$route . '/assets/css/tool.css', 
-				'action'  => function() {
-					$path = self::$assets . 'css' . DS . 'tool.css';
+				'pattern' => self::$route . '/assets/css/(:any)',
+				'action'  => function($filename) {
+					$path = self::$assets . 'css' . DS . $filename;
 					return new Response( f::read($path), 'css' );
 				}
 			),
+
+			// Js dist
 			array(
-				'pattern' => self::$route . '/assets/css/tool.min.css', 
-				'action'  => function() {
-					$path = self::$assets . 'css' . DS . 'tool.min.css';
-					return new Response( f::read($path), 'css' );
-				}
-			),
-			array(
-				'pattern' => self::$route . '/assets/js/dist/tool.js', 
-				'action'  => function() {
-					$path = self::$assets . 'js' . DS . 'dist/tool.js';
+				'pattern' => self::$route . '/assets/js/dist/(:any)',
+				'action'  => function($filename) {
+					$path = self::$assets . 'js' . DS . 'dist/' . $filename;
 					return new Response( f::read($path), 'js' );
 				}
 			),
+
+			// Js src
 			array(
-				'pattern' => self::$route . '/assets/js/dist/tool.min.js', 
-				'action'  => function() {
-					$path = self::$assets . 'js' . DS . 'dist/tool.min.js';
-					return new Response( f::read($path), 'js' );
-				}
-			),
-			array(
-				'pattern' => self::$route . '/assets/js/src/site.js', 
-				'action'  => function() {
+				'pattern' => self::$route . '/assets/js/src/(:any)',
+				'action'  => function($filename) {
 					$path = self::$assets . 'js' . DS . 'src/site/site.js';
 					return new Response( f::read($path), 'js' );
 				}
 			),
+			
+			// Svg
 			array(
-				'pattern' => self::$route . '/assets/js/dist/site.min.js', 
-				'action'  => function() {
-					$path = self::$assets . 'js' . DS . 'dist/site.min.js';
-					return new Response( f::read($path), 'js' );
+				'pattern' => self::$route . '/assets/images/svg/(:any)', 
+				'action'  => function($filename) {
+					$path = self::$assets . 'images' . DS . 'svg' . DS . $filename;
+					return new Response( f::read($path), 'svg' );
 				}
 			),
-			// Font Awesome
+
+			// Svg inverted
 			array(
-				'pattern' => self::$route . '/assets/fonts/font-awesome.woff', 
-				'action'  => function() {
-					$path = self::$assets . 'fonts' . DS . 'font-awesome-4.5.0' . DS . 'fontawesome-webfont.woff';
-					return new Response( f::read($path), 'woff' );
+				'pattern' => self::$route . '/assets/images/svg/inverted/(:any)', 
+				'action'  => function($filename) {
+					$path = self::$assets . 'images' . DS . 'svg' . DS . 'inverted' . DS . $filename;
+					return new Response( f::read($path), 'svg' );
 				}
 			),
-			// Font - Source Sans Pro
-			array(
-				'pattern' => self::$route . '/assets/fonts/source-sans-pro.woff', 
-				'action'  => function() {
-					$path = self::$assets . 'fonts' . DS . 'source-sans-pro' . DS . 'SourceSansPro-Regular.otf.woff';
-					return new Response( f::read($path), 'woff' );
-				}
-			)
 		));
 	}
 }

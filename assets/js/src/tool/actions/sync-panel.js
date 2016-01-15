@@ -39,7 +39,7 @@ var SyncPanel = (function () {
 
 	// Set url iframe
 	fn.setUrlIframe = function() {
-		_url_iframe = $$$('[data-section="' + _section_current + '"] iframe')[0].contentWindow.location.href;
+		_url_iframe = $('[data-section="' + _section_current + '"] iframe')[0].contentWindow.location.href;
 	};
 
 	// Remove url parts
@@ -67,7 +67,7 @@ var SyncPanel = (function () {
 
 	// Render url
 	fn.renderUrl = function() {
-		$$$('[data-section="' + _section_target + '"] iframe')[0].contentWindow.location.href = _site_url;
+		$('[data-section="' + _section_target + '"] iframe')[0].contentWindow.location.href = _site_url;
 	};
 
 	// Flip

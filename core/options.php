@@ -13,17 +13,20 @@ class splitviewOptions {
 
 	// Options get replacement
 	public static function optionsGetReplacement( $keys, $options ) {
-		foreach( $keys as $key ) {
-			if( ! empty( get($key) ) ) {
-				$new_options[$key] = get($key);
-			} else {
-				if( isset( $options[$key] ) ) {
-					$value = $options[$key];
-					$new_options[$key] = $value;
+		$new_options = array();
+		if( ! empty( $keys ) ) {
+			foreach( $keys as $key ) {
+				if( ! empty( get($key) ) ) {
+					$new_options[$key] = get($key);
+				} else {
+					if( isset( $options[$key] ) ) {
+						$value = $options[$key];
+						$new_options[$key] = $value;
+					}
 				}
 			}
+			return $new_options;
 		}
-		return $new_options;
 	}
 
 	// Args in javascript

@@ -3,6 +3,7 @@
 		flex-grow: 1;
 		display: flex;
 		flex-direction: column;
+		position: relative;
 
 		.iframe {
 			position: relative;
@@ -18,35 +19,16 @@
 		display: none;
 	}
 
-	[data-section="1"] {
-		width: 799px;
-		flex-grow: 0;
-		position: relative;
-
-		.dropdown li.site {
-			display: none;
-		}
-
+	[data-section="1"] {		
 		.bar {
 			border-right: 1px solid #555;
 		}
-
-		@media only screen and (max-width: 1600px) {
-			width: 50%;
-			flex-grow: 0;
-		}
 	}
 
-	[data-section="2"] {
-		.dropdown li.panel {
+	/*.button-sync {
+		.icon-arrow-up,
+		.icon-arrow-down {
 			display: none;
 		}
-	}
-
-	.button-sync {
-		.fa-long-arrow-up,
-		.fa-long-arrow-down {
-			display: none;
-		}
-	}
+	}*/
 }

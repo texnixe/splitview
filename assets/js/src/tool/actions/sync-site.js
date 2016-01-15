@@ -19,7 +19,7 @@ var SiteSync = (function() {
 		if( DATA ) {
 			setId();
 			targetUrl();
-			var obj = $$$('[data-section="' + SECTION_TARGET + '"] iframe')[0];
+			var obj = $('[data-section="' + SECTION_TARGET + '"] iframe')[0];
 			obj.contentWindow.document.location.href = SECTION_TARGET_URL;
 		}
 	};

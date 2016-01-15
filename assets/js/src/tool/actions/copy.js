@@ -17,7 +17,7 @@ var copy = (function () {
 
 	// Event
 	var event = function(count) {
-		$$$('[data-section="' + count + '"] .flash .copy').click(function(e){
+		$('[data-section="' + count + '"] .flash .copy').click(function(e){
 			_section_current = count;
 			fn.setSectionTarget();
 			fn.render();
@@ -27,8 +27,8 @@ var copy = (function () {
 
 	// Render
 	fn.render = function() {
-		var get_iframe = $$$('[data-section="' + _section_current + '"] iframe')[0];
-		var set_iframe = $$$('[data-section="' + _section_target + '"] iframe')[0];
+		var get_iframe = $('[data-section="' + _section_current + '"] iframe')[0];
+		var set_iframe = $('[data-section="' + _section_target + '"] iframe')[0];
 		var get_url = get_iframe.contentWindow.document.location.href;
 		set_iframe.contentWindow.document.location.href = get_url;
 	};

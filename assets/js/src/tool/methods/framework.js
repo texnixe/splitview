@@ -1,22 +1,17 @@
-// Selector - Single
-/*var $ = function(selector) {
-	return document.querySelector(selector);
-}*/
-
-// Selector - Multiple
-/*var $$ = function(selector, context) {
-	context = context || document;
-	var elements = context.querySelectorAll(selector);
-	return Array.prototype.slice.call(elements);
-}*/
-
-
-var $$$ = function(selector, context) {
+var $ = function(selector, context) {
 	context = context || document;
 	var elements = Array.prototype.slice.call(context.querySelectorAll(selector));
 	elements.click = function(cb){
 		elements.forEach(function(el){
 			el.addEventListener('click', function(e){
+				e.stopPropagation();
+				cb.apply(elements,[e]);
+			});
+		});
+	};
+	elements.change = function(cb){
+		elements.forEach(function(el){
+			el.addEventListener('change', function(e){
 				e.stopPropagation();
 				cb.apply(elements,[e]);
 			});
@@ -49,6 +44,14 @@ var $$$ = function(selector, context) {
 	elements.keyup = function(cb){
 		elements.forEach(function(el){
 			el.addEventListener('keyup', function(e){
+				e.stopPropagation();
+				cb.apply(elements,[e]);
+			});
+		});
+	};
+	elements.keydown = function(cb){
+		elements.forEach(function(el){
+			el.addEventListener('keydown', function(e){
 				e.stopPropagation();
 				cb.apply(elements,[e]);
 			});

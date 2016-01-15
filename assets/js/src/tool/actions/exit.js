@@ -11,8 +11,8 @@ var exit = (function () {
 	};
 
 	var event = function(key) {
-		$$$('[data-section="' + key + '"] li.exit').click(function(e){
-			var new_url = $$$('[data-section="' + key + '"] iframe')[0].contentWindow.document.location.href;
+		$('[data-section="' + key + '"] li.exit').click(function(e){
+			var new_url = $('[data-section="' + key + '"] iframe')[0].contentWindow.document.location.href;
 
 			// Middle click
 			if( e.which == 2 ) {

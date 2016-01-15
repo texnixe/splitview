@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.6 - Autosync
+
+### Width
+
+Now you can change the width of each section in column view. It's good for seeing what you are doing, or for testing the site in a mobile resolution.
+
+- Set a predefined width.
+- Set a custom size.
+- Set a custom unit (px or %).
+
+### Autosync
+
+If you activate Autosync in the flash menu, every time you save it does not only refresh the other iframe, it also sync it. With sync I mean load the page that just got saved.
+
+### Design change
+
+I move away from Kirby design style just a little bit.
+
+- Changed Font Awesome to Entypo+ as SVG files. It gave perfect pixel size and reduced file size.
+- Changed from the font "Source Sans Pro" to Arial which improves loading time.
+
 ## 0.5 - Flip
 
 Main features for this release are Flip button, improved sync and improved address bar. A lot has been done under the hood.

@@ -15,7 +15,7 @@ var Save = (function () {
 
 	// On save
 	fn.onSave = function(count) {
-		var element = $$$('[data-section="' + count + '"] iframe')[0].contentWindow.document.querySelector('.message-is-notice');
+		var element = $('[data-section="' + count + '"] iframe')[0].contentWindow.document.querySelector('.message-is-notice');
 		if( element ) {
 			panel_state = 'saved';
 		} else {
@@ -29,6 +29,9 @@ var Save = (function () {
 				fn.renderMessage();
 				Refresh.action(fn.flip(count));
 				panel_refreshed = true;
+				if( autosync[count] === true ) {
+					Sync.action(count);
+				}
 				setTimeout(fn.removeMessage, 4000);
 			}
 		}
@@ -37,14 +40,14 @@ var Save = (function () {
 	// Render message
 	fn.renderMessage = function() {
 		for (var i = 1; i < url.length; i++) {
-			$$$('[data-section="' + i + '"] .message-saved')[0].classList.add('active');
+			$('[data-section="' + i + '"] .message-saved')[0].classList.add('active');
 		}
 	};
 
 	// Remove message
 	fn.removeMessage = function() {
 		for (var i = 1; i < url.length; i++) {
-			$$$('[data-section="' + i + '"] .message-saved')[0].classList.remove('active');
+			$('[data-section="' + i + '"] .message-saved')[0].classList.remove('active');
 		}
 	};
 

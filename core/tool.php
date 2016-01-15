@@ -88,6 +88,12 @@ class SplitviewTool {
 		return $url;
 	}
 
+	// Uri
+	public static function uri() {
+		$uri = u() . '/' . c::get('splitview.route', 'splitview') . '/assets';
+		return $uri;
+	}
+
 	// CSS url
 	public static function css() {
 		$url = u() . '/' . c::get('splitview.route', 'splitview') . '/assets/css/tool';

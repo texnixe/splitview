@@ -1,4 +1,7 @@
 [data-view="rows"] {
+	li.screen {
+		display: none !important;
+	}
 	.splitview {
 		flex-direction: column; // Row
 	}

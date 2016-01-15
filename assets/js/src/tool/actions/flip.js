@@ -8,7 +8,7 @@ var flip = (function () {
 
 	// Events
 	var events = function() {
-		$$$('.bar .flip').click(function(e){
+		$('.bar .flip').click(function(e){
 			flip();
 			dropdown.remove();
 		});
@@ -16,10 +16,10 @@ var flip = (function () {
 
 	// Flip
 	var flip = function() {
-		if( $$$('body')[0].getAttribute('data-flip') != 'true' ) {
-			$$$('body')[0].setAttribute('data-flip', 'true');
+		if( $('body')[0].getAttribute('data-flip') != 'true' ) {
+			$('body')[0].setAttribute('data-flip', 'true');
 		} else {
-			$$$('body')[0].setAttribute('data-flip', 'false');
+			$('body')[0].setAttribute('data-flip', 'false');
 		}
 	};
 

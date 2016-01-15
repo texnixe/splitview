@@ -5,6 +5,9 @@ var iframe_count = 0;
 var url = [];
 var panel_state;
 var panel_refreshed = true;
+var autosync = [];
+autosync[1] = false;
+autosync[2] = false;
 var memory = {};
 
 var splitview = (function () {
@@ -34,9 +37,12 @@ var splitview = (function () {
 
 		Sync.init();
 		Refresh.init();
+		AutoSync.init();
 
 		view.init();
 		exit.init();
+		Screen.init();
+		Width.init();
 	};
 
 	return fn;

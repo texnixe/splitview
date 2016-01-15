@@ -9,7 +9,7 @@ var Show = (function () {
 	};
 
 	fn.event = function(section) {
-		$$$('[data-section="' + section + '"] .show .button').click(function(e){
+		$('[data-section="' + section + '"] .show .button').click(function(e){
 			InputClick.deleteAttribute(section);
 		});
 	};

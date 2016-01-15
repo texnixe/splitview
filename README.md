@@ -1,4 +1,4 @@
-# Splitview 0.5
+# Splitview 0.6
 
 Splitview makes it possible to edit your pages in a splitscreen view. See what you change directly after pressing save.
 

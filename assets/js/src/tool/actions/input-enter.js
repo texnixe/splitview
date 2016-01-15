@@ -10,7 +10,7 @@ var InputEnter = (function () {
 	};
 
 	fn.event = function(count) {
-		$$$('[data-section="' + count + '"] .url input').keypress(function(e){
+		$('[data-section="' + count + '"] .url input').keypress(function(e){
 			if (event.keyCode == 13) {
 				_section = count;
 				fn.setValue();
@@ -21,11 +21,11 @@ var InputEnter = (function () {
 	};
 
 	fn.setValue = function() {
-		_value = $$$('[data-section="' + _section + '"] .url input')[0].value;
+		_value = $('[data-section="' + _section + '"] .url input')[0].value;
 	};
 
 	fn.action = function() {
-		$$$('[data-section="' + _section + '"] iframe')[0].setAttribute('src', _value);
+		$('[data-section="' + _section + '"] iframe')[0].setAttribute('src', _value);
 	};
 
 	return fn;

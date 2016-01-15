@@ -5,7 +5,7 @@ var iframe = (function () {
 	fn.render = function(selector, value) {
 		var iframe = document.createElement('iframe');
 		iframe.src = value;
-		$$$(selector + ' .iframe')[0].appendChild(iframe);
+		$(selector + ' .iframe')[0].appendChild(iframe);
 		return iframe;
 	};
 

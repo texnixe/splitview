@@ -13,21 +13,21 @@ var section = (function () {
 	};
 
 	var site = function(selector, value, key) {
-		var element = $$$(selector + ' iframe')[0].contentWindow.document.querySelector('.splitview-data');
+		var element = $(selector + ' iframe')[0].contentWindow.document.querySelector('.splitview-data');
 		if( element ) {
-			var attribute = $$$(selector)[0].getAttribute('data-type');
+			var attribute = $(selector)[0].getAttribute('data-type');
 			if( attribute !== 'site') {
-				$$$(selector)[0].setAttribute('data-type', 'site');
+				$(selector)[0].setAttribute('data-type', 'site');
 			}
 		}
 	};
 
 	var panel = function(selector, value, key) {
-		var element = $$$(selector + ' iframe')[0].contentWindow.document.querySelector('title');
+		var element = $(selector + ' iframe')[0].contentWindow.document.querySelector('title');
 		if( element && element.innerHTML.substr(-8) == ' | Panel' ) {
-			var attribute = $$$(selector)[0].getAttribute('data-type');
+			var attribute = $(selector)[0].getAttribute('data-type');
 			if( attribute !== 'panel') {
-				$$$(selector)[0].setAttribute('data-type', 'panel');
+				$(selector)[0].setAttribute('data-type', 'panel');
 			}
 		}
 	};

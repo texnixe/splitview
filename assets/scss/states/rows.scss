@@ -2,7 +2,7 @@
 	[data-section="1"] {
 		.copy,
 		.sync {
-			.fa-long-arrow-up {
+			.icon-arrow-up {
 				display: none;
 			}
 		}
@@ -11,7 +11,7 @@
 	[data-section="2"] {
 		.copy,
 		.sync {
-			.fa-long-arrow-down {
+			.icon-arrow-down {
 				display: none;
 			}
 		}
@@ -21,8 +21,8 @@
 [data-view="rows"] {
 	.copy,
 	.sync {
-		.fa-long-arrow-right,
-		.fa-long-arrow-left {
+		.icon-arrow-right,
+		.icon-arrow-left {
 			display: none;
 		}
 	}

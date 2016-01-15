@@ -12,7 +12,7 @@
 		display: flex;
 		align-items: center;
 
-		>li {
+		>li .button {
 			border-left: 1px solid #555;
 			color: #fff;
 			cursor: pointer;
@@ -60,11 +60,16 @@
 	}
 
 	.button {
-		padding: 0 20px;
 		height: 43px;
 		width: 50px;
 		display: flex;
 		align-items: center;
 		box-sizing: border-box;
+		justify-content: center;
+
+		img {
+			width: 20px;
+			height: 20px;
+		}
 	}
 }

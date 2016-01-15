@@ -3,7 +3,7 @@ var blur = (function () {
 
 	// Force blur
 	fn.render = function(selector) {
-		$$$(selector).blur();
+		$(selector).blur();
 	};
 
 	return fn;

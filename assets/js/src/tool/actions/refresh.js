@@ -11,7 +11,7 @@ var Refresh = (function () {
 
 	// Event
 	fn.event = function(count) {
-		$$$('[data-section="' + count + '"] .refresh').click(function(e){
+		$('[data-section="' + count + '"] .refresh').click(function(e){
 			_section = count;
 			fn.action(_section);
 			dropdown.remove();
@@ -20,7 +20,7 @@ var Refresh = (function () {
 
 	// Refresh
 	fn.action = function(section) {
-		$$$('[data-section="' + section + '"] iframe')[0].contentWindow.location.reload();
+		$('[data-section="' + section + '"] iframe')[0].contentWindow.location.reload();
 	};
 
 	return fn;

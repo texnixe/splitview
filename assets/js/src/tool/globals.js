@@ -1,16 +1,16 @@
 // Hide
 function hide(selector) {
-	$$$(selector).hide();
+	$(selector).hide();
 }
 
 // Show
 function show(selector) {
-	$$$(selector).show();
+	$(selector).show();
 }
 
 // Element exists
 function elementExists(selector) {
-	if( $$$(selector).length ) {
+	if( $(selector).length ) {
 		return true;
 	}
 }

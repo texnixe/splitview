@@ -3,7 +3,6 @@
 	color: #fff;
 	text-align: center;
 	line-height: 48px;
-	padding: 0 20px;
 	right: 0;
 	height: 48px;
 	width: 0;
@@ -11,9 +10,18 @@
 	height: 48px;
 	opacity: 0;
 	transition: width 0.3s ease-out, opacity .25s ease-out;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	img {
+		vertical-align: bottom;
+		width: 20px;
+		height: 20px;
+	}
 
 	&.message-saved {
-		background: #8dae28;
+		background: #368C3D;
 	}
 
 	&.message-error {

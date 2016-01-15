@@ -3,7 +3,7 @@ var focus = (function () {
 
 	// FocusRootOnLoad
 	fn.rootOnLoad = function(selector) {
-		iframe = $$$(selector + ' iframe')[0];
+		iframe = $(selector + ' iframe')[0];
 		iframe.onload = function() {
 			iframe_count++;
 			if(iframe_count == 2) {
@@ -22,7 +22,7 @@ var focus = (function () {
 
 	// Force focus
 	fn.render = function(selector) {
-		$$$(selector).focus();
+		$(selector).focus();
 	};
 
 	// Set focus on root
