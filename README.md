@@ -98,6 +98,10 @@ Help to improve the code with pull requests or suggestions as issues.
 
 Possuble future ideas is added to the issues tagged `ideas` or `features`. Also look at milestones.
 
+### Icons
+
+Entypo pictograms by Daniel Bruce — [www.entypo.com](http://www.entypo.com)
+
 ### License
 
 [CC - Attribution 4.0 International](http://creativecommons.org/licenses/by/4.0/)
