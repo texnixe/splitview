@@ -24,7 +24,6 @@ var splitviewSite = (function () {
 	// Hash - Defaults
 	var hashDefaults = function() {
 		args = [];
-		args['admin_slug'] = encodeURIComponent( getOption('admin_slug', 'home') );
 		args['page_slug'] = encodeURIComponent( getOption('page_slug', '') );
 	}
 

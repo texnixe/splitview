@@ -37,7 +37,6 @@ class SplitviewSite {
 	private static function optionsPhpExtra() {
 		$extra = array(
 			'page.slug' => ( page()->isHomePage() !== true ) ? page()->uri() : '',
-			'admin.slug' => page()->uri(),
 			'root_url' => u()
 		);
 		self::$options_php_extra = $extra;

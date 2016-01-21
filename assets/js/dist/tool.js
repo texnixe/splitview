@@ -167,12 +167,14 @@ var splitview = (function () {
 
 		InputEnter.init();
 		InputClick.init();
+		InputHover.init();
 		Show.init();
 		
 
 		Sync.init();
 		Refresh.init();
 		AutoSync.init();
+		Zoom.init();
 
 		view.init();
 		exit.init();
@@ -544,6 +546,34 @@ var InputEnter = (function () {
 
 	return fn;
 })();
+var InputHover = (function () {
+	var fn = {};
+
+	fn.init = function() {
+		for (var i = 1; i < url.length; i++) {
+			fn.event(i);
+		}
+	};
+
+	fn.event = function(count) {
+		$('[data-section="' + count + '"] .url').mouseover(function(e){
+			/*if (event.keyCode == 13) {
+				_section = count;
+				fn.setValue();
+				fn.action();
+				InputClick.deleteAttribute(count);
+			}*/
+			var value = $('[data-section="' + count + '"] .url input')[0].value;
+			$('[data-section="' + count + '"] .address')[0].innerHTML = value;
+			$('[data-section="' + count + '"]')[0].setAttribute('data-address', '');
+		});
+		$('[data-section="' + count + '"] .url').mouseout(function(e){
+			$('[data-section="' + count + '"]')[0].removeAttribute('data-address');
+		});
+	};
+
+	return fn;
+})();
 var Refresh = (function () {
 	var fn = {};
 	var _section;
@@ -659,7 +689,9 @@ var setup = (function () {
 	fn.init = function(options) {
 		data = options;
 
-		url[1] = data['root_url'] + '/' + action.getOption('panel', 'panel') + '/pages/' + data['admin_slug'] + '/edit';
+		var admin_slug = ( data['page_slug'] != '' ? data['page_slug'] : 'home' );
+
+		url[1] = data['root_url'] + '/' + action.getOption('panel', 'panel') + '/pages/' + admin_slug + '/edit';
 		url[2] = data['root_url'] + '/' + data['page_slug'];
 	};
 
@@ -768,7 +800,7 @@ var SiteSync = (function() {
 	var SECTION_CURRENT;
 	var SECTION_TARGET;
 	var SECTION_TARGET_URL;
-	var PAGE_SLUG;
+	var _page_slug;
 	var DATA;
 
 	fn.action = function(type, section) {
@@ -784,16 +816,17 @@ var SiteSync = (function() {
 			setId();
 			targetUrl();
 			var obj = $('[data-section="' + SECTION_TARGET + '"] iframe')[0];
+
 			obj.contentWindow.document.location.href = SECTION_TARGET_URL;
 		}
 	};
 
 	var targetUrl = function() {
-		SECTION_TARGET_URL = data['root_url'] + '/' + action.getOption('panel', 'panel') + '/pages/' + PAGE_SLUG + '/edit';
+		SECTION_TARGET_URL = data['root_url'] + '/' + action.getOption('panel', 'panel') + '/pages/' + _page_slug + '/edit';
 	}
 
 	var setId = function() {
-		PAGE_SLUG = DATA.getAttribute('data-splitview-id');
+		_page_slug = DATA.getAttribute('data-splitview-id');
 	};
 
 	// Flip
@@ -908,24 +941,19 @@ var Width = (function () {
 	fn.event = function(count) {
 
 		$('[data-section="' + count + '"] .screen input').click(function(e){
-			var width = this[0].value;
-			fn.setUnitByInput(count);
-			fn.setWidthByInput(count);
-			fn.changeWidth(count);
+			fn.action(this, count);
 		});
 
 		$('[data-section="' + count + '"] .screen input').keydown(function(e){
-			var width = this[0].value;
-			fn.setUnitByInput(count);
-			fn.setWidthByInput(count);
-			fn.changeWidth(count);
+			fn.action(this, count);
 		});
 
 		$('[data-section="' + count + '"] .screen input').keyup(function(e){
-			var width = this[0].value;
-			fn.setUnitByInput(count);
-			fn.setWidthByInput(count);
-			fn.changeWidth(count);
+			fn.action(this, count);
+		});
+
+		$('[data-section="' + count + '"] .screen input').wheel(function(e){
+			fn.action(this, count);
 		});
 
 		// Screen click
@@ -978,6 +1006,13 @@ var Width = (function () {
 		$('[data-section="' + count + '"] [data-width="50"]').click(function(e){
 			fn.renderInputByClick(count, this);
 		});
+	};
+
+	fn.action = function(obj, section) {
+		var width = obj[0].value;
+		fn.setUnitByInput(section);
+		fn.setWidthByInput(section);
+		fn.changeWidth(section);
 	};
 
 	// Render input
@@ -1068,6 +1103,133 @@ var Width = (function () {
 
 	return fn;
 })();
+var Zoom = (function () {
+	var fn = {};
+
+	fn.style = function(section, scale, width) {
+		var nodeStyle = $('[data-section="' + section + '"]' + ' iframe')[0].contentWindow.document.querySelector('.splitview-zoom');
+
+		if( ! nodeStyle ) {
+			var style_element = document.createElement('style');
+			style_element.className = 'splitview-zoom';
+			var node = $('[data-section="' + section + '"]' + ' iframe')[0].contentWindow.document.querySelector('body').appendChild(style_element);
+			node.innerHTML = 'html { transform: scale(' + scale + '); transform-origin: top left; width: ' + width + '%; }';
+		} else {
+			nodeStyle.innerHTML = 'html { transform: scale(' + scale + '); transform-origin: top left; width: ' + width + '%; }';
+		}
+	};
+
+	fn.init = function() {
+		for (var i = 1; i < url.length; i++) {
+			fn.event(i);
+		}
+	};
+
+	fn.event = function(section) {
+		$('[data-section="' + section + '"] .zoom .button').click(function(e){
+			fn.focus(section);
+		});
+
+		$('[data-section="' + section + '"] .zoom-custom input').keypress(function(e){
+			if (event.keyCode == 13) {
+				dropdown.remove();
+			}
+		});
+
+		$('[data-section="' + section + '"] .zoom-custom input').wheel(function(e){
+			fn.action(section);
+		});
+
+		$('[data-section="' + section + '"] .zoom-custom input').keydown(function(e){
+			fn.action(section);
+		});
+
+		$('[data-section="' + section + '"] .zoom-custom input').keyup(function(e){
+			fn.action(section);
+		});
+
+		$('[data-section="' + section + '"] .zoom-custom input').click(function(e){
+			fn.action(section);
+		});
+
+		$('[data-section="' + section + '"] .zoom-reset').click(function(e){
+			fn.reset(section);
+			fn.action(section);
+			fn.focus(section);
+		});
+
+		$('[data-section="' + section + '"] .zoom-plus').click(function(e){
+			fn.changePlus(section);
+			fn.action(section);
+			fn.focus(section);
+		});
+
+		$('[data-section="' + section + '"] .zoom-minus').click(function(e){
+			fn.changeMinus(section);
+			fn.action(section);
+			fn.focus(section);
+		});
+	};
+
+	fn.focus = function(section) {
+		$('[data-section="' + section + '"] .zoom-custom input').focus();
+	};
+
+	fn.action = function(section) {
+		var value = fn.currentValue(section);
+		var current_value = parseFloat( fn.currentValue(section) ).toFixed(1);
+		current_value = parseFloat(current_value);
+		var current_percentage = fn.currentPercentage(current_value);
+		var magic_number = fn.magicNumber(current_percentage);
+		var flipped_percentage = fn.flippedPercentage(magic_number);
+
+		fn.style(section, current_value, flipped_percentage);
+
+
+	};
+
+	fn.reset = function(section) {
+		$('[data-section="' + section + '"] .zoom-custom input')[0].value = 1.0;
+	};
+
+	fn.currentValue = function(section) {
+		return $('[data-section="' + section + '"] .zoom-custom input')[0].value;
+	};
+
+	fn.currentPercentage = function( value) {
+		return value * 100;
+	};
+
+	fn.magicNumber = function(percentage) {
+		return 100 / percentage;
+	};
+
+	fn.flippedPercentage = function(magic_number) {
+		return 100 * magic_number;
+	};
+
+	fn.changePlus = function(section) {
+		var current_value = parseFloat( fn.currentValue(section) ).toFixed(1);
+		current_value = parseFloat(current_value);
+
+		var plus = current_value + 0.1;
+		var plus_value = parseFloat( plus.toFixed(1) );
+		$('[data-section="' + section + '"] .zoom-custom input')[0].value = plus_value;
+	};
+
+	fn.changeMinus = function(section) {
+		var current_value = parseFloat( fn.currentValue(section) ).toFixed(1);
+		current_value = parseFloat(current_value);
+
+		var minus = current_value - 0.1;
+		if( minus_value >= 0 ) {
+			var minus_value = parseFloat( minus.toFixed(1) );
+			$('[data-section="' + section + '"] .zoom-custom input')[0].value = minus_value;
+		}
+	};
+
+	return fn;
+})();
 var blur = (function () {
 	var fn = {};
 
@@ -1090,6 +1252,9 @@ var focus = (function () {
 				fn.root();
 				messages.hide();
 				timeloop.events();
+
+
+				//history.pushState({}, 'Splitview', data['root_url'] + '/splitview/');
 			}
 		};
 	};
@@ -1107,8 +1272,8 @@ var focus = (function () {
 
 	// Set focus on root
 	fn.root = function() {
-		blur.render('section.panel iframe');
-		blur.render('section.site iframe');
+		blur.render('[data-section="1"] iframe');
+		blur.render('[data-section="2"] iframe');
 		focus.render('.splitview');
 	};
 
@@ -1136,6 +1301,14 @@ var $ = function(selector, context) {
 	elements.mouseover = function(cb){
 		elements.forEach(function(el){
 			el.addEventListener('mouseenter', function(e){
+				e.stopPropagation();
+				cb.apply(elements,[e]);
+			});
+		});
+	};
+	elements.wheel = function(cb){
+		elements.forEach(function(el){
+			el.addEventListener('wheel', function(e){
 				e.stopPropagation();
 				cb.apply(elements,[e]);
 			});

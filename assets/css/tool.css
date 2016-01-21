@@ -1,28 +1,18 @@
 .dropdown {
   display: none; }
 
-[data-bar="1"][data-dropdown="flash"] [data-section="1"] .flash .dropdown {
+[data-bar="1"][data-dropdown="flash"] [data-section="1"] .flash .dropdown,
+[data-bar="1"][data-dropdown="screen"] [data-section="1"] .screen .dropdown,
+[data-bar="1"][data-dropdown="views"] [data-section="1"] .views .dropdown,
+[data-bar="1"][data-dropdown="close"] [data-section="1"] .close .dropdown,
+[data-bar="1"][data-dropdown="zoom"] [data-section="1"] .zoom .dropdown {
   display: block; }
 
-[data-bar="1"][data-dropdown="screen"] [data-section="1"] .screen .dropdown {
-  display: block; }
-
-[data-bar="1"][data-dropdown="views"] [data-section="1"] .views .dropdown {
-  display: block; }
-
-[data-bar="1"][data-dropdown="close"] [data-section="1"] .close .dropdown {
-  display: block; }
-
-[data-bar="2"][data-dropdown="flash"] [data-section="2"] .flash .dropdown {
-  display: block; }
-
-[data-bar="2"][data-dropdown="screen"] [data-section="2"] .screen .dropdown {
-  display: block; }
-
-[data-bar="2"][data-dropdown="views"] [data-section="2"] .views .dropdown {
-  display: block; }
-
-[data-bar="2"][data-dropdown="close"] [data-section="2"] .close .dropdown {
+[data-bar="2"][data-dropdown="flash"] [data-section="2"] .flash .dropdown,
+[data-bar="2"][data-dropdown="screen"] [data-section="2"] .screen .dropdown,
+[data-bar="2"][data-dropdown="views"] [data-section="2"] .views .dropdown,
+[data-bar="2"][data-dropdown="close"] [data-section="2"] .close .dropdown,
+[data-bar="2"][data-dropdown="zoom"] [data-section="2"] .zoom .dropdown {
   display: block; }
 
 li.autosync .default {
@@ -293,6 +283,26 @@ iframe {
     width: 56px;
     -webkit-transition: all 0s ease 0s;
     transition: all 0s ease 0s; }
+
+.address {
+  display: none; }
+
+[data-section="1"][data-address] .address,
+[data-section="2"][data-address] .address {
+  display: block; }
+
+.address {
+  position: absolute;
+  bottom: 0;
+  padding: 5px 10px;
+  background: #ddd;
+  border-top: 2px solid #ddd;
+  width: 100%;
+  box-sizing: border-box;
+  color: #666;
+  font-size: 12px;
+  font-family: Arial;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5); }
 
 .right li {
   position: relative; }
@@ -641,6 +651,93 @@ iframe {
     margin-right: 5px; }
   .size-form select {
     margin-left: 5px; }
+
+.zoom img {
+  height: 20px;
+  width: 20px;
+  vertical-align: bottom; }
+
+.zoom .title {
+  padding-bottom: 20px; }
+
+.zoom .zoom-form {
+  padding: 20px;
+  padding-bottom: 10px; }
+  .zoom .zoom-form .zoom-group {
+    border: 1px solid #ddd;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex; }
+  .zoom .zoom-form .zoom-plus,
+  .zoom .zoom-form .zoom-minus {
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    height: 40px; }
+  .zoom .zoom-form .zoom-button {
+    background: #f5f5f5;
+    border-top: 2px solid transparent;
+    height: 40px;
+    width: 40px;
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    display: flex;
+    cursor: pointer;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none; }
+    .zoom .zoom-form .zoom-button:hover {
+      background: #eee; }
+  .zoom .zoom-form .zoom-plus .zoom-button {
+    border-right: none; }
+  .zoom .zoom-form .zoom-minus .zoom-button {
+    border-left: none; }
+  .zoom .zoom-form input {
+    width: 70px;
+    height: 40px;
+    padding-left: 10px;
+    padding-right: 2px;
+    outline: 0;
+    border: none;
+    box-sizing: border-box;
+    font-family: Arial;
+    font-size: 14px; }
+
+.zoom .zoom-reset {
+  padding: 20px;
+  padding-top: 0; }
+
+.zoom .zoom-reset-button {
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-bottom: 2px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer; }
+  .zoom .zoom-reset-button:hover {
+    background: #eee; }
 
 .splitview {
   display: -webkit-box;

@@ -66,29 +66,36 @@
 				</li>
 			</ul>
 		</li>
+		<li class="zoom">
+			<div class="button">
+				<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/inverted/magnifying-glass.svg">
+			</div>
+			<ul class="dropdown">
+				<li class="zoom-form">
+					<div class="title">Zoom factor</div>
+					<div class="zoom-group">
+						<div class="zoom-plus">
+							<div class="zoom-button">
+								<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/plus.svg">
+							</div>
+						</div>
 
-		<?php /*
-				<li>
-					<div class="icon-right">
-						<i class="fa fa-search-plus"></i>
+						<div class="zoom-custom">
+							<input type="number" min="0" step="0.1" value="1">
+						</div>
+
+						<div class="zoom-minus">
+							<div class="zoom-button">
+								<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/minus.svg">
+							</div>
+						</div>
 					</div>
-					<div class="label">Zoom in</div>
 				</li>
-				<li>
-					<div class="icon-right">
-						<i class="fa fa-search-minus"></i>
-					</div>
-					<div class="label">Zoom out</div>
+				<li class="zoom-reset">
+					<div class="zoom-reset-button">Reset</div>
 				</li>
-				<li>
-					<div class="icon-right">
-						<i class="fa fa-search"></i>
-					</div>
-					<div class="label">Reset</div>
-				</li>
-				*/
-				?>
-		
+			</ul>
+		</li>
 		<li class="screen">
 			<div class="button">
 				<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/inverted/tablet-mobile-combo.svg">
@@ -219,6 +226,7 @@
 	</ul>
 </div>
 <div class="iframe">
+	<div class="address">Test</div>
 	<div class="message message-saved">
 		<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/inverted/check.svg">
 	</div>

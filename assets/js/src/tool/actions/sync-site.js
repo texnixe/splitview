@@ -4,7 +4,7 @@ var SiteSync = (function() {
 	var SECTION_CURRENT;
 	var SECTION_TARGET;
 	var SECTION_TARGET_URL;
-	var PAGE_SLUG;
+	var _page_slug;
 	var DATA;
 
 	fn.action = function(type, section) {
@@ -20,16 +20,17 @@ var SiteSync = (function() {
 			setId();
 			targetUrl();
 			var obj = $('[data-section="' + SECTION_TARGET + '"] iframe')[0];
+
 			obj.contentWindow.document.location.href = SECTION_TARGET_URL;
 		}
 	};
 
 	var targetUrl = function() {
-		SECTION_TARGET_URL = data['root_url'] + '/' + action.getOption('panel', 'panel') + '/pages/' + PAGE_SLUG + '/edit';
+		SECTION_TARGET_URL = data['root_url'] + '/' + action.getOption('panel', 'panel') + '/pages/' + _page_slug + '/edit';
 	}
 
 	var setId = function() {
-		PAGE_SLUG = DATA.getAttribute('data-splitview-id');
+		_page_slug = DATA.getAttribute('data-splitview-id');
 	};
 
 	// Flip

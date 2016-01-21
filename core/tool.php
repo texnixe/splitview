@@ -27,9 +27,8 @@ class SplitviewTool {
 			'memory',
 			'panel',
 			'page.slug',
-			'admin.slug',
-			'root_url',
 			'view',
+			'root.url'
 		);
 		self::$keys = $keys;
 	}
@@ -43,8 +42,7 @@ class SplitviewTool {
 	private static function optionsPhpExtra() {
 		$extra = array(
 			'page.slug' => ( ! empty( get('page_slug') ) ) ? get('page_slug') : '',
-			'admin.slug' => ( ! empty ( get('admin_slug') ) ) ? get('admin_slug') : site()->homePage()->uri(),
-			'root_url' => u()
+			'root.url' => u()
 		);
 		self::$options_php_extra = $extra;
 	}

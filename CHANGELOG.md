@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.7 - Zoom
+
+### Zoom
+
+Zoom in and out is built in by default in the browser but it zoom in the whole site, in this case both sides of the splitview.
+
+Now you can now zoom in and out in the sections independently.
+
+**Zoom features:**
+
+- Plus and minus buttons for increasing and decreasing zoom factor
+- Custom number input to add your custom number
+- Reset for setting the zoom factor to 1 (100%)
+
+I can recommend to use the keyboard keys or the wheel on the mouse.
+
+### Address hover preview
+
+We already have a feature that when we click on the address it expands.
+
+As an addition to that you can now also hover the address to see a preview of the address in the footer, just like the browser hover preview of a link.
+
+### Shorter url
+
+Before both panel slug and page slug was sent to Splitview. Now only the page slug need to be sent which means a shorter Splitview url.
+
+**Something like this:**
+http://example.com/splitview/?page_slug=about
+
 ## 0.6 - Autosync
 
 ### Width

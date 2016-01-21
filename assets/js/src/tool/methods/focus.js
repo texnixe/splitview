@@ -10,6 +10,9 @@ var focus = (function () {
 				fn.root();
 				messages.hide();
 				timeloop.events();
+
+
+				//history.pushState({}, 'Splitview', data['root_url'] + '/splitview/');
 			}
 		};
 	};
@@ -27,8 +30,8 @@ var focus = (function () {
 
 	// Set focus on root
 	fn.root = function() {
-		blur.render('section.panel iframe');
-		blur.render('section.site iframe');
+		blur.render('[data-section="1"] iframe');
+		blur.render('[data-section="2"] iframe');
 		focus.render('.splitview');
 	};
 

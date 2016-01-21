@@ -3,48 +3,22 @@
 }
 
 [data-bar="1"] {
-	&[data-dropdown="flash"] {
-		[data-section="1"] .flash .dropdown {
-			display: block;
-		}
-	}
-	&[data-dropdown="screen"] {
-		[data-section="1"] .screen .dropdown {
-			display: block;
-		}
-	}
-	&[data-dropdown="views"] {
-		[data-section="1"] .views .dropdown {
-			display: block;
-		}
-	}
-	&[data-dropdown="close"] {
-		[data-section="1"] .close .dropdown {
-			display: block;
-		}
+	&[data-dropdown="flash"] [data-section="1"] .flash .dropdown,
+	&[data-dropdown="screen"] [data-section="1"] .screen .dropdown,
+	&[data-dropdown="views"] [data-section="1"] .views .dropdown,
+	&[data-dropdown="close"] [data-section="1"] .close .dropdown,
+	&[data-dropdown="zoom"] [data-section="1"] .zoom .dropdown {
+		display: block;
 	}
 }
 
 [data-bar="2"] {
-	&[data-dropdown="flash"] {
-		[data-section="2"] .flash .dropdown {
-			display: block;
-		}
-	}
-	&[data-dropdown="screen"] {
-		[data-section="2"] .screen .dropdown {
-			display: block;
-		}
-	}
-	&[data-dropdown="views"] {
-		[data-section="2"] .views .dropdown {
-			display: block;
-		}
-	}
-	&[data-dropdown="close"] {
-		[data-section="2"] .close .dropdown {
-			display: block;
-		}
+	&[data-dropdown="flash"] [data-section="2"] .flash .dropdown,
+	&[data-dropdown="screen"] [data-section="2"] .screen .dropdown,
+	&[data-dropdown="views"] [data-section="2"] .views .dropdown,
+	&[data-dropdown="close"] [data-section="2"] .close .dropdown,
+	&[data-dropdown="zoom"] [data-section="2"] .zoom .dropdown {
+		display: block;
 	}
 }
 

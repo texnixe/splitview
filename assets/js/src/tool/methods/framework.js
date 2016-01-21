@@ -25,6 +25,14 @@ var $ = function(selector, context) {
 			});
 		});
 	};
+	elements.wheel = function(cb){
+		elements.forEach(function(el){
+			el.addEventListener('wheel', function(e){
+				e.stopPropagation();
+				cb.apply(elements,[e]);
+			});
+		});
+	};
 	elements.mouseout = function(cb){
 		elements.forEach(function(el){
 			el.addEventListener('mouseleave', function(e){

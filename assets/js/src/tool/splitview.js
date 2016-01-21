@@ -32,12 +32,14 @@ var splitview = (function () {
 
 		InputEnter.init();
 		InputClick.init();
+		InputHover.init();
 		Show.init();
 		
 
 		Sync.init();
 		Refresh.init();
 		AutoSync.init();
+		Zoom.init();
 
 		view.init();
 		exit.init();

@@ -22,24 +22,19 @@ var Width = (function () {
 	fn.event = function(count) {
 
 		$('[data-section="' + count + '"] .screen input').click(function(e){
-			var width = this[0].value;
-			fn.setUnitByInput(count);
-			fn.setWidthByInput(count);
-			fn.changeWidth(count);
+			fn.action(this, count);
 		});
 
 		$('[data-section="' + count + '"] .screen input').keydown(function(e){
-			var width = this[0].value;
-			fn.setUnitByInput(count);
-			fn.setWidthByInput(count);
-			fn.changeWidth(count);
+			fn.action(this, count);
 		});
 
 		$('[data-section="' + count + '"] .screen input').keyup(function(e){
-			var width = this[0].value;
-			fn.setUnitByInput(count);
-			fn.setWidthByInput(count);
-			fn.changeWidth(count);
+			fn.action(this, count);
+		});
+
+		$('[data-section="' + count + '"] .screen input').wheel(function(e){
+			fn.action(this, count);
 		});
 
 		// Screen click
@@ -92,6 +87,13 @@ var Width = (function () {
 		$('[data-section="' + count + '"] [data-width="50"]').click(function(e){
 			fn.renderInputByClick(count, this);
 		});
+	};
+
+	fn.action = function(obj, section) {
+		var width = obj[0].value;
+		fn.setUnitByInput(section);
+		fn.setWidthByInput(section);
+		fn.changeWidth(section);
 	};
 
 	// Render input
