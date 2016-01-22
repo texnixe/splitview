@@ -1,0 +1,22 @@
+.dfw-return {
+	cursor: pointer;
+	background: #ddd;
+	width: 100%;
+	height: 10px;
+	overflow: hidden;
+}
+.dfw-return img {
+	width: 20px;
+	height: 20px;
+	vertical-align: bottom;
+	display: block;
+	margin: 0 auto;
+	margin-top: -3px;
+}
+
+[data-free] .splitview {
+	height: calc( 100% - 10px );
+}
+[data-free] .bar {
+	display: none;
+}

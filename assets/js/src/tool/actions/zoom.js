@@ -117,7 +117,7 @@ var Zoom = (function () {
 		current_value = parseFloat(current_value);
 
 		var minus = current_value - 0.1;
-		if( minus_value >= 0 ) {
+		if( minus >= 0 ) {
 			var minus_value = parseFloat( minus.toFixed(1) );
 			$('[data-section="' + section + '"] .zoom-custom input')[0].value = minus_value;
 		}

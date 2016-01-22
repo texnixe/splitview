@@ -16,6 +16,9 @@
 		<?php echo SplitviewTool::snippet('tool-view'); ?>
 	</section>
 </div>
+<div class="dfw-return">
+	<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/menu.svg">
+</div>
 
 <?php echo js( splitviewTool::js() ); ?>
 <script>

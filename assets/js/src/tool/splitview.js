@@ -1,7 +1,5 @@
 var data = {};
 var iframe_count = 0;
-//var panel_url;
-//var site_url;
 var url = [];
 var panel_state;
 var panel_refreshed = true;
@@ -40,6 +38,7 @@ var splitview = (function () {
 		Refresh.init();
 		AutoSync.init();
 		Zoom.init();
+		Free.init();
 
 		view.init();
 		exit.init();

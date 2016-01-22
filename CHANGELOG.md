@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.8 - Distraction free writing
+
+### Distraction free writing
+
+It's a feature that WordPress has. It makes the distractions disapear so you can only focus on the content.
+
+Click on "Views" > "Distraction" free writing.
+
+**What it hides:**
+
+- Splitview bars disapears. Just focus on this page with the current settings.
+- Panel bars disapears. You cannot navigate from this page in this view mode.
+- In general it removes navigation and options and keep what you need to edit the page.
+
+**In distraction free writing mode**
+
+It shows a tiny bar at the bottom which you can click on to get back.
+
+- It's at the bottom because for some reason the user find the bars on top distracting.
+- It's added below the iframes. It means nothing is overlapped. No distraction on top of the content.
+- It's a bar, not a button because it has this space. Why not use it?
+- It's small and almost invisible, to make it as less distracting as possible.
+- It's not white and not black, something in between to make it less distracting on most type of color themed sites.
+
+### Fixes
+
+- There was a problem when clicking the minus in the zoom tool. It's fixed.
+- The zoom buttons have been switched place. Minus to the left and plus to the right feels more correct.
+
 ## 0.7 - Zoom
 
 ### Zoom

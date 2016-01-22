@@ -74,19 +74,19 @@
 				<li class="zoom-form">
 					<div class="title">Zoom factor</div>
 					<div class="zoom-group">
-						<div class="zoom-plus">
+						<div class="zoom-minus">
 							<div class="zoom-button">
-								<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/plus.svg">
+								<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/minus.svg">
 							</div>
-						</div>
+						</div>						
 
 						<div class="zoom-custom">
 							<input type="number" min="0" step="0.1" value="1">
 						</div>
 
-						<div class="zoom-minus">
+						<div class="zoom-plus">
 							<div class="zoom-button">
-								<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/minus.svg">
+								<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/plus.svg">
 							</div>
 						</div>
 					</div>
@@ -133,13 +133,13 @@
 					<table class="size-list">
 						<tr>
 							<td>
-								<div class="size" data-width="25" data-unit="%"><div class="size-inside">25%</div></div>
+								<div class="size" data-width="25" data-unit="%"><div class="size-inside">25</div></div>
 							</td>
 							<td>
-								<div class="size" data-width="33" data-unit="%"><div class="size-inside">33%</div></div>
+								<div class="size" data-width="33" data-unit="%"><div class="size-inside">33</div></div>
 							</td>
 							<td>
-								<div class="size" data-width="50" data-unit="%"><div class="size-inside">50%</div></div>
+								<div class="size" data-width="50" data-unit="%"><div class="size-inside">50</div></div>
 							</td>
 						</tr>
 					</table>
@@ -202,19 +202,19 @@
 					</div>
 					<div class="label">Flip</div>
 				</li>
+				<li class="free">
+					<div class="icon-right">
+						<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/eye.svg">
+					</div>
+					<div class="label">Distraction free</div>
+				</li>
 			</ul>
 		</li>
 		<li class="close">
 			<div class="button">
-				<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/inverted/menu.svg">
+				<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/inverted/cross.svg">
 			</div>
 			<ul class="dropdown list">
-				<li class="invisible debug">
-					<div class="icon-right">
-						<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/edit.svg">
-					</div>
-					<div class="label">Distraction free</div>
-				</li>
 				<li class="exit">
 					<div class="icon-right">
 						<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/log-out.svg">
@@ -226,7 +226,7 @@
 	</ul>
 </div>
 <div class="iframe">
-	<div class="address">Test</div>
+	<div class="address"></div>
 	<div class="message message-saved">
 		<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/inverted/check.svg">
 	</div>
