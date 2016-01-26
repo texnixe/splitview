@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.9 - Translations
+
+A minor release that only have one feature, language support.
+
+Currently there are two languages supported, english and swedish. It will automatically use the language set in your browser. If your language is missing it will fallback to english.
+
+I'm more than happy to receive more translations and any feedback around the topic.
+
 ## 0.8 - Distraction free writing
 
 ### Distraction free writing

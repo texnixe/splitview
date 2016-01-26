@@ -21,7 +21,7 @@
 					<div class="icon-right">
 						<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/cw.svg">
 					</div>
-					<div class="label">Refresh</div>
+					<div class="label"><?php echo l('refresh', 'Refresh'); ?></div>
 				</li>
 				<li class="copy">
 					<div class="icon-right">
@@ -38,7 +38,7 @@
 							<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/arrow-long-down.svg">
 						</div>
 					</div>
-					<div class="label">Copy</div>
+					<div class="label"><?php echo l('copy', 'Copy'); ?></div>
 				</li>
 				<li class="sync">
 					<div class="icon-right">
@@ -55,14 +55,14 @@
 							<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/arrow-long-down.svg">
 						</div>
 					</div>
-					<div class="label">Sync</div>
+					<div class="label"><?php echo l('sync', 'Sync'); ?></div>
 				</li>
 				<li class="autosync">
 					<div class="icon-right">
 						<img class="default" src="<?php echo SplitviewTool::uri(); ?>/images/svg/loop.svg">
 						<img class="inverted" src="<?php echo SplitviewTool::uri(); ?>/images/svg/inverted/loop.svg">
 					</div>
-					<div class="label">Autosync</div>
+					<div class="label"><?php echo l('autosync', 'Autosync'); ?></div>
 				</li>
 			</ul>
 		</li>
@@ -72,7 +72,7 @@
 			</div>
 			<ul class="dropdown">
 				<li class="zoom-form">
-					<div class="title">Zoom factor</div>
+					<div class="title"><?php echo l('zoom-factor', 'Zoom factor'); ?></div>
 					<div class="zoom-group">
 						<div class="zoom-minus">
 							<div class="zoom-button">
@@ -92,7 +92,7 @@
 					</div>
 				</li>
 				<li class="zoom-reset">
-					<div class="zoom-reset-button">Reset</div>
+					<div class="zoom-reset-button"><?php echo l('reset', 'Reset'); ?></div>
 				</li>
 			</ul>
 		</li>
@@ -102,7 +102,7 @@
 			</div>
 			<ul class="dropdown">
 				<li class="sizes">
-					<div class="title">Pixels (px)</div>
+					<div class="title"><?php echo l('pixels', 'Pixels (px)'); ?></div>
 					<table class="size-list">
 						<tr>
 							<td>
@@ -129,7 +129,7 @@
 					</table>
 				</li>
 				<li class="sizes">
-					<div class="title">Percentage (%)</div>
+					<div class="title"><?php echo l('percentage', 'Percentage (%)'); ?></div>
 					<table class="size-list">
 						<tr>
 							<td>
@@ -166,8 +166,8 @@
 							<div class="icon-single"></div>
 						</div>
 					</div>
-					<div class="label label-single">Switch</div>
-					<div class="label label-multiple">Current</div>
+					<div class="label label-single"><?php echo l('switch', 'Switch'); ?></div>
+					<div class="label label-multiple"><?php echo l('current', 'Current'); ?></div>
 				</li>
 				<li class="section2">
 					<div class="icon-right">
@@ -175,8 +175,8 @@
 							<div class="icon-single"></div>
 						</div>
 					</div>
-					<div class="label-single">Switch</div>
-					<div class="label-multiple">Current</div>
+					<div class="label-single"><?php echo l('switch', 'Switch'); ?></div>
+					<div class="label-multiple"><?php echo l('current', 'Current'); ?></div>
 				</li>
 				<li class="rows">
 					<div class="icon-right">
@@ -185,7 +185,7 @@
 							<div class="icon-row"></div>
 						</div>
 					</div>
-					<div class="label">Rows</div>
+					<div class="label"><?php echo l('rows', 'Rows'); ?></div>
 				</li>
 				<li class="columns">
 					<div class="icon-right">
@@ -194,19 +194,19 @@
 							<div class="icon-columns"></div>
 						</div>
 					</div>
-					<div class="label">Columns</div>
+					<div class="label"><?php echo l('columns', 'Columns'); ?></div>
 				</li>
 				<li class="flip">
 					<div class="icon-right">
 						<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/swap.svg">
 					</div>
-					<div class="label">Flip</div>
+					<div class="label"><?php echo l('flip', 'Flip'); ?></div>
 				</li>
 				<li class="free">
 					<div class="icon-right">
 						<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/eye.svg">
 					</div>
-					<div class="label">Distraction free</div>
+					<div class="label"><?php echo l('distraction-free', 'Distraction free'); ?></div>
 				</li>
 			</ul>
 		</li>
@@ -219,7 +219,7 @@
 					<div class="icon-right">
 						<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/log-out.svg">
 					</div>
-					<div class="label">Exit to this view</div>
+					<div class="label"><?php echo l('exit-to-this-view', 'Exit to this view'); ?></div>
 				</li>
 			</ul>
 		</li>
