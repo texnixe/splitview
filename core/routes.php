@@ -34,7 +34,7 @@ class SplitbarRoutes {
 			array(
 				'pattern' => self::$route . '/assets/js/dist/(:any)',
 				'action'  => function($filename) {
-					$path = self::$assets . 'js' . DS . 'dist/' . $filename;
+					$path = self::$assets . 'js' . DS . 'dist' . DS . $filename;
 					return new Response( f::read($path), 'js' );
 				}
 			),
@@ -43,7 +43,7 @@ class SplitbarRoutes {
 			array(
 				'pattern' => self::$route . '/assets/js/src/(:any)',
 				'action'  => function($filename) {
-					$path = self::$assets . 'js' . DS . 'src/site/site.js';
+					$path = self::$assets . 'js' . DS . 'src' . DS . 'site' . DS . 'site.js';
 					return new Response( f::read($path), 'js' );
 				}
 			),
