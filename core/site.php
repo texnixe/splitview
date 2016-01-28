@@ -65,8 +65,8 @@ class SplitviewSite {
 
 	// Url
 	public static function url() {
-		$url = u() . '/' . c::get('splitview.route', 'splitview') . '/assets/js/';
-		$url .= ( c::get('splitview.debug', false) === true ) ? 'src/site.js?time=' . time() : 'dist/site.min.js';
+		$url = u() . '/' . c::get('splitview.route', 'splitview') . '/js/';
+		$url .= ( c::get('splitview.debug', false) === true ) ? 'src/site?time=' . time() : 'dist/site';
 		return $url;
 	}
 }

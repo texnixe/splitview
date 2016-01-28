@@ -9,33 +9,33 @@
 	<ul class="right">
 		<li class="show">
 			<div class="button">
-				<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/inverted/chevron-left.svg">
+				<img src="<?php echo SplitviewTool::uri(); ?>/svg/inverted/chevron-left">
 			</div>
 		</li>
 		<li class="flash">
 			<div class="button">
-				<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/inverted/flash.svg">
+				<img src="<?php echo SplitviewTool::uri(); ?>/svg/inverted/flash">
 			</div>
 			<ul class="dropdown list">
 				<li class="refresh">
 					<div class="icon-right">
-						<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/cw.svg">
+						<img src="<?php echo SplitviewTool::uri(); ?>/svg/cw">
 					</div>
 					<div class="label"><?php echo l('refresh', 'Refresh'); ?></div>
 				</li>
 				<li class="copy">
 					<div class="icon-right">
 						<div class="icon-arrow-right">
-							<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/arrow-long-right.svg">
+							<img src="<?php echo SplitviewTool::uri(); ?>/svg/arrow-long-right">
 						</div>
 						<div class="icon-arrow-left">
-							<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/arrow-long-left.svg">
+							<img src="<?php echo SplitviewTool::uri(); ?>/svg/arrow-long-left">
 						</div>
 						<div class="icon-arrow-up">
-							<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/arrow-long-up.svg">
+							<img src="<?php echo SplitviewTool::uri(); ?>/svg/arrow-long-up">
 						</div>
 						<div class="icon-arrow-down">
-							<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/arrow-long-down.svg">
+							<img src="<?php echo SplitviewTool::uri(); ?>/svg/arrow-long-down">
 						</div>
 					</div>
 					<div class="label"><?php echo l('copy', 'Copy'); ?></div>
@@ -43,24 +43,24 @@
 				<li class="sync">
 					<div class="icon-right">
 						<div class="icon-arrow-right">
-							<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/arrow-long-right.svg">
+							<img src="<?php echo SplitviewTool::uri(); ?>/svg/arrow-long-right">
 						</div>
 						<div class="icon-arrow-left">
-							<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/arrow-long-left.svg">
+							<img src="<?php echo SplitviewTool::uri(); ?>/svg/arrow-long-left">
 						</div>
 						<div class="icon-arrow-up">
-							<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/arrow-long-up.svg">
+							<img src="<?php echo SplitviewTool::uri(); ?>/svg/arrow-long-up">
 						</div>
 						<div class="icon-arrow-down">
-							<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/arrow-long-down.svg">
+							<img src="<?php echo SplitviewTool::uri(); ?>/svg/arrow-long-down">
 						</div>
 					</div>
 					<div class="label"><?php echo l('sync', 'Sync'); ?></div>
 				</li>
 				<li class="autosync">
 					<div class="icon-right">
-						<img class="default" src="<?php echo SplitviewTool::uri(); ?>/images/svg/loop.svg">
-						<img class="inverted" src="<?php echo SplitviewTool::uri(); ?>/images/svg/inverted/loop.svg">
+						<img class="default" src="<?php echo SplitviewTool::uri(); ?>/svg/loop">
+						<img class="inverted" src="<?php echo SplitviewTool::uri(); ?>/svg/inverted/loop">
 					</div>
 					<div class="label"><?php echo l('autosync', 'Autosync'); ?></div>
 				</li>
@@ -68,7 +68,7 @@
 		</li>
 		<li class="zoom">
 			<div class="button">
-				<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/inverted/magnifying-glass.svg">
+				<img src="<?php echo SplitviewTool::uri(); ?>/svg/inverted/magnifying-glass">
 			</div>
 			<ul class="dropdown">
 				<li class="zoom-form">
@@ -76,7 +76,7 @@
 					<div class="zoom-group">
 						<div class="zoom-minus">
 							<div class="zoom-button">
-								<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/minus.svg">
+								<img src="<?php echo SplitviewTool::uri(); ?>/svg/minus">
 							</div>
 						</div>						
 
@@ -86,7 +86,7 @@
 
 						<div class="zoom-plus">
 							<div class="zoom-button">
-								<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/plus.svg">
+								<img src="<?php echo SplitviewTool::uri(); ?>/svg/plus">
 							</div>
 						</div>
 					</div>
@@ -98,7 +98,7 @@
 		</li>
 		<li class="screen">
 			<div class="button">
-				<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/inverted/tablet-mobile-combo.svg">
+				<img src="<?php echo SplitviewTool::uri(); ?>/svg/inverted/tablet-mobile-combo">
 			</div>
 			<ul class="dropdown">
 				<li class="sizes">
@@ -157,7 +157,7 @@
 		</li>
 		<li class="views">
 			<div class="button">
-				<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/inverted/grid.svg">
+				<img src="<?php echo SplitviewTool::uri(); ?>/svg/inverted/grid">
 			</div>
 			<ul class="dropdown list">
 				<li class="section1">
@@ -198,13 +198,13 @@
 				</li>
 				<li class="flip">
 					<div class="icon-right">
-						<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/swap.svg">
+						<img src="<?php echo SplitviewTool::uri(); ?>/svg/swap">
 					</div>
 					<div class="label"><?php echo l('flip', 'Flip'); ?></div>
 				</li>
 				<li class="free">
 					<div class="icon-right">
-						<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/eye.svg">
+						<img src="<?php echo SplitviewTool::uri(); ?>/svg/eye">
 					</div>
 					<div class="label"><?php echo l('distraction-free', 'Distraction free'); ?></div>
 				</li>
@@ -212,12 +212,12 @@
 		</li>
 		<li class="close">
 			<div class="button">
-				<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/inverted/cross.svg">
+				<img src="<?php echo SplitviewTool::uri(); ?>/svg/inverted/cross">
 			</div>
 			<ul class="dropdown list">
 				<li class="exit">
 					<div class="icon-right">
-						<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/log-out.svg">
+						<img src="<?php echo SplitviewTool::uri(); ?>/svg/log-out">
 					</div>
 					<div class="label"><?php echo l('exit-to-this-view', 'Exit to this view'); ?></div>
 				</li>
@@ -228,9 +228,9 @@
 <div class="iframe">
 	<div class="address"></div>
 	<div class="message message-saved">
-		<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/inverted/check.svg">
+		<img src="<?php echo SplitviewTool::uri(); ?>/svg/inverted/check">
 	</div>
 	<div class="message message-error">
-		<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/inverted/cross.svg">
+		<img src="<?php echo SplitviewTool::uri(); ?>/svg/inverted/cross">
 	</div>
 </div>

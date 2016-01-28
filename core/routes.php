@@ -23,45 +23,45 @@ class SplitbarRoutes {
 
 			// Css
 			array(
-				'pattern' => self::$route . '/assets/css/(:any)',
-				'action'  => function($filename) {
-					$path = self::$assets . 'css' . DS . $filename;
+				'pattern' => self::$route . '/css/(:any)',
+				'action'  => function($slug) {
+					$path = self::$assets . 'css' . DS . $slug . '.min.css';
 					return new Response( f::read($path), 'css' );
 				}
 			),
 
 			// Js dist
 			array(
-				'pattern' => self::$route . '/assets/js/dist/(:any)',
-				'action'  => function($filename) {
-					$path = self::$assets . 'js' . DS . 'dist' . DS . $filename;
+				'pattern' => self::$route . '/js/dist/(:any)',
+				'action'  => function($slug) {
+					$path = self::$assets . 'js' . DS . 'dist' . DS . $slug . '.min.js';
 					return new Response( f::read($path), 'js' );
 				}
 			),
 
 			// Js src
 			array(
-				'pattern' => self::$route . '/assets/js/src/(:any)',
-				'action'  => function($filename) {
-					$path = self::$assets . 'js' . DS . 'src' . DS . 'site' . DS . 'site.js';
+				'pattern' => self::$route . '/js/src/(:any)',
+				'action'  => function($slug) {
+					$path = self::$assets . 'js' . DS . 'src' . DS . $slug . DS . $slug . '.js';
 					return new Response( f::read($path), 'js' );
 				}
 			),
 			
 			// Svg
 			array(
-				'pattern' => self::$route . '/assets/images/svg/(:any)', 
-				'action'  => function($filename) {
-					$path = self::$assets . 'images' . DS . 'svg' . DS . $filename;
+				'pattern' => self::$route . '/svg/(:any)', 
+				'action'  => function($slug) {
+					$path = self::$assets . 'images' . DS . 'svg' . DS . $slug . '.svg';
 					return new Response( f::read($path), 'svg' );
 				}
 			),
 
 			// Svg inverted
 			array(
-				'pattern' => self::$route . '/assets/images/svg/inverted/(:any)', 
-				'action'  => function($filename) {
-					$path = self::$assets . 'images' . DS . 'svg' . DS . 'inverted' . DS . $filename;
+				'pattern' => self::$route . '/svg/inverted/(:any)', 
+				'action'  => function($slug) {
+					$path = self::$assets . 'images' . DS . 'svg' . DS . 'inverted' . DS . $slug . '.svg';
 					return new Response( f::read($path), 'svg' );
 				}
 			),

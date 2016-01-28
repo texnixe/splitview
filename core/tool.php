@@ -81,21 +81,21 @@ class SplitviewTool {
 
 	// JS url
 	public static function js() {
-		$url = u() . '/' . c::get('splitview.route', 'splitview') . '/assets/js/';
-		$url .= ( c::get('splitview.debug', false) === true ) ? 'dist/tool.js?time=' . time() : 'dist/tool.min.js';
+		$url = u() . '/' . c::get('splitview.route', 'splitview') . '/js/';
+		$url .= ( c::get('splitview.debug', false) === true ) ? 'dist/tool?time=' . time() : 'dist/tool';
 		return $url;
 	}
 
 	// Uri
 	public static function uri() {
-		$uri = u() . '/' . c::get('splitview.route', 'splitview') . '/assets';
+		$uri = u() . '/' . c::get('splitview.route', 'splitview') . '';
 		return $uri;
 	}
 
 	// CSS url
 	public static function css() {
-		$url = u() . '/' . c::get('splitview.route', 'splitview') . '/assets/css/tool';
-		$url .= ( c::get('splitview.debug', false) === true ) ? '.css?time=' . time() : '.min.css';
+		$url = u() . '/' . c::get('splitview.route', 'splitview') . '/css/tool';
+		$url .= ( c::get('splitview.debug', false) === true ) ? '' . time() : '';
 		return $url;
 	}
 

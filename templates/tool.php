@@ -17,7 +17,7 @@
 	</section>
 </div>
 <div class="dfw-return">
-	<img src="<?php echo SplitviewTool::uri(); ?>/images/svg/menu.svg">
+	<img src="<?php echo SplitviewTool::uri(); ?>/svg/menu">
 </div>
 
 <?php echo js( splitviewTool::js() ); ?>
